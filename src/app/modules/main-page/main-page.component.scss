@@ -1,0 +1,15 @@
+.page-content {
+	display: flex;
+	justify-content: center;
+	padding: 100px;
+
+	&__upcomming-events {
+		margin-left: 300px;
+
+		@media (max-width: 1300px){
+			display: none;
+		}
+
+	}
+
+}

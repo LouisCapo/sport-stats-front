@@ -1,0 +1,40 @@
+.card-body {
+	padding: 10px;
+	width: 700px;
+	height: 700px;
+	border-radius: 20px;
+	box-shadow: 0 0 5px #b0b0b0;
+	color: #fff;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: column;
+
+	&__img {
+
+		img {
+			width: 700px;
+			height: 500px;
+		}
+
+	}
+
+	&__date {
+		color: #b0b0b0;
+		width: 100%;
+	}
+
+	&__title {
+		font-size: 25px;
+		line-height: 1;
+	}
+
+	&__desc {
+		color: #b0b0b0;
+	}
+
+}
+
+.card-body:hover{
+	box-shadow: 0 0 10px #b0b0b0;
+}

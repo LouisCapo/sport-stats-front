@@ -1,0 +1,30 @@
+.upcomming-events {
+	color: #b0b0b0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+	&__header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
+	
+	&__title {
+		font-size: 20px;
+		color: #b0b0b0;
+		margin-bottom: 10px;
+	}
+
+	.events-list {
+
+		&__event-item {
+			margin-bottom: 10px;
+		}
+
+	}
+
+}
+

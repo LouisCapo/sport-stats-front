@@ -1,0 +1,35 @@
+.news {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+
+	&__header {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__last-news {
+		font-size: 25px;
+		color: #b0b0b0;
+		margin-left: 10px;
+	}
+
+	&__sport-select {
+	}
+
+}
+
+.news-list {
+	margin-top: 10px;
+  display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+	&__card-item {
+		margin-bottom: 30px;
+	}
+
+}

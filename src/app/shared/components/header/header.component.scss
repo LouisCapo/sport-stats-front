@@ -1,0 +1,33 @@
+.header-content {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	
+
+	&__nav-bar {
+		list-style-type: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__nav-item {
+		margin-left: 10px;
+
+		a {
+			color: #fff;
+			text-decoration: none;
+		}
+
+		a:hover {
+			color: #b0b0b0;
+		}
+
+	}
+
+	&__search-icon {
+		font-size: 30px;
+	}
+
+}

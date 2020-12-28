@@ -8,6 +8,18 @@ const routes: Routes = [
       import(`./modules/main-page/main-page.module`).then(
         (module) => module.MainPageModule
       ),
+  },{
+    path: 'player',
+    loadChildren: () =>
+      import(`./modules/player-page/player-page.module`).then(
+        (module) => module.PlayerPageModule
+      ),
+  },{
+    path: 'team',
+    loadChildren: () =>
+      import(`./modules/team-page/team-page.module`).then(
+        (module) => module.TeamPageModule
+      ),
   },
 ];
 

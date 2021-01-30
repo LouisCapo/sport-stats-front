@@ -1,139 +1,49 @@
 <div class="team-card">
   <div class="team-card__team-info">
     <div class="team-card__team-logo">
-      <img src="https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937" alt="">
+      <img src="{{ teamInfo.teamLogo }}" alt="">
     </div>
     <div class="team-card__about-team">
-      <span class="team-card__team-name">Natus Vincere</span>
+      <span class="team-card__team-name">{{ teamInfo.teamName }}</span>
       <div class="team-card__team-line-up">
-        <div class="team-card__player-card">
-          <div class="team-card__player-photo">
-            <img src="https://img-cdn.hltv.org/playerbodyshot/0mmVKzVsSaBc2qjsxH2hyo.png?ixlib=java-2.1.0&w=400&s=29e9c3dc50bd8a8dd17dbbb869095cdf" alt="">
-          </div>
-          <div class="team-card__player-nickname">
-            <span>flamie</span>
-          </div>
-        </div>
-        <div class="team-card__player-card">
-          <div class="team-card__player-photo">
-            <img src="https://img-cdn.hltv.org/playerbodyshot/QaTkwUoBdKr120VPSlMUHO.png?ixlib=java-2.1.0&w=400&s=1177cfee474a3033a2857124b6ca8a3e" alt="">
-          </div>
-          <div class="team-card__player-nickname">
-            <span>s1mple</span>
-          </div>
-        </div>
-        <div class="team-card__player-card">
-          <div class="team-card__player-photo">
-            <img src="https://img-cdn.hltv.org/playerbodyshot/lKM1xHTpbPv4kV9DFstvkM.png?ixlib=java-2.1.0&w=400&s=6b0da4cb1149f5655fb05abccabd553a" alt="">
-          </div>
-          <div class="team-card__player-nickname">
-            <span>electronic</span>
-          </div>
-        </div>
-        <div class="team-card__player-card">
-          <div class="team-card__player-photo">
-            <img src="https://img-cdn.hltv.org/playerbodyshot/HcGmlkqTSrIM-W6Vs5LZPR.png?ixlib=java-2.1.0&w=400&s=21f7500440e0342e1703ae7077634115" alt="">
-          </div>
-          <div class="team-card__player-nickname">
-            <span>Boombl4</span>
-          </div>
-        </div>
-        <div class="team-card__player-card">
-          <div class="team-card__player-photo">
-            <img src="https://img-cdn.hltv.org/playerbodyshot/RwD68V2yo9TJabLLp9HsWx.png?ixlib=java-2.1.0&w=400&s=fecbc4f2703917d427908c713cb92532" alt="">
-          </div>
-          <div class="team-card__player-nickname">
-            <span>Perfecto</span>
+        <div *ngFor="let teamMember of teamInfo.teamMembers">
+          <div class="team-card__player-card">
+            <div class="team-card__player-photo">
+              <img src="{{ teamMember.memberPhoto }}" alt="">
+            </div>
+            <div class="team-card__player-nickname">
+              <span>{{ teamMember.memberNick }}</span>
+            </div>
           </div>
         </div>
       </div>
       <div class="team-card__stats-info">
-        <div class="team-card__stats-row">
-          <span class="team-card__stats-title">Место в мировом рейтинге:</span>
-          <span class="team-card__stats-value">3</span>
-        </div>
-        <div class="team-card__stats-row">
-          <span class="team-card__stats-title">Средний возраст игроков:</span>
-          <span class="team-card__stats-value">22.5</span>
+        <div *ngFor="let teamStats of teamInfo.teamStats">
+          <div class="team-card__stats-row">
+            <span class="team-card__stats-title">{{ teamStats.title }}:</span>
+            <span class="team-card__stats-value">{{ teamStats.value }}</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <div class="team-card__last-matches">
     <span class="team-card__last-match-title">Последние матчи:</span>
-    <div class="team-card__last-match-row">
-      <div class="team-card__last-match-team">
-        <div class="team-card__last-match-team-logo">
-          <img src="https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937" alt="">
+    <div *ngFor="let match of teamInfo.lastMatches">
+      <div class="team-card__last-match-row">
+        <div class="team-card__last-match-team">
+          <div class="team-card__last-match-team-logo">
+            <img src="{{ match.firstTeam.teamLogo }}" alt="">
+          </div>
+          <span class="team-card__last-match-team-name">{{ match.firstTeam.teamName }}</span>
         </div>
-        <span class="team-card__last-match-team-name">Natus Vincere</span>
-      </div>
-      <span class="team-card__last-match-score">1:2</span>
-      <div class="team-card__last-match-team">
-        <div class="team-card__last-match-team-logo">
-          <img src="https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067" alt="">
+        <span class="team-card__last-match-score">{{ match.matchScore }}</span>
+        <div class="team-card__last-match-team">
+          <div class="team-card__last-match-team-logo">
+            <img src="{{ match.secondTeam.teamLogo }}" alt="">
+          </div>
+          <span class="team-card__last-match-team-name">{{ match.secondTeam.teamName }}</span>
         </div>
-        <span class="team-card__last-match-team-name">Astralis</span>
-      </div>
-    </div>
-    <div class="team-card__last-match-row">
-      <div class="team-card__last-match-team">
-        <div class="team-card__last-match-team-logo">
-          <img src="https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937" alt="">
-        </div>
-        <span class="team-card__last-match-team-name">Natus Vincere</span>
-      </div>
-      <span class="team-card__last-match-score">1:2</span>
-      <div class="team-card__last-match-team">
-        <div class="team-card__last-match-team-logo">
-          <img src="https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067" alt="">
-        </div>
-        <span class="team-card__last-match-team-name">Astralis</span>
-      </div>
-    </div>
-    <div class="team-card__last-match-row">
-      <div class="team-card__last-match-team">
-        <div class="team-card__last-match-team-logo">
-          <img src="https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937" alt="">
-        </div>
-        <span class="team-card__last-match-team-name">Natus Vincere</span>
-      </div>
-      <span class="team-card__last-match-score">1:2</span>
-      <div class="team-card__last-match-team">
-        <div class="team-card__last-match-team-logo">
-          <img src="https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067" alt="">
-        </div>
-        <span class="team-card__last-match-team-name">Astralis</span>
-      </div>
-    </div>
-    <div class="team-card__last-match-row">
-      <div class="team-card__last-match-team">
-        <div class="team-card__last-match-team-logo">
-          <img src="https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937" alt="">
-        </div>
-        <span class="team-card__last-match-team-name">Natus Vincere</span>
-      </div>
-      <span class="team-card__last-match-score">1:2</span>
-      <div class="team-card__last-match-team">
-        <div class="team-card__last-match-team-logo">
-          <img src="https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067" alt="">
-        </div>
-        <span class="team-card__last-match-team-name">Astralis</span>
-      </div>
-    </div>
-    <div class="team-card__last-match-row">
-      <div class="team-card__last-match-team">
-        <div class="team-card__last-match-team-logo">
-          <img src="https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937" alt="">
-        </div>
-        <span class="team-card__last-match-team-name">Natus Vincere</span>
-      </div>
-      <span class="team-card__last-match-score">1:2</span>
-      <div class="team-card__last-match-team">
-        <div class="team-card__last-match-team-logo">
-          <img src="https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067" alt="">
-        </div>
-        <span class="team-card__last-match-team-name">Astralis</span>
       </div>
     </div>
   </div>

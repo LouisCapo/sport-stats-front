@@ -1,8 +1,11 @@
-<div class="player-card">
+<span *ngIf="loading" style="height: 100%; display: flex; justify-content: center; align-items: center;">
+  <mat-spinner></mat-spinner>
+</span>
+<div *ngIf="!loading" class="player-card">
   <div class="player-card__player-info">
     <div class="player-card__player-photo">
       <img
-        src="https://img-cdn.hltv.org/playerbodyshot/QaTkwUoBdKr120VPSlMUHO.png?ixlib=java-2.1.0&w=400&s=1177cfee474a3033a2857124b6ca8a3e"
+        src="{{ playerInfo.playerPhoto }}"
         alt=""
       />
     </div>

@@ -3,6 +3,7 @@ export interface IPlayer {
 	playerNick: string;
 	playerId: string;
 	playerTeam: string;
+	playerPhoto: string;
 	playerTeamIcon: string;
 	playerAchievements: string[];
 	playerStats: IPlayerStats[];

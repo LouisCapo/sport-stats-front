@@ -13,6 +13,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   @Input() playerId: string;
 
   playerInfo: IPlayer;
+  loading = true;
 
   get playerAchievements() {
     return this.playerInfo.playerAchievements.join(' | ');
@@ -25,6 +26,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._subscriptions.push(this._playerService.getPlayer(this.playerId).subscribe(res => {
       this.playerInfo = res;
+      this.loading = false;
     }))
   }
 

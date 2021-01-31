@@ -1,6 +1,6 @@
-<span *ngIf="loading" style="height: 100%; display: flex; justify-content: center; align-items: center;">
+<div *ngIf="loading" style="height: 100%; display: flex; justify-content: center; align-items: center;">
   <mat-spinner></mat-spinner>
-</span>
+</div>
 <div *ngIf="!loading" class="player-card">
   <div class="player-card__player-info">
     <div class="player-card__player-photo">
@@ -11,28 +11,24 @@
     </div>
     <div class="player-card__about-player">
       <span class="player-card__player-name">{{playerInfo.playerName}}</span>
-      <div class="player-card__nickname-info">
-        <span>Ник:</span>
-        <span class="player-card__player-nickname">{{playerInfo.playerNick}}</span>
+      <div class="player-card__about-player-row">
+        <span class="player-card__about-player-title">Ник:</span>
+        <span class="player-card__about-player-value">{{playerInfo.playerNick}}</span>
       </div>
-      <div class="player-card__player-team">
-        <span>Текущая команда:</span>
-        <div class="player-card__team-info">
-          <img
-            class="player-card__team-logo"
-            src="{{playerInfo.playerTeamIcon}}"
-            alt=""
-          />
-          <span class="player-card__team-name">{{playerInfo.playerTeam}}</span>
+      <div class="player-card__about-player-row">
+        <span class="player-card__about-player-title">Возраст:</span>
+        <span class="player-card__about-player-value">23</span>
+      </div>
+      <div class="player-card__about-player-row" style="cursor: pointer;">
+        <span class="player-card__about-player-title">Текущая команда:</span>
+        <div (click)="openTeamPage(playerInfo.playerTeamId)" class="player-card__player-team">
+          <img class="player-card__team-logo" src="{{playerInfo.playerTeamIcon}}" alt="" />
+          <span class="player-card__about-player-value">{{playerInfo.playerTeam}}</span>
         </div>
       </div>
-      <div class="player-card__player-achievement">
-        <span>Достижения:</span>
-        <div class="player-card__achievement-list">
-          <span class="player-card__achievements"
-            >{{playerAchievements}}</span
-          >
-        </div>
+      <div class="player-card__about-player-row">
+        <span class="player-card__about-player-title">Достижения:</span>
+        <span class="player-card__about-player-value">{{playerAchievements}}</span>
       </div>
     </div>
   </div>

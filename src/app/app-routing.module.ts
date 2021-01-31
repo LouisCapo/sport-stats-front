@@ -9,13 +9,13 @@ const routes: Routes = [
         (module) => module.MainPageModule
       ),
   },{
-    path: 'player',
+    path: 'player/:id',
     loadChildren: () =>
       import(`./modules/player-page/player-page.module`).then(
         (module) => module.PlayerPageModule
       ),
   },{
-    path: 'team',
+    path: 'team/:id',
     loadChildren: () =>
       import(`./modules/team-page/team-page.module`).then(
         (module) => module.TeamPageModule

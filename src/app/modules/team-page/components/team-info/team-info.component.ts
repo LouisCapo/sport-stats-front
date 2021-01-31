@@ -2,6 +2,8 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ITeam } from '../../model/team-interfaces'
 import { TeamService } from '../../services/team.service'
+import { Router } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-team-info',
@@ -10,15 +12,19 @@ import { TeamService } from '../../services/team.service'
 })
 export class TeamInfoComponent implements OnInit, OnDestroy {
 
-  @Input() teamId: string;
-
+  teamId;
   teamInfo: ITeam;
 
   private _subscription: Subscription[] = [];
 
-  constructor(private _teamService: TeamService) { }
+  constructor(private _teamService: TeamService,
+              private _router: Router,
+              private _route: ActivatedRoute) { }
 
   ngOnInit() {
+    this._route.params.subscribe(res => {
+      this.teamId = res.id;
+    })
     this._subscription.push(this._teamService.getTeam(this.teamId).subscribe(res => {
       this.teamInfo = res;
     }))
@@ -28,6 +34,10 @@ export class TeamInfoComponent implements OnInit, OnDestroy {
     this._subscription.forEach(res => {
       res.unsubscribe();
     })
+  }
+
+  openPlayerPage(playerId) {
+    this._router.navigate([`/player/${playerId}`])
   }
 
 }

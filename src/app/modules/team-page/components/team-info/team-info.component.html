@@ -7,7 +7,7 @@
       <span class="team-card__team-name">{{ teamInfo.teamName }}</span>
       <div class="team-card__team-line-up">
         <div *ngFor="let teamMember of teamInfo.teamMembers">
-          <div class="team-card__player-card">
+          <div (click)="openPlayerPage(teamMember.memberId)" class="team-card__player-card">
             <div class="team-card__player-photo">
               <img src="{{ teamMember.memberPhoto }}" alt="">
             </div>
@@ -18,6 +18,10 @@
         </div>
       </div>
       <div class="team-card__stats-info">
+        <div class="team-card__stats-row">
+          <span class="team-card__stats-title">Вид спорта:</span>
+            <span class="team-card__stats-value">{{ teamInfo.sportType }}</span>
+        </div>
         <div *ngFor="let teamStats of teamInfo.teamStats">
           <div class="team-card__stats-row">
             <span class="team-card__stats-title">{{ teamStats.title }}:</span>

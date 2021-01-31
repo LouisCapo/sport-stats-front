@@ -5,6 +5,7 @@ export interface ITeam {
 	teamMembers: ITeamMember[];
 	teamStats: ITeamStats[];
 	lastMatches: ILastMatch[];
+	sportType: string;
 }
 
 interface ITeamMember {

@@ -23,25 +23,30 @@
 		}
 	}
 
+	&__about-player-row {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		font-size: 17px;
+		height: 10px;
+	}
+
+	&__about-player-row:not(:last-child) {
+		margin-bottom: 15px;
+	}
+
+	&__about-player-title {
+		font-weight: lighter;
+	}
+
+	&__about-player-value {
+		color: #87a3bf;
+	}
+
 	&__player-name {
 		font-size: 20px;
 		color: #87a3bf;
 		margin-bottom: 30px;
-	}
-
-	&__player-nickname {
-		font-size: 17px;
-		color: #87a3bf;
-		font-weight: normal;
-	}
-
-	&__nickname-info {
-		width: 100%;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		font-size: 17px;
-		font-weight: lighter;
 	}
 
 	&__about-player {
@@ -52,20 +57,6 @@
 	}
 
 	&__player-team {
-		width: 100%;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		font-size: 17px;
-		font-weight: lighter;
-	}
-
-	&__team-name {
-		font-weight: normal;
-		color: #87a3bf;
-	}
-
-	&__team-info {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -74,19 +65,6 @@
 			height: 30px;
 			margin-right: 10px;
 		}
-	}
-
-	&__player-achievement {
-		width: 100%;
-		display: flex;
-		justify-content: space-between;
-		font-size: 17px;
-		font-weight: lighter;
-	}
-
-	&__achievements {
-		font-weight: normal;
-		color: #87a3bf;
 	}
 
 	&__player-stats {

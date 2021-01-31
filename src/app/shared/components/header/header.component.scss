@@ -4,6 +4,9 @@
 	justify-content: space-between;
 	align-items: center;
 	
+	&__title:hover {
+		cursor: pointer;
+	}
 
 	&__nav-bar {
 		list-style-type: none;

@@ -14,6 +14,7 @@ constructor() { }
       res.next({
         teamName: 'Natus Vincere',
         teamId: '123',
+        sportType: 'Киберспорт',
         teamLogo:
           'https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937',
         teamMembers: [

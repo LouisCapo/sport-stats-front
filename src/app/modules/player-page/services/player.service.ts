@@ -4,9 +4,7 @@ import { IPlayer } from '../model/player-interfaces'
 import { ENV_TOKEN } from 'src/environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http'
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class PlayerService {
   constructor(
     @Inject(ENV_TOKEN) private _environments,

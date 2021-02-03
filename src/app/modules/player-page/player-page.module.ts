@@ -4,6 +4,7 @@ import { PlayerPageComponent } from './player-page.component';
 import { PlayerPageRoutingModule } from './player-page-routing.module'
 import { PlayerInfoComponent } from './components/player-info/player-info.component'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PlayerService } from '../player-page/services/player.service'
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     PlayerPageRoutingModule,
     MatProgressSpinnerModule,
   ],
+  providers: [PlayerService],
   declarations: [PlayerPageComponent, PlayerInfoComponent]
 })
 export class PlayerPageModule { }

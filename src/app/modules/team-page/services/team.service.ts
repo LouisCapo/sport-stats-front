@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ITeam } from '../model/team-interfaces'
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TeamService {
 
 constructor() { }

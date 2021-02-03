@@ -1,19 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IPlayer } from '../model/player-interfaces'
-import { ApiService } from '../../../shared/services/api.service'
-import { HttpParams } from '@angular/common/http';
+import { ENV_TOKEN } from 'src/environments/environment';
+import { HttpClient, HttpParams } from '@angular/common/http'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PlayerService {
-
-constructor(private _apiService: ApiService) { }
+  constructor(
+    @Inject(ENV_TOKEN) private _environments,
+    private http: HttpClient
+  ) {}
 
   getPlayer(id: string): Observable<IPlayer> {
     const params = new HttpParams().set('id', id);
-    return this._apiService.playerRequest('get-player', params);
+    return this.http.get<IPlayer>(
+      `${this._environments.apiUrl}/api/players/get-player`,
+      { params }
+    );
   }
-
 }

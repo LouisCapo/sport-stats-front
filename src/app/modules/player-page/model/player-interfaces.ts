@@ -2,12 +2,16 @@ export interface IPlayer {
 	playerName: string;
 	playerNick: string;
 	playerId: string;
-	playerTeam: string;
-	playerTeamId: string;
+	playerTeam: IPlayerTeam;
 	playerPhoto: string;
-	playerTeamIcon: string;
 	playerAchievements: string[];
 	playerStats: IPlayerStats[];
+}
+
+interface IPlayerTeam {
+	teamName: string;
+	teamId: string;
+	teamLogo: string
 }
 
 interface IPlayerStats {

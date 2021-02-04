@@ -21,9 +21,9 @@
       </div>
       <div class="player-card__about-player-row" style="cursor: pointer;">
         <span class="player-card__about-player-title">Текущая команда:</span>
-        <div (click)="openTeamPage(playerInfo.playerTeamId)" class="player-card__player-team">
-          <img class="player-card__team-logo" src="{{playerInfo.playerTeamIcon}}" alt="" />
-          <span class="player-card__about-player-value">{{playerInfo.playerTeam}}</span>
+        <div (click)="openTeamPage(playerInfo.playerTeam.teamId)" class="player-card__player-team">
+          <img class="player-card__team-logo" src="{{playerInfo.playerTeam.teamLogo}}" alt="" />
+          <span class="player-card__about-player-value">{{playerInfo.playerTeam.teamName}}</span>
         </div>
       </div>
       <div class="player-card__about-player-row">

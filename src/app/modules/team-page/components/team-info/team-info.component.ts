@@ -4,6 +4,7 @@ import { ITeam } from '../../model/team-interfaces';
 import { TeamService } from '../../services/team.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { IErrorRequest } from 'src/app/shared/model/api-inteface';
 
 @Component({
   selector: 'app-team-info',
@@ -13,6 +14,8 @@ import { ActivatedRoute } from '@angular/router';
 export class TeamInfoComponent implements OnInit, OnDestroy {
   teamId: string;
   teamInfo: ITeam;
+  errorInfo: IErrorRequest;
+  loading = true;
 
   private _subscription: Subscription[] = [];
 
@@ -30,7 +33,11 @@ export class TeamInfoComponent implements OnInit, OnDestroy {
     );
     this._subscription.push(
       this._teamService.getTeam(this.teamId).subscribe((res) => {
-        this.teamInfo = res;
+        if ((res as IErrorRequest).error) {
+          this.errorInfo = res as IErrorRequest;
+        }
+        this.teamInfo = res as ITeam;
+        this.loading = false;
       })
     );
   }

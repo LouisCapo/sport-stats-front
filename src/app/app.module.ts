@@ -12,9 +12,9 @@ import { ENV_TOKEN, environment } from '../environments/environment';
     AppComponent
   ],
   imports: [
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
     BrowserAnimationsModule,
     HttpClientModule,
   ],

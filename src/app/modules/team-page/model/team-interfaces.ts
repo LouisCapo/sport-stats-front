@@ -6,9 +6,11 @@ export interface ITeam {
 	teamStats: ITeamStats[];
 	lastMatches: ILastMatch[];
 	sportType: string;
+	memberAverageAge: number;
 }
 
 interface ITeamMember {
+	memberName: string;
 	memberNick: string;
 	memberPhoto: string;
 	memberId: string;

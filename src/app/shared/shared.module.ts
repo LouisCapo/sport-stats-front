@@ -4,6 +4,7 @@ import { HeaderComponent } from './components/header/header.component'
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import { InfoMessageComponent } from './components/info-message/info-message.component'
 
 @NgModule({
   imports: [
@@ -12,7 +13,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatInputModule,
     MatIconModule,
   ],
-  declarations: [HeaderComponent],
-  exports: [HeaderComponent]
+  declarations: [HeaderComponent, InfoMessageComponent],
+  exports: [HeaderComponent, InfoMessageComponent]
 })
 export class SharedModule { }

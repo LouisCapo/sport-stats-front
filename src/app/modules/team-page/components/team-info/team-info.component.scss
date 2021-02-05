@@ -1,10 +1,14 @@
 .team-card {
 	padding: 10px;
 	width: 800px;
-	height: 500px;
+	height: auto;
 	border-radius: 20px;
 	box-shadow: 0 0 5px #b0b0b0;
 	color: #fff;
+
+	&__error-message{
+		width: 100%;
+	}
 
 	&__team-info {
 		width: 100%;

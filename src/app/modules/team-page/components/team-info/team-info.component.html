@@ -1,54 +1,73 @@
-<div class="team-card">
-  <div class="team-card__team-info">
-    <div class="team-card__team-logo">
-      <img src="{{ teamInfo.teamLogo }}" alt="">
+<ng-container *ngTemplateOutlet="loading ? spiner : teamCard">
+
+</ng-container>
+<ng-template #teamCard>
+  <div class="team-card">
+    <div *ngIf="errorInfo" class="team-card__error-message">
+      <app-info-message [error]="true" [messageText]="errorInfo.error.msg"></app-info-message>
     </div>
-    <div class="team-card__about-team">
-      <span class="team-card__team-name">{{ teamInfo.teamName }}</span>
-      <div class="team-card__team-line-up">
-        <div *ngFor="let teamMember of teamInfo.teamMembers">
-          <div (click)="openPlayerPage(teamMember.memberId)" class="team-card__player-card">
-            <div class="team-card__player-photo">
-              <img src="{{ teamMember.memberPhoto }}" alt="">
+    <div *ngIf="!errorInfo">
+      <div class="team-card__team-info">
+        <div class="team-card__team-logo">
+          <img [src]="teamInfo.teamLogo" alt="">
+        </div>
+        <div class="team-card__about-team">
+          <span class="team-card__team-name">{{ teamInfo.teamName }}</span>
+          <div class="team-card__team-line-up">
+            <div *ngFor="let teamMember of teamInfo.teamMembers">
+              <div (click)="openPlayerPage(teamMember.memberId)" class="team-card__player-card">
+                <div class="team-card__player-photo">
+                  <img [src]="teamMember.memberPhoto" alt="">
+                </div>
+                <div class="team-card__player-nickname">
+                  <span>{{ teamMember.memberNick }}</span>
+                </div>
+              </div>
             </div>
-            <div class="team-card__player-nickname">
-              <span>{{ teamMember.memberNick }}</span>
+          </div>
+          <div class="team-card__stats-info">
+            <div class="team-card__stats-row">
+              <span class="team-card__stats-title">Вид спорта:</span>
+                <span class="team-card__stats-value">{{ teamInfo.sportType }}</span>
+            </div>
+            <div class="team-card__stats-row">
+              <span class="team-card__stats-title">Средний возраст игроков:</span>
+                <span class="team-card__stats-value">{{ teamInfo.memberAverageAge }}</span>
+            </div>
+            <div *ngFor="let teamStats of teamInfo.teamStats">
+              <div class="team-card__stats-row">
+                <span class="team-card__stats-title">{{ teamStats.title }}:</span>
+                <span class="team-card__stats-value">{{ teamStats.value }}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="team-card__stats-info">
-        <div class="team-card__stats-row">
-          <span class="team-card__stats-title">Вид спорта:</span>
-            <span class="team-card__stats-value">{{ teamInfo.sportType }}</span>
-        </div>
-        <div *ngFor="let teamStats of teamInfo.teamStats">
-          <div class="team-card__stats-row">
-            <span class="team-card__stats-title">{{ teamStats.title }}:</span>
-            <span class="team-card__stats-value">{{ teamStats.value }}</span>
+      <div class="team-card__last-matches">
+        <span class="team-card__last-match-title">Последние матчи:</span>
+        <div *ngFor="let match of teamInfo.lastMatches">
+          <div class="team-card__last-match-row">
+            <div class="team-card__last-match-team">
+              <div class="team-card__last-match-team-logo">
+                <img src="{{ match.firstTeam.teamLogo }}" alt="">
+              </div>
+              <span class="team-card__last-match-team-name">{{ match.firstTeam.teamName }}</span>
+            </div>
+            <span class="team-card__last-match-score">{{ match.matchScore }}</span>
+            <div class="team-card__last-match-team">
+              <div class="team-card__last-match-team-logo">
+                <img src="{{ match.secondTeam.teamLogo }}" alt="">
+              </div>
+              <span class="team-card__last-match-team-name">{{ match.secondTeam.teamName }}</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="team-card__last-matches">
-    <span class="team-card__last-match-title">Последние матчи:</span>
-    <div *ngFor="let match of teamInfo.lastMatches">
-      <div class="team-card__last-match-row">
-        <div class="team-card__last-match-team">
-          <div class="team-card__last-match-team-logo">
-            <img src="{{ match.firstTeam.teamLogo }}" alt="">
-          </div>
-          <span class="team-card__last-match-team-name">{{ match.firstTeam.teamName }}</span>
-        </div>
-        <span class="team-card__last-match-score">{{ match.matchScore }}</span>
-        <div class="team-card__last-match-team">
-          <div class="team-card__last-match-team-logo">
-            <img src="{{ match.secondTeam.teamLogo }}" alt="">
-          </div>
-          <span class="team-card__last-match-team-name">{{ match.secondTeam.teamName }}</span>
-        </div>
-      </div>
-    </div>
+</ng-template>
+<ng-template #spiner>
+  <div class="loading-spiner">
+    <mat-spinner></mat-spinner>
   </div>
-</div>
+</ng-template>

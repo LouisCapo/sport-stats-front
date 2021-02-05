@@ -4,6 +4,7 @@ import { IPlayer } from '../../model/player-interfaces';
 import { PlayerService } from '../../services/player.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { IErrorRequest } from '../../../../shared/model/api-inteface'
 
 @Component({
   selector: 'app-player-info',
@@ -14,6 +15,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   playerId: string;
   playerInfo: IPlayer;
   loading = true;
+  errorInfo: IErrorRequest;
 
   get playerAchievements() {
     return this.playerInfo.playerAchievements.join(' | ');
@@ -35,7 +37,10 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     );
     this._subscriptions.push(
       this._playerService.getPlayer(this.playerId).subscribe((res) => {
-        this.playerInfo = res;
+        if ((res as IErrorRequest).error) {
+          this.errorInfo = res as IErrorRequest;
+        }
+        this.playerInfo = res as IPlayer;
         this.loading = false;
       })
     );

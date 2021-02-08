@@ -6,13 +6,15 @@ import { PlayerInfoComponent } from './components/player-info/player-info.compon
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PlayerService } from '../player-page/services/player.service'
 import { SharedModule } from '../../shared/shared.module'
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   imports: [
     CommonModule,
     PlayerPageRoutingModule,
     MatProgressSpinnerModule,
-    SharedModule
+    SharedModule,
+    MatCardModule
   ],
   providers: [PlayerService],
   declarations: [PlayerPageComponent, PlayerInfoComponent]

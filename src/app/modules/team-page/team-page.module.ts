@@ -6,12 +6,14 @@ import { TeamInfoComponent } from './components/team-info/team-info.component'
 import { TeamService } from '../team-page/services/team.service'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SharedModule } from '../../shared/shared.module'
+import {MatCardModule} from '@angular/material/card';
 @NgModule({
   imports: [
     CommonModule,
     TeamPageRoutingModule,
     MatProgressSpinnerModule,
-    SharedModule
+    SharedModule,
+    MatCardModule
   ],
   declarations: [TeamPageComponent, TeamInfoComponent],
   providers: [TeamService]

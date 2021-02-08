@@ -6,10 +6,10 @@
 	}
 
 	&__team-info {
-		width: 100%;
+		width: auto;
 		display: flex;
 		justify-content: center;
-		
+		flex-wrap: wrap;
 	}
 
 	&__team-logo {

@@ -36,23 +36,27 @@
               <div
                 (click)="openTeamPage(playerInfo.playerTeam.teamId)"
                 class="player-card__player-team"
-                style="cursor: pointer"
               >
                 <img
                   class="player-card__team-logo"
-                  src="{{ playerInfo.playerTeam.teamLogo }}"
+                  [src]="playerInfo.playerTeam.teamLogo"
                   alt=""
                 />
-                <span class="player-card__about-player-value">{{
+                <span class="player-card__about-player-value player-card__link">{{
                   playerInfo.playerTeam.teamName
                 }}</span>
               </div>
             </div>
             <div class="player-card__about-player-row">
               <span class="player-card__about-player-title">Достижения:</span>
-              <span class="player-card__about-player-value">{{
-                playerAchievements
-              }}</span>
+              <span class="player-card__about-player-value"
+                ><span
+                  class="player-card__link"
+                  *ngFor="let achievement of playerInfo.playerAchievements"
+                  (click)="openAchievementNews(achievement.newsId)"
+                  >{{ achievement.title }}
+                </span></span
+              >
             </div>
           </div>
         </div>

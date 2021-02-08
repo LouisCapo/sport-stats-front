@@ -1,0 +1,30 @@
+<ng-container *ngTemplateOutlet="loading ? spiner : newsCard"> </ng-container>
+<ng-template #newsCard>
+  <mat-card class="news-card">
+    <div *ngIf="errorInfo">
+      <app-info-message [error]="true" [messageText]="errorInfo.error.msg"></app-info-message>
+    </div>
+    <div *ngIf="!errorInfo">
+      <img
+        mat-card-image
+        class="news-card__photo"
+        [src]="newsInfo.newsPhotos[0]"
+        alt=""
+      />
+      <mat-card-content class="news-card__card-filling">
+        <mat-card-title>{{ newsInfo.newsTitle }}</mat-card-title>
+        <div class="news-card__news-text">
+          <span>{{ newsInfo.newsText }}</span>
+        </div>
+        <mat-card-footer class="news-card__card-footer">
+          <span class="news-card__news-date">{{ newsInfo.newsDate }}</span>
+        </mat-card-footer>
+      </mat-card-content>
+    </div>
+  </mat-card>
+</ng-template>
+<ng-template #spiner>
+  <div class="loading-spiner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

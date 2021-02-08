@@ -43,26 +43,28 @@
             </div>
           </div>
         </div>
-        <div class="team-card__last-matches">
-          <span class="team-card__last-match-title">Последние матчи:</span>
-          <div *ngFor="let match of teamInfo.lastMatches">
-            <div class="team-card__last-match-row">
-              <div class="team-card__last-match-team">
-                <div class="team-card__last-match-team-logo">
-                  <img src="{{ match.firstTeam.teamLogo }}" alt="">
+        <mat-card-footer>
+          <div class="team-card__last-matches">
+            <span class="team-card__last-match-title">Последние матчи:</span>
+            <div *ngFor="let match of teamInfo.lastMatches">
+              <div class="team-card__last-match-row">
+                <div class="team-card__last-match-team">
+                  <div class="team-card__last-match-team-logo">
+                    <img src="{{ match.firstTeam.teamLogo }}" alt="">
+                  </div>
+                  <span class="team-card__last-match-team-name">{{ match.firstTeam.teamName }}</span>
                 </div>
-                <span class="team-card__last-match-team-name">{{ match.firstTeam.teamName }}</span>
-              </div>
-              <span class="team-card__last-match-score">{{ match.matchScore }}</span>
-              <div class="team-card__last-match-team">
-                <div class="team-card__last-match-team-logo">
-                  <img src="{{ match.secondTeam.teamLogo }}" alt="">
+                <span class="team-card__last-match-score">{{ match.matchScore }}</span>
+                <div class="team-card__last-match-team">
+                  <div class="team-card__last-match-team-logo">
+                    <img src="{{ match.secondTeam.teamLogo }}" alt="">
+                  </div>
+                  <span class="team-card__last-match-team-name">{{ match.secondTeam.teamName }}</span>
                 </div>
-                <span class="team-card__last-match-team-name">{{ match.secondTeam.teamName }}</span>
               </div>
             </div>
           </div>
-        </div>
+        </mat-card-footer>
       </div>
     </mat-card-content>
   </mat-card>

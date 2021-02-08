@@ -20,6 +20,12 @@ const routes: Routes = [
       import(`./modules/team-page/team-page.module`).then(
         (module) => module.TeamPageModule
       ),
+  },{
+    path: 'news/:id',
+    loadChildren: () =>
+      import(`./modules/news-page/news-page.module`).then(
+        (module) => module.NewsPageModule
+      ),
   },
 ];
 

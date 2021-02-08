@@ -5,7 +5,7 @@ export interface IPlayer {
 	playerTeam: IPlayerTeam;
 	playerPhoto: string;
 	playerAge: number;
-	playerAchievements: string[];
+	playerAchievements: IPlayerAchievements[];
 	playerStats: IPlayerStats[];
 }
 
@@ -18,4 +18,9 @@ interface IPlayerTeam {
 interface IPlayerStats {
 	title: string;
 	value: string;
+}
+
+interface IPlayerAchievements {
+	title: string;
+	newsId: string;
 }

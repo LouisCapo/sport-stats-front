@@ -1,0 +1,22 @@
+.loading-spiner {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.news-card {
+  margin-top: 50px;
+  width: 700px;
+
+  &__card-footer {
+    display: flex;
+    justify-content: flex-end;
+    color: #b0b0b0
+  }
+
+  &__card-filling {
+    padding: 0 10px 10px 10px;
+  }
+
+}

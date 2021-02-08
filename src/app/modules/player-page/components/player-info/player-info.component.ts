@@ -2,8 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IPlayer } from '../../model/player-interfaces';
 import { PlayerService } from '../../services/player.service';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { IErrorRequest } from '../../../../shared/model/api-inteface'
 
 @Component({
@@ -16,10 +15,6 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   playerInfo: IPlayer;
   loading = true;
   errorInfo: IErrorRequest;
-
-  get playerAchievements() {
-    return this.playerInfo.playerAchievements.join(' | ');
-  }
 
   private _subscriptions: Subscription[] = [];
 
@@ -54,5 +49,9 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
 
   openTeamPage(teamId) {
     this._router.navigate([`/team/${teamId}`]);
+  }
+
+  openAchievementNews(newsId) {
+    this._router.navigate([`/news/${newsId}`]);
   }
 }

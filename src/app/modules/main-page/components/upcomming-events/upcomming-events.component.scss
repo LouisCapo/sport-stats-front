@@ -4,12 +4,14 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	min-width: 250px;
 
 	&__header {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
+		width: 100%;
 	}
 	
 	&__title {
@@ -19,8 +21,14 @@
 	}
 
 	.events-list {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
 
 		&__event-item {
+			width: 100%;
 			margin-bottom: 10px;
 		}
 

@@ -1,6 +1,8 @@
-<div class="upcomming-events">
-  <div class="upcomming-events__header">
-    <span class="upcomming-events__title">Предстоящие события:</span>
+<mat-card class="upcomming-events">
+  <mat-card-header class="upcomming-events__header">
+    <mat-card-title>
+      <span class="upcomming-events__title">Предстоящие события</span>
+    </mat-card-title>
     <mat-form-field appearance="fill">
       <mat-label>Вид спорта</mat-label>
       <mat-select class="upcomming-events__sport-select" name="Спорт">
@@ -9,8 +11,8 @@
         <mat-option>Киберспорт</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
-  <div class="events-list">
+  </mat-card-header>
+  <mat-card-content class="events-list">
     <div class="events-list__event-item">
       <app-upcomming-events-item></app-upcomming-events-item>
     </div>
@@ -29,5 +31,5 @@
     <div class="events-list__event-item">
       <app-upcomming-events-item></app-upcomming-events-item>
     </div>
-  </div>
-</div>
+  </mat-card-content>
+</mat-card>

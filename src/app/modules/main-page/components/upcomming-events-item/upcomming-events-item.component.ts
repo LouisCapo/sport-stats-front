@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-upcomming-events-item',
@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./upcomming-events-item.component.scss']
 })
 export class UpcommingEventsItemComponent implements OnInit {
+
+  @Input() date: string;
+  @Input() firstMember;
+  @Input() secondMember;
 
   constructor() { }
 

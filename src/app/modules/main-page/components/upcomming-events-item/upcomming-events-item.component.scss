@@ -1,5 +1,5 @@
 .event-card {
-	width: 150px;
+	width: 100%;
 	color: #fff;
 
 	&__body {
@@ -7,23 +7,20 @@
 		flex-direction: column;
 	}
 
-	&__date {
+	&__row {
 		padding: 5px;
-		width: 100%;
 		border: 2px solid #b0b0b0;
 		border-bottom: none;
 	}
 
-	&__member {
-		width: 100%;
-		padding: 5px;
-		display: flex;
-		align-items: center;
-		border: 2px solid #b0b0b0;
+	&__row:last-child {
+		border-bottom: 2px solid #b0b0b0;
 	}
 
-	&__member:last-child {
-		border-top: none;
+	&__member {
+		width: 100%;
+		display: flex;
+		align-items: center;
 	}
 
   &__logo {

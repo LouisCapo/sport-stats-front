@@ -7,12 +7,16 @@ import { NewsItemComponent } from './components/news-item/news-item.component'
 import { MatSelectModule } from '@angular/material/select';
 import { UpcommingEventsComponent } from './components/upcomming-events/upcomming-events.component'
 import { UpcommingEventsItemComponent } from './components/upcomming-events-item/upcomming-events-item.component'
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   imports: [
     CommonModule,
     MainPageRoutingModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule,
+    MatButtonModule,
   ],
   declarations: [MainPageComponent, NewsComponent, NewsItemComponent, UpcommingEventsComponent, UpcommingEventsItemComponent]
 })

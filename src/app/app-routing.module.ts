@@ -26,7 +26,13 @@ const routes: Routes = [
       import(`./modules/news-page/news-page.module`).then(
         (module) => module.NewsPageModule
       ),
-  },
+  }, {
+    path: '**',
+    loadChildren: () => 
+      import(`./modules/not-found-page/not-found-page.module`).then(
+        (module) => module.NotFoundPageModule
+      ),
+  }
 ];
 
 @NgModule({

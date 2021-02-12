@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NotFoundDialogComponent } from './components/not-found-dialog/not-found-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component'
 
 @Component({
   selector: 'app-not-found-page',
@@ -18,7 +18,13 @@ export class NotFoundPageComponent implements OnInit, OnDestroy {
               private _router: Router,) {}
 
   ngOnInit() {
-    const dialogRef = this._matDialog.open(NotFoundDialogComponent);
+    const dialogRef = this._matDialog.open(ErrorDialogComponent, {
+      data: {
+        error: false,
+        errorMessage: 'Запрашиваемая страница не найдена :(',
+        closeButtonLabel: 'На главную'
+      }
+    });
     this._subscription.push(dialogRef.afterClosed().subscribe((res) => {
       this._router.navigate(['/main']);
     }));

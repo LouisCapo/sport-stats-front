@@ -5,6 +5,8 @@ import { PlayerService } from '../../services/player.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IErrorRequest } from '../../../../shared/model/api-inteface'
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component'
 
 @Component({
   selector: 'app-player-info',
@@ -15,14 +17,15 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   playerId: string;
   playerInfo: IPlayer;
   loading = true;
-  errorInfo: IErrorRequest;
+  error = false;
 
   private _subscriptions: Subscription[] = [];
 
   constructor(
     private _playerService: PlayerService,
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _matDialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -35,15 +38,24 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
       this._playerService.getPlayer(this.playerId).subscribe((res) => {
         console.log(res);
         if ((res as IErrorRequest).error) {
-          this.errorInfo = res as IErrorRequest;
+          this.error = true;
+          this._matDialog.open(ErrorDialogComponent, {
+            data: {
+              errorMessage: (res as IErrorRequest).error.msg,
+              error: true,
+            }
+          });
         }
         this.playerInfo = res as IPlayer;
         this.loading = false;
       }, (err: HttpErrorResponse) => {
-        this.errorInfo = {error: {
-          code: -1,
-          msg: `К сожалению сервис не доступен в данный момент :(\r\nПопробуйте позже.`
-        }}
+        this.error = true;
+        this._matDialog.open(ErrorDialogComponent, {
+          data: {
+            errorMessage: 'К сожалению сервис не доступен в данный момент :(\r\nПопробуйте позже.',
+            error: true,
+          }
+        });
         this.loading = false;
       })
     );

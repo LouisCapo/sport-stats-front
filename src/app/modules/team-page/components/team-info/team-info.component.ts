@@ -5,6 +5,9 @@ import { TeamService } from '../../services/team.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { IErrorRequest } from 'src/app/shared/model/api-inteface';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component'
 
 @Component({
   selector: 'app-team-info',
@@ -14,7 +17,7 @@ import { IErrorRequest } from 'src/app/shared/model/api-inteface';
 export class TeamInfoComponent implements OnInit, OnDestroy {
   teamId: string;
   teamInfo: ITeam;
-  errorInfo: IErrorRequest;
+  error: boolean;
   loading = true;
 
   private _subscription: Subscription[] = [];
@@ -22,7 +25,8 @@ export class TeamInfoComponent implements OnInit, OnDestroy {
   constructor(
     private _teamService: TeamService,
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _matDialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -34,9 +38,24 @@ export class TeamInfoComponent implements OnInit, OnDestroy {
     this._subscription.push(
       this._teamService.getTeam(this.teamId).subscribe((res) => {
         if ((res as IErrorRequest).error) {
-          this.errorInfo = res as IErrorRequest;
+          this.error = true;
+          this._matDialog.open(ErrorDialogComponent, {
+            data: {
+              error: true,
+              errorMessage: (res as IErrorRequest).error.msg,
+            }
+          })
         }
         this.teamInfo = res as ITeam;
+        this.loading = false;
+      }, (err: HttpErrorResponse) => {
+        this.error = true;
+        this._matDialog.open(ErrorDialogComponent, {
+          data: {
+            error: true,
+            errorMessage: 'К сожалению сервис не доступен в данный момент :(\r\nПопробуйте позже.'
+          }
+        })
         this.loading = false;
       })
     );

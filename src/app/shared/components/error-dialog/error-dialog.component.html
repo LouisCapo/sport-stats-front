@@ -1,0 +1,6 @@
+<mat-dialog-content>
+  <app-info-message [error]="data.error" [messageText]="data.errorMessage"></app-info-message>
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="data.closeButtonLabel" class="dialog__actions">
+  <button mat-raised-button mat-dialog-close>{{data.closeButtonLabel}}</button>
+</mat-dialog-actions>

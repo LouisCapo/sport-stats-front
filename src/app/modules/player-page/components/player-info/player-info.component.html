@@ -1,14 +1,8 @@
 <ng-container *ngTemplateOutlet="loading ? spiner : playerCard"> </ng-container>
 <ng-template #playerCard>
-  <mat-card class="player-card">
-    <mat-card-content>
-      <div *ngIf="errorInfo" class="player-card__error-bar">
-        <app-info-message
-          [error]="true"
-          [messageText]="errorInfo.error.msg"
-        ></app-info-message>
-      </div>
-      <div *ngIf="!errorInfo">
+  <mat-card *ngIf="!error" class="player-card">
+    <mat-card-content> 
+      <div>
         <div class="player-card__player-info">
           <div class="player-card__player-photo">
             <img [src]="playerInfo.playerPhoto" alt="" />

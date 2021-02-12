@@ -5,7 +5,7 @@ export interface IErrorRequest {
 export interface IErrorDialog {
 	error: boolean;
 	errorMessage: string;
-	closeButtonLabel: string;
+	closeButtonLabel?: string;
 }
 
 interface IErrorAnswer {

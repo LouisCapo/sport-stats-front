@@ -3,10 +3,10 @@ import { Subscription } from 'rxjs';
 import { IPlayer } from '../../model/player-interfaces';
 import { PlayerService } from '../../services/player.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IErrorRequest } from '../../../../shared/model/api-inteface'
+import { IErrorRequest } from '../../../../shared/model/api-inteface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
-import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component'
+import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-player-info',
@@ -25,7 +25,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     private _playerService: PlayerService,
     private _router: Router,
     private _route: ActivatedRoute,
-    private _matDialog: MatDialog,
+    private _matDialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -35,29 +35,38 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
       })
     );
     this._subscriptions.push(
-      this._playerService.getPlayer(this.playerId).subscribe((res) => {
-        console.log(res);
-        if ((res as IErrorRequest).error) {
+      this._playerService.getPlayer(this.playerId).subscribe(
+        (res) => {
+          if ((res as IErrorRequest).error) {
+            this.error = true;
+            const dialogRef = this._matDialog.open(ErrorDialogComponent, {
+              data: {
+                errorMessage: (res as IErrorRequest).error.msg,
+                error: true,
+                closeButtonLabel: 'На главную',
+              },
+            });
+            this._subscriptions.push(
+              dialogRef.afterClosed().subscribe((ev) => {
+                this._router.navigate(['/main']);
+              })
+            );
+          }
+          this.playerInfo = res as IPlayer;
+          this.loading = false;
+        },
+        (err: HttpErrorResponse) => {
           this.error = true;
           this._matDialog.open(ErrorDialogComponent, {
             data: {
-              errorMessage: (res as IErrorRequest).error.msg,
+              errorMessage:
+                'К сожалению сервис не доступен в данный момент :(\r\nПопробуйте позже.',
               error: true,
-            }
+            },
           });
+          this.loading = false;
         }
-        this.playerInfo = res as IPlayer;
-        this.loading = false;
-      }, (err: HttpErrorResponse) => {
-        this.error = true;
-        this._matDialog.open(ErrorDialogComponent, {
-          data: {
-            errorMessage: 'К сожалению сервис не доступен в данный момент :(\r\nПопробуйте позже.',
-            error: true,
-          }
-        });
-        this.loading = false;
-      })
+      )
     );
   }
 

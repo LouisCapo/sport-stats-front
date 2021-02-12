@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IErrorRequest } from 'src/app/shared/model/api-inteface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
-import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component'
+import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-team-info',
@@ -26,7 +26,7 @@ export class TeamInfoComponent implements OnInit, OnDestroy {
     private _teamService: TeamService,
     private _router: Router,
     private _route: ActivatedRoute,
-    private _matDialog: MatDialog,
+    private _matDialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -36,28 +36,38 @@ export class TeamInfoComponent implements OnInit, OnDestroy {
       })
     );
     this._subscription.push(
-      this._teamService.getTeam(this.teamId).subscribe((res) => {
-        if ((res as IErrorRequest).error) {
+      this._teamService.getTeam(this.teamId).subscribe(
+        (res) => {
+          if ((res as IErrorRequest).error) {
+            this.error = true;
+            const dialogRef = this._matDialog.open(ErrorDialogComponent, {
+              data: {
+                error: true,
+                errorMessage: (res as IErrorRequest).error.msg,
+                closeButtonLabel: 'На главную',
+              },
+            });
+            this._subscription.push(
+              dialogRef.afterClosed().subscribe((ev) => {
+                this._router.navigate(['/main']);
+              })
+            );
+          }
+          this.teamInfo = res as ITeam;
+          this.loading = false;
+        },
+        (err: HttpErrorResponse) => {
           this.error = true;
           this._matDialog.open(ErrorDialogComponent, {
             data: {
               error: true,
-              errorMessage: (res as IErrorRequest).error.msg,
-            }
-          })
+              errorMessage:
+                'К сожалению сервис не доступен в данный момент :(\r\nПопробуйте позже.',
+            },
+          });
+          this.loading = false;
         }
-        this.teamInfo = res as ITeam;
-        this.loading = false;
-      }, (err: HttpErrorResponse) => {
-        this.error = true;
-        this._matDialog.open(ErrorDialogComponent, {
-          data: {
-            error: true,
-            errorMessage: 'К сожалению сервис не доступен в данный момент :(\r\nПопробуйте позже.'
-          }
-        })
-        this.loading = false;
-      })
+      )
     );
   }
 

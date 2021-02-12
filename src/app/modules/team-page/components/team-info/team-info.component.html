@@ -42,6 +42,7 @@
         <mat-card-footer>
           <div class="team-card__last-matches">
             <span class="team-card__last-match-title">Последние матчи:</span>
+            <app-info-message *ngIf="!teamInfo.lastMatches" [messageText]="'Нет актуальной инфорамации по последним матчам ' + teamInfo.teamName"></app-info-message>
             <div *ngFor="let match of teamInfo.lastMatches">
               <div class="team-card__last-match-row">
                 <div class="team-card__last-match-team">

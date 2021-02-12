@@ -57,6 +57,7 @@
         <mat-card-footer>
           <div class="player-card__stats-bar">
             <span class="player-card__stats">Статистика:</span>
+            <app-info-message *ngIf="!playerInfo.playerStats" [messageText]="'Нет актуальной инфорамации по статистике игрока ' + playerInfo.playerName"></app-info-message>
             <div class="player-card__player-stats">
               <div *ngFor="let stats of playerInfo.playerStats">
                 <div class="player-card__stats-row">

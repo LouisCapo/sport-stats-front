@@ -11,13 +11,6 @@ import { filter } from 'rxjs/operators';
 export class AppComponent implements OnInit {
 
   constructor(private _router: Router, private _route: ActivatedRoute) {
-    this._router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((res: NavigationEnd) => {
-        if (res.url === '/') {
-          this._router.navigate(['/main']);
-        }
-      });
   }
 
   ngOnInit() {}

@@ -4,6 +4,7 @@ import { IPlayer } from '../../model/player-interfaces';
 import { PlayerService } from '../../services/player.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IErrorRequest } from '../../../../shared/model/api-inteface'
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-player-info',
@@ -32,10 +33,17 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     );
     this._subscriptions.push(
       this._playerService.getPlayer(this.playerId).subscribe((res) => {
+        console.log(res);
         if ((res as IErrorRequest).error) {
           this.errorInfo = res as IErrorRequest;
         }
         this.playerInfo = res as IPlayer;
+        this.loading = false;
+      }, (err: HttpErrorResponse) => {
+        this.errorInfo = {error: {
+          code: -1,
+          msg: `К сожалению сервис не доступен в данный момент :(\r\nПопробуйте позже.`
+        }}
         this.loading = false;
       })
     );

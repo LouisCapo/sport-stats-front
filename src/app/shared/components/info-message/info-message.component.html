@@ -1,6 +1,6 @@
 <div class="message-card" [ngClass]="{'error': error, 'info': !error}">
   <span class="material-icons">
-    <span *ngIf="error; else infoIcon" class="message-card__error-icon">cancel</span>
+    <span *ngIf="error; else infoIcon" class="message-card__error-icon">close</span>
     <ng-template #infoIcon><span class="message-card__info-icon">info</span></ng-template>
   </span>
   <div class="message-card__message-text">

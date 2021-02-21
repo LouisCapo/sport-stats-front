@@ -1,0 +1,22 @@
+<div class="side-bar">
+  <div class="side-bar__groupe">
+    <div class="side-bar__item">
+      <span class="material-icons"> person </span>
+      <span *ngIf="navBarOpen" class="side-bar__item-desc">Игроки</span>
+    </div>
+    <div class="side-bar__item">
+      <span class="material-icons"> people_alt </span>
+      <span *ngIf="navBarOpen" class="side-bar__item-desc">Команды</span>
+    </div>
+    <div class="side-bar__item">
+      <span class="material-icons"> receipt_long </span>
+      <span *ngIf="navBarOpen" class="side-bar__item-desc">Новости</span>
+    </div>
+  </div>
+  <div class="side-bar__groupe">
+    <div class="side-bar__item side-bar__open-button" (click)="togleNavBar()">
+      <span *ngIf="!navBarOpen" class="material-icons"> arrow_forward_ios </span>
+      <span *ngIf="navBarOpen" class="material-icons"> arrow_back_ios </span>
+    </div>
+  </div>
+</div>

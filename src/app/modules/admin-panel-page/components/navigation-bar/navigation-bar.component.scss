@@ -1,0 +1,38 @@
+.side-bar {
+  width: auto;
+  height: 100%;
+  background-color: #c2185b;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 0 0 20px 0;
+  &__item {
+    display: flex;
+    align-items: center;
+    .material-icons {
+      width: 60px;
+      height: 60px;
+      color: #fff;
+      font-size: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &-desc {
+      padding-left: 15px;
+      padding-right: 15px;
+      font-size: 15px;
+		  color: #fff;
+    }
+  }
+  &__item:hover {
+    background-color: #9e0441;
+    cursor: pointer;
+  }
+  &__open-button {
+    justify-content: center;
+  }
+  &__open-button:hover {
+    border-radius: 0 0 20px 0;
+  }
+}

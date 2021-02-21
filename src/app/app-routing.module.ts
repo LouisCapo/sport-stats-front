@@ -34,6 +34,12 @@ const routes: Routes = [
         (module) => module.NewsPageModule
       ),
   }, {
+    path: 'admin-panel',
+    loadChildren: () => 
+      import(`./modules/admin-panel-page/admin-panel-page.module`).then(
+        (module) => module.AdminPanelPageModule
+      )
+  }, {
     path: '**',
     loadChildren: () => 
       import(`./modules/not-found-page/not-found-page.module`).then(

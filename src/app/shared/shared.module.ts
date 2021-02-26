@@ -8,6 +8,7 @@ import { InfoMessageComponent } from './components/info-message/info-message.com
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
     MatIconModule,
     MatDialogModule,
     MatButtonModule,
+    MatSidenavModule,
   ],
   declarations: [HeaderComponent, InfoMessageComponent, ErrorDialogComponent],
   exports: [HeaderComponent, InfoMessageComponent, ErrorDialogComponent]

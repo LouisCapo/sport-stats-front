@@ -1,6 +1,24 @@
-.header {
-	height: 70px;
+.sidenav {
+  width: 200px;
+  &-container {
+    height: 100vh;
+  }
 }
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.hidden {
+  display: none;
+}
+
 .header-content {
 	width: 100%;
 	display: flex;

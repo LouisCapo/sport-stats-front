@@ -35,4 +35,17 @@
   &__open-button:hover {
     border-radius: 0 0 20px 0;
   }
+  &__selected-item {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    .material-icons {
+      color: #c2185b;
+    }
+    .side-bar__item-desc {
+      color: #c2185b;
+    }
+  }
+  &__selected-item:hover {
+    background-color: #fff;
+  }
 }

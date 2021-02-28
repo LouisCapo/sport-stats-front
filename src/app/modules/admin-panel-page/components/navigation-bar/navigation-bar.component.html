@@ -1,25 +1,51 @@
 <div class="side-bar">
   <div class="side-bar__groupe">
-    <div class="side-bar__item">
+    <div
+      [ngClass]="{
+        'side-bar__selected-item': selectedSection === panelSections.PLAYER
+      }"
+      (click)="openSelectedSection(panelSections.PLAYER)"
+      class="side-bar__item"
+    >
       <span class="material-icons"> person </span>
       <span *ngIf="navBarOpen" class="side-bar__item-desc">Игроки</span>
     </div>
-    <div class="side-bar__item">
+    <div
+      [ngClass]="{
+        'side-bar__selected-item': selectedSection === panelSections.TEAM
+      }"
+      (click)="openSelectedSection(panelSections.TEAM)"
+      class="side-bar__item"
+    >
       <span class="material-icons"> people_alt </span>
       <span *ngIf="navBarOpen" class="side-bar__item-desc">Команды</span>
     </div>
-    <div class="side-bar__item">
+    <div
+      [ngClass]="{
+        'side-bar__selected-item': selectedSection === panelSections.NEWS
+      }"
+      (click)="openSelectedSection(panelSections.NEWS)"
+      class="side-bar__item"
+    >
       <span class="material-icons"> wysiwyg </span>
       <span *ngIf="navBarOpen" class="side-bar__item-desc">Новости</span>
     </div>
-    <div class="side-bar__item">
+    <div
+      [ngClass]="{
+        'side-bar__selected-item': selectedSection === panelSections.MATCHES
+      }"
+      (click)="openSelectedSection(panelSections.MATCHES)"
+      class="side-bar__item"
+    >
       <span class="material-icons"> directions_run </span>
       <span *ngIf="navBarOpen" class="side-bar__item-desc">Матчи</span>
     </div>
   </div>
   <div class="side-bar__groupe">
     <div class="side-bar__item side-bar__open-button" (click)="togleNavBar()">
-      <span *ngIf="!navBarOpen" class="material-icons"> arrow_forward_ios </span>
+      <span *ngIf="!navBarOpen" class="material-icons">
+        arrow_forward_ios
+      </span>
       <span *ngIf="navBarOpen" class="material-icons"> arrow_back_ios </span>
     </div>
   </div>

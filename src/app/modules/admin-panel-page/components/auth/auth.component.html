@@ -1,0 +1,30 @@
+<div class="auth-page">
+  <mat-card class="auth-page__card">
+    <mat-card-content class="auth-page__card-content">
+      <mat-form-field class="auth-page__card-item">
+        <mat-label>Логин</mat-label>
+        <input [formControl]="loginControl" type="text" matInput />
+        <mat-error *ngIf="loginErrorMessage">
+          {{ loginErrorMessage }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="auth-page__card-item">
+        <mat-label>Пароль</mat-label>
+        <input [formControl]="passwordControl" type="password" matInput />
+        <mat-error *ngIf="passwordErrorMessage">
+          {{ passwordErrorMessage }}
+        </mat-error>
+      </mat-form-field>
+      <div class="auth-page__card-item">
+        <button
+          style="width: 100%"
+          mat-raised-button
+          color="primary"
+          (click)="signIn()"
+        >
+          Войти
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

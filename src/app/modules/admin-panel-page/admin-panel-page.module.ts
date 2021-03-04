@@ -11,6 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   imports: [
@@ -22,12 +24,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     ReactiveFormsModule,
     MatSnackBarModule,
+    MatDialogModule,
   ],
   declarations: [
     AdminPanelPageComponent,
     NavigationBarComponent,
     EditFormComponent,
     AuthComponent,
-  ]
+  ],
+  providers: [AuthService]
 })
 export class AdminPanelPageModule { }

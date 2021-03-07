@@ -1,1 +1,38 @@
-Flex
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Создать">
+    <ng-container *ngTemplateOutlet="playerCreate"></ng-container>
+  </mat-tab>
+  <mat-tab label="Редактировать">
+    <ng-container></ng-container>
+  </mat-tab>
+</mat-tab-group>
+
+<ng-template #playerCreate>
+  <div class="page-section">
+    <mat-form-field class="page-section__item">
+      <mat-label>Имя игрока</mat-label>
+      <input type="email" matInput placeholder="Иванов Иван">
+      <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error> -->
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="page-section__item">
+      <mat-label>Вид спорта</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let item of sportTypesList">{{ item.sportTitle }}</mat-option>
+      </mat-select>
+      <!-- <mat-error *ngIf="selected.hasError('pattern') && !selected.hasError('required')">
+        Your selection is invalid
+      </mat-error> -->
+    </mat-form-field>
+    <div class="page-section__item">
+      <button
+          style="width: 100%"
+          mat-raised-button
+          color="primary"
+        >
+          Создать
+        </button>
+    </div>
+  </div>
+</ng-template>

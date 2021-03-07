@@ -13,6 +13,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AuthService } from './services/auth.service';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
+import { ApiService } from './services/api.service';
 
 @NgModule({
   imports: [
@@ -25,6 +28,8 @@ import { AuthService } from './services/auth.service';
     ReactiveFormsModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatTabsModule,
+    MatSelectModule,
   ],
   declarations: [
     AdminPanelPageComponent,
@@ -32,6 +37,6 @@ import { AuthService } from './services/auth.service';
     EditFormComponent,
     AuthComponent,
   ],
-  providers: [AuthService]
+  providers: [AuthService, ApiService]
 })
 export class AdminPanelPageModule { }

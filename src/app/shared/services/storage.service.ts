@@ -17,8 +17,12 @@ constructor(private _router: Router) { }
   }
 
   logout() {
-    localStorage.clear();
+    this.clearToken();
     this._router.navigate(['/admin-panel/auth'])
+  }
+
+  clearToken() {
+    localStorage.clear();
   }
 
 }

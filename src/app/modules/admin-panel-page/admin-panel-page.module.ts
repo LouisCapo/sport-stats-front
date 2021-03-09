@@ -16,6 +16,9 @@ import { AuthService } from './services/auth.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { ApiService } from './services/api.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   imports: [
@@ -30,6 +33,9 @@ import { ApiService } from './services/api.service';
     MatDialogModule,
     MatTabsModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   declarations: [
     AdminPanelPageComponent,

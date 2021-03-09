@@ -1,11 +1,18 @@
-<mat-tab-group mat-align-tabs="center">
-  <mat-tab label="Создать">
-    <ng-container *ngTemplateOutlet="playerCreate"></ng-container>
-  </mat-tab>
-  <mat-tab label="Редактировать">
-    <ng-container></ng-container>
-  </mat-tab>
-</mat-tab-group>
+<ng-container *ngTemplateOutlet="loading ? spiner : editForm">
+</ng-container>
+
+
+<ng-template #editForm>
+  <mat-tab-group *ngIf="!error" mat-align-tabs="center">
+    <mat-tab label="Создать">
+      <ng-container *ngTemplateOutlet="playerCreate"></ng-container>
+    </mat-tab>
+    <mat-tab label="Редактировать">
+      <ng-container *ngTemplateOutlet="playerEdit"></ng-container>
+    </mat-tab>
+  </mat-tab-group>
+</ng-template>
+
 
 <ng-template #playerCreate>
   <div class="page-section">
@@ -21,9 +28,16 @@
       <mat-select>
         <mat-option *ngFor="let item of sportTypesList">{{ item.sportTitle }}</mat-option>
       </mat-select>
-      <!-- <mat-error *ngIf="selected.hasError('pattern') && !selected.hasError('required')">
-        Your selection is invalid
-      </mat-error> -->
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="page-section__item">
+      <mat-label>Дата рождения</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="page-section__item">
+      <mat-label>ID команды</mat-label>
+      <input type="text" matInput placeholder="XXXXXXXXXXXXXXXXXXXXXXXX">
     </mat-form-field>
     <div class="page-section__item">
       <button
@@ -34,5 +48,33 @@
           Создать
         </button>
     </div>
+  </div>
+</ng-template>
+
+
+<ng-template #playerEdit>
+  <div class="page-section">
+    <div class="page-section__row-bar page-section__item">
+      <mat-form-field class="page-section__item">
+        <mat-label>ID игрока</mat-label>
+        <input type="email" matInput placeholder="XXXXXXXXXXXXXXXXXXXXXXXX">
+      </mat-form-field>
+      <div class="page-section__item">
+        <button
+            style="width: 100%"
+            mat-raised-button
+            color="primary"
+          >
+            Найти
+          </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #spiner>
+  <div class="loading-spiner">
+    <mat-spinner></mat-spinner>
   </div>
 </ng-template>

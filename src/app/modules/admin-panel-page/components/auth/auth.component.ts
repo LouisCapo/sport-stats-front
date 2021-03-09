@@ -78,14 +78,6 @@ export class AuthComponent implements OnInit {
         this._snackBar.open((res as IErrorRequest).error.msg, 'Ок', {
           duration: 3000,
         })
-      }, (err: HttpErrorResponse) => {
-        this._matDialog.open(ErrorDialogComponent, {
-          data: {
-            errorMessage:
-              'К сожалению сервис не доступен в данный момент :(\r\nПопробуйте позже.',
-            error: true,
-          },
-        });
       });
   }
 }

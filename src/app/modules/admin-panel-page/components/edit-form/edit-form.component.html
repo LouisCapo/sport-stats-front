@@ -1,6 +1,4 @@
-<ng-container *ngTemplateOutlet="loading ? spiner : editForm">
-</ng-container>
-
+<ng-container *ngTemplateOutlet="loading ? spiner : editForm"> </ng-container>
 
 <ng-template #editForm>
   <mat-tab-group *ngIf="!error" mat-align-tabs="center">
@@ -13,65 +11,204 @@
   </mat-tab-group>
 </ng-template>
 
-
 <ng-template #playerCreate>
-  <div class="page-section">
+  <div class="page-section" [formGroup]="newPlayerForm">
     <mat-form-field class="page-section__item">
       <mat-label>Имя игрока</mat-label>
-      <input type="email" matInput placeholder="Иванов Иван">
-      <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-        Please enter a valid email address
-      </mat-error> -->
+      <input
+        type="text"
+        matInput
+        maxlength="50"
+        placeholder="Иванов Иван"
+        formControlName="playerName"
+      />
+      <mat-error *ngIf="errorMessage">
+        {{ errorMessage }}
+      </mat-error>
     </mat-form-field>
+
+    <mat-form-field class="page-section__item">
+      <mat-label>Ник</mat-label>
+      <input
+        formControlName="playerNick"
+        maxlength="50"
+        type="text"
+        matInput
+        placeholder="nickname"
+      />
+    </mat-form-field>
+
     <mat-form-field appearance="fill" class="page-section__item">
       <mat-label>Вид спорта</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let item of sportTypesList">{{ item.sportTitle }}</mat-option>
+      <mat-select formControlName="sportTypeCode">
+        <mat-option *ngFor="let item of sportTypesList" [value]="item.code">
+          {{ item.title }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
+
     <mat-form-field appearance="fill" class="page-section__item">
       <mat-label>Дата рождения</mat-label>
-      <input matInput [matDatepicker]="picker">
+      <input
+        matInput
+        formControlName="playerBirthday"
+        [matDatepicker]="picker"
+      />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+
     <mat-form-field class="page-section__item">
       <mat-label>ID команды</mat-label>
-      <input type="text" matInput placeholder="XXXXXXXXXXXXXXXXXXXXXXXX">
+      <input
+        formControlName="playerTeamId"
+        maxlength="24"
+        type="text"
+        matInput
+        placeholder="XXXXXXXXXXXXXXXXXXXXXXXX"
+      />
+      <mat-error *ngIf="newPlayerForm.controls.playerTeamId.errors">
+        <span>ID команды должен быть длинной 24 символа</span>
+      </mat-error>
     </mat-form-field>
-    <div class="page-section__item">
+
+    <mat-form-field class="page-section__item">
+      <mat-label>Фотография</mat-label>
+      <input
+        formControlName="playerPhoto"
+        type="text"
+        matInput
+        placeholder="url"
+      />
+    </mat-form-field>
+
+    <div
+      class="page-section__item"
+      [matTooltip]="errorMessage ? errorMessage : isControlsHaveError(newPlayerForm.controls) ? 'Корректно заполните поля' : ''"
+    >
       <button
-          style="width: 100%"
-          mat-raised-button
-          color="primary"
-        >
-          Создать
-        </button>
+        style="width: 100%"
+        mat-raised-button
+        color="primary"
+        [disabled]="isControlsHaveError(newPlayerForm.controls) "
+        (click)="createNewPlayer()"
+      >
+        Создать
+      </button>
     </div>
   </div>
 </ng-template>
 
-
 <ng-template #playerEdit>
-  <div class="page-section">
+  <div class="page-section" [formGroup]='editPlayerForm'>
     <div class="page-section__row-bar page-section__item">
       <mat-form-field class="page-section__item">
         <mat-label>ID игрока</mat-label>
-        <input type="email" matInput placeholder="XXXXXXXXXXXXXXXXXXXXXXXX">
+        <input formControlName="playerId" 
+                type="email" 
+                matInput 
+                placeholder="XXXXXXXXXXXXXXXXXXXXXXXX" 
+                maxlength="24"
+        />
       </mat-form-field>
       <div class="page-section__item">
-        <button
-            style="width: 100%"
-            mat-raised-button
-            color="primary"
-          >
-            Найти
-          </button>
+        <button style="width: 100%" 
+                mat-raised-button 
+                color="primary"
+                [disabled]="!editPlayerForm.controls.playerId.value || !!editPlayerForm.controls.playerId.errors"
+                (click)="searchPlayer()"
+                >
+          Найти
+        </button>
       </div>
+    </div>
+    <div *ngIf="oldPlayerData && editPlayerForm.controls.playerId" class="page-section__edit-form">
+      <div class="page-section__item page-section__photo">
+        <img [src]="oldPlayerData.playerPhoto ? oldPlayerData.playerPhoto : '../../../../../assets/photos/player-photo.png'" alt="">
+      </div>
+      <mat-form-field class="page-section__item">
+        <mat-label>Имя игрока</mat-label>
+        <input
+          type="text"
+          matInput
+          maxlength="50"
+          placeholder="Иванов Иван"
+          formControlName="playerName"
+        />
+        <mat-error *ngIf="editPlayerForm.controls.playerName.errors">
+          <span>Минимальная длина имени - 5</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="page-section__item">
+        <mat-label>Ник</mat-label>
+        <input
+          formControlName="playerNick"
+          maxlength="50"
+          type="text"
+          matInput
+          placeholder="nickname"
+        />
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="page-section__item">
+        <mat-label>Вид спорта</mat-label>
+        <mat-select formControlName="sportTypeCode">
+          <mat-option *ngFor="let item of sportTypesList" [value]="item.code">
+            {{ item.title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="page-section__item">
+        <mat-label>Дата рождения</mat-label>
+        <input
+          matInput
+          formControlName="playerBirthday"
+          [matDatepicker]="picker"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field class="page-section__item">
+        <mat-label>ID команды</mat-label>
+        <input
+          formControlName="playerTeamId"
+          maxlength="24"
+          type="text"
+          matInput
+          placeholder="XXXXXXXXXXXXXXXXXXXXXXXX"
+        />
+        <mat-error *ngIf="editPlayerForm.controls.playerTeamId.errors">
+          <span>ID команды должен быть длинной 24 символа</span>
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="page-section__item">
+        <mat-label>Фотография</mat-label>
+        <input
+          formControlName="playerPhoto"
+          type="text"
+          matInput
+          placeholder="url"
+        />
+      </mat-form-field>
+
+      <div class="page-section__item">
+        <button style="width: 100%" 
+                mat-raised-button 
+                color="primary" 
+                [disabled]="isControlsHaveError(editPlayerForm.controls)" 
+                (click)="savePlayerChanges()"
+        >
+          Сохранить
+        </button>
+      </div>
+
     </div>
   </div>
 </ng-template>
-
 
 <ng-template #spiner>
   <div class="loading-spiner">

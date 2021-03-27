@@ -1,6 +1,12 @@
 .player-card {
 	margin-top: 50px;
 
+	&__header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
 	&__player-info {
 		display: flex;
 		flex-direction: row;
@@ -33,6 +39,7 @@
 	}
 
 	&__about-player-value {
+		margin-left: 30px;
 		color: #87a3bf;
 	}
 

@@ -19,6 +19,7 @@ import { ApiService } from './services/api.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSelectModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTooltipModule,
   ],
   declarations: [
     AdminPanelPageComponent,

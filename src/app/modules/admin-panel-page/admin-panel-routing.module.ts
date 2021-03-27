@@ -12,6 +12,10 @@ const routes: Routes = [
     }, {
       path: 'auth',
       component: AuthComponent,
+    }, {
+      path: '',
+      component: AdminPanelPageComponent,
+      canActivate: [AuthGuardService]
     }
   ];
 

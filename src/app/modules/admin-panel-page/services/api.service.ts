@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IErrorRequest } from 'src/app/shared/model/api-inteface';
 import { ENV_TOKEN } from 'src/environments/environment';
-import { ISportTypes } from '../model/edit-panel-interface'
+import { IPlayer } from '../../player-page/model/player-interfaces';
+import { INewPlayer, INewPlayerId, ISportTypes } from '../model/edit-panel-interface'
 
 @Injectable()
 export class ApiService {
@@ -15,6 +16,18 @@ export class ApiService {
 
   getSportTypeList(): Observable<ISportTypes[] | IErrorRequest> {
     return this._http.get<ISportTypes[] | IErrorRequest>(`${this._environments.apiUrl}/api/sport/sport-list`);
+  }
+
+  createNewPlayer(player: INewPlayer): Observable<INewPlayerId | IErrorRequest> {
+    return this._http.post<INewPlayerId | IErrorRequest>(`${this._environments.apiUrl}/api/players/create-player`, player);
+  }
+
+  getPlayerById(id: string): Observable<IPlayer | IErrorRequest> {
+    const params = new HttpParams().set('id', id);
+    return this._http.get<IPlayer | IErrorRequest>(
+      `${this._environments.apiUrl}/api/players/get-player`,
+      { params }
+    );
   }
 
 }

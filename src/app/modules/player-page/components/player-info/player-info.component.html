@@ -1,63 +1,60 @@
 <ng-container *ngTemplateOutlet="loading ? spiner : playerCard"> </ng-container>
 <ng-template #playerCard>
   <mat-card *ngIf="!error" class="player-card">
+    <mat-card-header class="player-card__header">
+      <mat-card-title>
+        <span class="player-card__player-name">
+          {{ playerInfo.playerName }}
+        </span>
+      </mat-card-title>
+    </mat-card-header>
     <mat-card-content> 
       <div>
         <div class="player-card__player-info">
           <div class="player-card__player-photo">
-            <img [src]="playerInfo.playerPhoto" alt="" />
+            <img [src]="playerInfo.playerPhoto ? playerInfo.playerPhoto : '../../../../../assets/photos/player-photo.png'" alt="" />
           </div>
           <div class="player-card__about-player">
-            <span class="player-card__player-name">{{
-              playerInfo.playerName
-            }}</span>
-            <div class="player-card__about-player-row">
+            <div *ngIf="playerInfo.playerNick" class="player-card__about-player-row">
               <span class="player-card__about-player-title">Ник:</span>
               <span class="player-card__about-player-value">{{
                 playerInfo.playerNick
               }}</span>
             </div>
-            <div class="player-card__about-player-row">
+            <div *ngIf="playerInfo.playerAge" class="player-card__about-player-row">
               <span class="player-card__about-player-title">Возраст:</span>
               <span class="player-card__about-player-value">{{
                 playerInfo.playerAge
               }}</span>
             </div>
-            <div class="player-card__about-player-row">
+            <div *ngIf="playerInfo.playerTeam" class="player-card__about-player-row">
               <span class="player-card__about-player-title"
                 >Текущая команда:</span
               >
               <div
                 (click)="openTeamPage(playerInfo.playerTeam.teamId)"
-                class="player-card__player-team"
+                class="player-card__player-team player-card__about-player-value"
               >
                 <img
                   class="player-card__team-logo"
                   [src]="playerInfo.playerTeam.teamLogo"
                   alt=""
                 />
-                <span class="player-card__about-player-value player-card__link">{{
+                <span class="player-card__link">{{
                   playerInfo.playerTeam.teamName
                 }}</span>
               </div>
-            </div>
-            <div class="player-card__about-player-row">
-              <span class="player-card__about-player-title">Достижения:</span>
-              <span class="player-card__about-player-value"
-                ><span
-                  class="player-card__link"
-                  *ngFor="let achievement of playerInfo.playerAchievements"
-                  (click)="openAchievementNews(achievement.newsId)"
-                  >{{ achievement.title }}
-                </span></span
-              >
             </div>
           </div>
         </div>
         <mat-card-footer>
           <div class="player-card__stats-bar">
             <span class="player-card__stats">Статистика:</span>
-            <app-info-message *ngIf="!playerInfo.playerStats" [messageText]="'Нет актуальной инфорамации по статистике игрока ' + playerInfo.playerName"></app-info-message>
+            <app-info-message *ngIf="!playerInfo.playerStats.length" 
+                              [messageText]="'Нет актуальной инфорамации по статистике игрока ' + playerInfo.playerName"
+                              style="margin-top: 10px;"
+                              >
+            </app-info-message>
             <div class="player-card__player-stats">
               <div *ngFor="let stats of playerInfo.playerStats">
                 <div class="player-card__stats-row">

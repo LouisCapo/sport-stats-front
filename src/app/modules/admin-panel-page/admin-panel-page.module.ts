@@ -20,6 +20,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CreatingStatsComponent } from './components/creating-stats/creating-stats.component'
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -38,12 +40,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
+    MatIconModule
   ],
   declarations: [
     AdminPanelPageComponent,
     NavigationBarComponent,
     EditFormComponent,
     AuthComponent,
+    CreatingStatsComponent
   ],
   providers: [AuthService, ApiService]
 })

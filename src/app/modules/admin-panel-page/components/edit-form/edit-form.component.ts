@@ -17,7 +17,6 @@ import { IPlayer } from 'src/app/modules/player-page/model/player-interfaces';
   styleUrls: ['./edit-form.component.scss'],
 })
 export class EditFormComponent implements OnInit, OnDestroy {
-
   @Input() selectedSection;
 
   loading = true;
@@ -37,7 +36,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
       Validators.minLength(24),
       Validators.maxLength(24),
     ]),
-    playerPhoto: new FormControl('') ,
+    playerPhoto: new FormControl(''),
   });
 
   editPlayerForm = new FormGroup({
@@ -61,7 +60,9 @@ export class EditFormComponent implements OnInit, OnDestroy {
 
   get errorMessage(): string {
     if (this.newPlayerForm.controls.playerName.errors) {
-      return this.newPlayerForm.controls.playerName.hasError('required') ? 'Заполните обязательное поле!' : 'Минимальная длина 5 символов!';
+      return this.newPlayerForm.controls.playerName.hasError('required')
+        ? 'Заполните обязательное поле!'
+        : 'Минимальная длина 5 символов!';
     }
   }
 
@@ -71,16 +72,18 @@ export class EditFormComponent implements OnInit, OnDestroy {
     private _apiService: ApiService,
     private _matDialog: MatDialog,
     private _router: Router,
-    private _errorService: ErrorsService,
+    private _errorService: ErrorsService
   ) {}
 
   ngOnInit() {
-    this._subscriptions.add(this._errorService.onServerError.subscribe(res => {
-      if (res) {
-        this.loading = false;
-        this.error = true;
-      }
-    }))
+    this._subscriptions.add(
+      this._errorService.onServerError.subscribe((res) => {
+        if (res) {
+          this.loading = false;
+          this.error = true;
+        }
+      })
+    );
     this._subscriptions.add(
       this._apiService.getSportTypeList().subscribe((res) => {
         if ((res as IErrorRequest).error) {
@@ -111,40 +114,52 @@ export class EditFormComponent implements OnInit, OnDestroy {
   createNewPlayer() {
     const controls = this.newPlayerForm.controls;
     console.log(controls.playerName);
-    console.log(controls.sportTypeCode)
+    console.log(controls.sportTypeCode);
     if (!this.error) {
       const data = {
         playerName: controls.playerName.value,
-        playerNick: controls.playerNick.value ? controls.playerNick.value : null,
-        sportTypeCode: controls.sportTypeCode.value.toString() ? controls.sportTypeCode.value : null,
-        playerBirthday: controls.playerBirthday.value ? controls.playerBirthday.value : null,
-        playerTeamId: controls.playerTeamId.value ? controls.playerTeamId.value : null,
-        playerPhoto: controls.playerPhoto.value ? controls.playerPhoto.value : null,
-      }
-      this._apiService.createNewPlayer(data).subscribe(res => {
+        playerNick: controls.playerNick.value
+          ? controls.playerNick.value
+          : null,
+        sportTypeCode: controls.sportTypeCode.value.toString()
+          ? controls.sportTypeCode.value
+          : null,
+        playerBirthday: controls.playerBirthday.value
+          ? controls.playerBirthday.value
+          : null,
+        playerTeamId: controls.playerTeamId.value
+          ? controls.playerTeamId.value
+          : null,
+        playerPhoto: controls.playerPhoto.value
+          ? controls.playerPhoto.value
+          : null,
+      };
+      this._apiService.createNewPlayer(data).subscribe((res) => {
         if ((res as INewPlayerId).playerId) {
           this.clearForm(controls);
         }
         return this._matDialog.open(ErrorDialogComponent, {
           data: {
             error: !(res as INewPlayerId).playerId,
-            errorMessage: (res as INewPlayerId).playerId ? `Игрок создан, его id: ${(res as INewPlayerId).playerId}` : (res as IErrorRequest).error.msg,
+            errorMessage: (res as INewPlayerId).playerId
+              ? `Игрок создан, его id: ${(res as INewPlayerId).playerId}`
+              : (res as IErrorRequest).error.msg,
             closeButtonLabel: 'Ок',
           },
-        })
-      })
+        });
+      });
     }
   }
 
   clearForm(controls): void {
-    for(let key in controls) {
+    for (let key in controls) {
       controls[key].setValue('');
       controls[key].markAsUntouched();
     }
   }
 
   isControlsHaveError(controls) {
-    for(let key in controls) {
+    for (let key in controls) {
       if (controls[key].errors) {
         return true;
       }
@@ -155,33 +170,46 @@ export class EditFormComponent implements OnInit, OnDestroy {
   searchPlayer() {
     const controls = this.editPlayerForm.controls;
     if (controls.playerId.value) {
-      this._subscriptions.add(this._apiService.getPlayerById(controls.playerId.value).subscribe(res => {
-        if ((res as IErrorRequest).error) {
-          this._matDialog.open(ErrorDialogComponent, {
-            data: {
-              error: true,
-              errorMessage: (res as IErrorRequest).error.msg,
-              closeButtonLabel: 'Ок'
+      this._subscriptions.add(
+        this._apiService
+          .getPlayerById(controls.playerId.value)
+          .subscribe((res) => {
+            if ((res as IErrorRequest).error) {
+              this._matDialog.open(ErrorDialogComponent, {
+                data: {
+                  error: true,
+                  errorMessage: (res as IErrorRequest).error.msg,
+                  closeButtonLabel: 'Ок',
+                },
+              });
+              return this.clearForm(controls);
             }
+            this.clearForm(controls);
+            this.oldPlayerData = res as IPlayer;
+            console.log(Date.parse((res as IPlayer).playerBirthday));
+            controls.playerId.setValue(this.oldPlayerData.playerId);
+            controls.playerName.setValue(this.oldPlayerData.playerName);
+            controls.playerNick.setValue(this.oldPlayerData.playerNick);
+            controls.playerTeamId.setValue(this.oldPlayerData.playerTeam?.teamId);
+            controls.playerPhoto.setValue(this.oldPlayerData.playerPhoto);
+            controls.playerBirthday.setValue(new Date(this.oldPlayerData.playerBirthday));
+            controls.sportTypeCode.setValue(this.oldPlayerData.sportType.code);
           })
-          return this.clearForm(controls);
-        }
-        this.clearForm(controls);
-        this.oldPlayerData = res as IPlayer;
-        console.log(Date.parse((res as IPlayer).playerBirthday));
-        controls.playerId.setValue(this.oldPlayerData.playerId);
-        controls.playerName.setValue(this.oldPlayerData.playerName);
-        controls.playerNick.setValue(this.oldPlayerData.playerNick);
-        controls.playerTeamId.setValue(this.oldPlayerData.playerTeam?.teamId);
-        controls.playerPhoto.setValue(this.oldPlayerData.playerPhoto);
-        controls.playerBirthday.setValue(new Date(this.oldPlayerData.playerBirthday));
-        controls.sportTypeCode.setValue(this.oldPlayerData.sportType.code);
-      }))
+      );
     }
   }
 
-  savePlayerChanges() {
+  savePlayerChanges() {}
 
+  changeStats(event, index) {
+    this.oldPlayerData.playerStats[index] = event;
   }
 
+  addNewStats() {
+    this.oldPlayerData.playerStats.push({title: '', value: ''});
+  }
+
+  deleteStats(index) {
+    this.oldPlayerData.playerStats.splice(index, 1);
+  }
 }

@@ -1,0 +1,11 @@
+.statistic-card {
+  &__header {
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}

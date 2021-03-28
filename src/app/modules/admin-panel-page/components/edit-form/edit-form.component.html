@@ -196,6 +196,23 @@
       </mat-form-field>
 
       <div class="page-section__item">
+        <div class="page-section__stats-item" *ngFor="let statsItem of oldPlayerData.playerStats; let i = index">
+          <app-creating-stats [title]="statsItem.title" 
+                              [value]="statsItem.value"
+                              (onStatsChanged)="changeStats($event, i)"
+                              (onStatsDeleted)="deleteStats(i)"
+                            >
+          </app-creating-stats>
+        </div>
+      </div>
+
+      <div class="page-section__item">
+        <button mat-fab color="primary" (click)="addNewStats()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+      <div class="page-section__item">
         <button style="width: 100%" 
                 mat-raised-button 
                 color="primary" 

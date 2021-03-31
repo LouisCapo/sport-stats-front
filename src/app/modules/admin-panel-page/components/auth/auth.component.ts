@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ILogin } from '../../model/auth-interface';
@@ -9,12 +9,14 @@ import { IErrorRequest } from 'src/app/shared/model/api-inteface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
+
   loginControl = new FormControl('', [
     Validators.required,
     Validators.minLength(5),
@@ -43,6 +45,8 @@ export class AuthComponent implements OnInit {
     return null;
   }
 
+  private _subscriptions: Subscription = new Subscription();
+
   constructor(
     private _snackBar: MatSnackBar,
     private _authService: AuthService,
@@ -57,6 +61,10 @@ export class AuthComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this._subscriptions.unsubscribe();
+  }
+
   signIn(): void {
     if (this.loginControl.errors || this.passwordControl.errors) {
       this._snackBar.open('Заполните все поля!', 'Ок', {
@@ -64,7 +72,7 @@ export class AuthComponent implements OnInit {
       });
       return;
     }
-    this._authService
+    this._subscriptions.add(this._authService
       .login(this.loginControl.value, this.passwordControl.value)
       .subscribe((res) => {
         if ((res as ILogin).token) {
@@ -86,6 +94,6 @@ export class AuthComponent implements OnInit {
             error: true,
           },
         });
-      });
+      }));
   }
 }

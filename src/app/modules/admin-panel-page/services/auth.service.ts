@@ -21,4 +21,8 @@ export class AuthService {
     return this._http.post<ILogin | IErrorRequest>(`${this._environments.apiUrl}/api/auth/login`, data);
   }
 
+  adminCheck(): Observable<{Ok: number} | IErrorRequest> {
+    return this._http.get<{Ok: number} | IErrorRequest>(`${this._environments.apiUrl}/api/auth/isAdmin`);
+  }
+
 }

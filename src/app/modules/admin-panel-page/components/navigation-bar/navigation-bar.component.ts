@@ -11,7 +11,8 @@ export class NavigationBarComponent implements OnInit {
   navBarOpen = false;
   panelSections = AdminPanelSections;
   selectedSection = this.panelSections.PLAYER;
-  @Output() onSectionSelected: EventEmitter<number>;
+
+  @Output() onSectionSelected: EventEmitter<number> = new EventEmitter();
 
   constructor() { }
 

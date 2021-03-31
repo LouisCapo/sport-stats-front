@@ -13,6 +13,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AuthService } from './services/auth.service';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
+import { ApiService } from './services/api.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { CreatingStatsComponent } from './components/creating-stats/creating-stats.component'
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -25,13 +34,21 @@ import { AuthService } from './services/auth.service';
     ReactiveFormsModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatTabsModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTooltipModule,
+    MatIconModule
   ],
   declarations: [
     AdminPanelPageComponent,
     NavigationBarComponent,
     EditFormComponent,
     AuthComponent,
+    CreatingStatsComponent
   ],
-  providers: [AuthService]
+  providers: [AuthService, ApiService]
 })
 export class AdminPanelPageModule { }

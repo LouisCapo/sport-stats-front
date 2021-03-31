@@ -1,3 +1,5 @@
+import { ISportTypes } from "../../admin-panel-page/model/edit-panel-interface";
+
 export interface IPlayer {
 	playerName: string;
 	playerNick: string;
@@ -5,8 +7,9 @@ export interface IPlayer {
 	playerTeam: IPlayerTeam;
 	playerPhoto: string;
 	playerAge: number;
-	playerAchievements: IPlayerAchievements[];
+	playerBirthday: string;
 	playerStats: IPlayerStats[];
+	sportType: ISportTypes;
 }
 
 interface IPlayerTeam {

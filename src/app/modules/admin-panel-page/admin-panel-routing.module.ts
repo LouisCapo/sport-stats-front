@@ -14,7 +14,8 @@ const routes: Routes = [
       component: AuthComponent,
     }, {
       path: '',
-      component: AuthComponent,
+      component: AdminPanelPageComponent,
+      canActivate: [AuthGuardService]
     }
   ];
 

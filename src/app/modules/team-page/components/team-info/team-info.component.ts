@@ -8,6 +8,7 @@ import { IErrorRequest } from 'src/app/shared/model/api-inteface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
+import { ErrorsService } from 'src/app/shared/services/errors.service';
 
 @Component({
   selector: 'app-team-info',
@@ -20,22 +21,29 @@ export class TeamInfoComponent implements OnInit, OnDestroy {
   error: boolean;
   loading = true;
 
-  private _subscription: Subscription[] = [];
+  private _subscription = new Subscription();
 
   constructor(
     private _teamService: TeamService,
     private _router: Router,
     private _route: ActivatedRoute,
-    private _matDialog: MatDialog
+    private _matDialog: MatDialog,
+    private _errorService: ErrorsService,
   ) {}
 
   ngOnInit() {
-    this._subscription.push(
+    this._subscription.add(this._errorService.onServerError.subscribe(res => {
+      if (res) {
+        this.error = true;
+        this.loading = false;
+      }
+    }))
+    this._subscription.add(
       this._route.params.subscribe((res) => {
         this.teamId = res.id;
       })
     );
-    this._subscription.push(
+    this._subscription.add(
       this._teamService.getTeam(this.teamId).subscribe(
         (res) => {
           if ((res as IErrorRequest).error) {
@@ -47,7 +55,7 @@ export class TeamInfoComponent implements OnInit, OnDestroy {
                 closeButtonLabel: 'На главную',
               },
             });
-            this._subscription.push(
+            this._subscription.add(
               dialogRef.afterClosed().subscribe((ev) => {
                 this._router.navigate(['/main']);
               })
@@ -55,26 +63,12 @@ export class TeamInfoComponent implements OnInit, OnDestroy {
           }
           this.teamInfo = res as ITeam;
           this.loading = false;
-        },
-        (err: HttpErrorResponse) => {
-          this.error = true;
-          this._matDialog.open(ErrorDialogComponent, {
-            data: {
-              error: true,
-              errorMessage:
-                'К сожалению сервис не доступен в данный момент :(\r\nПопробуйте позже.',
-            },
-          });
-          this.loading = false;
-        }
-      )
+        })
     );
   }
 
   ngOnDestroy() {
-    this._subscription.forEach((res) => {
-      res.unsubscribe();
-    });
+    this._subscription.unsubscribe();
   }
 
   openPlayerPage(playerId) {

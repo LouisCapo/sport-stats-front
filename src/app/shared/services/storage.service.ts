@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
 
-constructor() { }
+constructor(private _router: Router) { }
 
   get userToken() {
     return localStorage.getItem('token');
@@ -16,6 +17,11 @@ constructor() { }
   }
 
   logout() {
+    this.clearToken();
+    this._router.navigate(['/admin-panel/auth'])
+  }
+
+  clearToken() {
     localStorage.clear();
   }
 

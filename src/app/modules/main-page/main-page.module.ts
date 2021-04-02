@@ -9,6 +9,9 @@ import { UpcommingEventsComponent } from './components/upcomming-events/upcommin
 import { UpcommingEventsItemComponent } from './components/upcomming-events-item/upcomming-events-item.component'
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import { ApiService } from './services/api.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -17,7 +20,11 @@ import {MatButtonModule} from '@angular/material/button';
     MatSelectModule,
     MatCardModule,
     MatButtonModule,
+    MatDialogModule,
+    ReactiveFormsModule
+
   ],
+  providers:[ApiService],
   declarations: [MainPageComponent, NewsComponent, NewsItemComponent, UpcommingEventsComponent, UpcommingEventsItemComponent]
 })
 export class MainPageModule { }

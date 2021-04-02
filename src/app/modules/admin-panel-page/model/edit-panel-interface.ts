@@ -6,11 +6,19 @@ export interface ISportTypes {
 export interface INewPlayer {
   playerName: string,
   playerNick: string,
-  sportTypeCode: string,
-  playerBirthday: string,
+  sportTypeCode: number,
+  playerBirthday: Date,
   playerTeamId: string
 }
 
-export interface INewPlayerId {
-  playerId: string,
+export interface INewObjectId {
+  id: string,
+}
+
+export interface INewNews {
+  newsTitle: string,
+  newsSportTypeCode: number,
+  newsSubTitle: string,
+  newsText: string,
+  newsPhoto: string,
 }

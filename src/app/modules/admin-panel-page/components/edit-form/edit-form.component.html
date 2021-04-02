@@ -2,11 +2,12 @@
 
 <ng-template #editForm>
   <mat-tab-group *ngIf="!error" mat-align-tabs="center">
-    <mat-tab label="Создать">
-      <ng-container *ngTemplateOutlet="playerCreate"></ng-container>
+    <mat-tab [ngSwitch]="selectedSection" label="Создать">
+      <ng-container *ngSwitchCase="panelSections.PLAYER" [ngTemplateOutlet]="playerCreate"></ng-container>
+      <ng-container *ngSwitchCase="panelSections.NEWS" [ngTemplateOutlet]="newsCreate"></ng-container>
     </mat-tab>
-    <mat-tab label="Редактировать">
-      <ng-container *ngTemplateOutlet="playerEdit"></ng-container>
+    <mat-tab [ngSwitch]="selectedSection" label="Редактировать">
+      <ng-container *ngSwitchCase="panelSections.PLAYER" [ngTemplateOutlet]="playerEdit"></ng-container>
     </mat-tab>
   </mat-tab-group>
 </ng-template>
@@ -218,6 +219,75 @@
                 color="primary" 
                 [disabled]="isControlsHaveError(editPlayerForm.controls)" 
                 (click)="savePlayerChanges()"
+        >
+          Сохранить
+        </button>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #newsCreate>
+  <div class="page-section">
+    <div class="page-section__edit-form" [formGroup]="createNewsForm">
+
+      <mat-form-field class="page-section__item">
+        <mat-label>Заголовок новости</mat-label>
+        <input
+          type="text"
+          matInput
+          maxlength="50"
+          formControlName="newsTitle"
+          placeholder="Заголовок"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="page-section__item">
+        <mat-label>Вид спорта</mat-label>
+        <mat-select formControlName="newsSportTypeCode">
+          <mat-option *ngFor="let item of sportTypesList" [value]="item.code">
+            {{ item.title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="page-section__item">
+        <mat-label>Описание новости</mat-label>
+        <textarea
+          formControlName="newsSubTitle"
+          type="text"
+          matInput
+          placeholder="Описание"
+        ></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="page-section__item">
+        <mat-label>Текст новости</mat-label>
+        <textarea
+          formControlName="newsText"
+          type="text"
+          matInput
+          placeholder="Заголовок"
+        ></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="page-section__item">
+        <mat-label>Фотография</mat-label>
+        <input
+          formControlName="newsPhoto"
+          type="text"
+          matInput
+          placeholder="url"
+        />
+      </mat-form-field>
+
+      <div class="page-section__item">
+        <button style="width: 100%" 
+                mat-raised-button 
+                color="primary" 
+                [disabled]="isControlsHaveError(createNewsForm.controls)" 
+                (click)="createNewNews()"
         >
           Сохранить
         </button>

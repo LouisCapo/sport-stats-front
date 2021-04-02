@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ISportTypes } from 'src/app/modules/admin-panel-page/model/edit-panel-interface';
 
 @Component({
   selector: 'app-upcomming-events',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./upcomming-events.component.scss']
 })
 export class UpcommingEventsComponent implements OnInit {
+
+  @Input() sportTypeList: ISportTypes[];
 
   constructor() { }
 

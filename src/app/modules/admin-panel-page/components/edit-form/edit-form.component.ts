@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IErrorRequest } from 'src/app/shared/model/api-inteface';
-import { INewPlayerId, ISportTypes } from '../../model/edit-panel-interface';
+import { INewObjectId, ISportTypes } from '../../model/edit-panel-interface';
 import { ApiService } from '../../services/api.service'
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
 import { Router } from '@angular/router';
@@ -10,6 +10,7 @@ import { ErrorsService } from 'src/app/shared/services/errors.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { formatDate } from "@angular/common";
 import { IPlayer } from 'src/app/modules/player-page/model/player-interfaces';
+import { AdminPanelSections } from '../../admin-panel-enum.enum';
 
 @Component({
   selector: 'app-edit-form',
@@ -19,6 +20,7 @@ import { IPlayer } from 'src/app/modules/player-page/model/player-interfaces';
 export class EditFormComponent implements OnInit, OnDestroy {
   @Input() selectedSection;
 
+  panelSections = AdminPanelSections;
   loading = true;
   error = false;
   sportTypesList: ISportTypes[];
@@ -57,6 +59,21 @@ export class EditFormComponent implements OnInit, OnDestroy {
     playerBirthday: new FormControl(''),
     playerPhoto: new FormControl(''),
   });
+
+  createNewsForm = new FormGroup({
+    newsTitle: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(50),
+    ]),
+    newsSportTypeCode: new FormControl(''),
+    newsSubTitle: new FormControl('', [
+      Validators.required,
+    ]),
+    newsText: new FormControl('', [
+      Validators.required,
+    ]),
+    newsPhoto: new FormControl(''),
+  })
 
   get errorMessage(): string {
     if (this.newPlayerForm.controls.playerName.errors) {
@@ -113,8 +130,6 @@ export class EditFormComponent implements OnInit, OnDestroy {
 
   createNewPlayer() {
     const controls = this.newPlayerForm.controls;
-    console.log(controls.playerName);
-    console.log(controls.sportTypeCode);
     if (!this.error) {
       const data = {
         playerName: controls.playerName.value,
@@ -135,14 +150,14 @@ export class EditFormComponent implements OnInit, OnDestroy {
           : null,
       };
       this._apiService.createNewPlayer(data).subscribe((res) => {
-        if ((res as INewPlayerId).playerId) {
+        if ((res as INewObjectId).id) {
           this.clearForm(controls);
         }
         return this._matDialog.open(ErrorDialogComponent, {
           data: {
-            error: !(res as INewPlayerId).playerId,
-            errorMessage: (res as INewPlayerId).playerId
-              ? `Игрок создан, его id: ${(res as INewPlayerId).playerId}`
+            error: !(res as INewObjectId).id,
+            errorMessage: (res as INewObjectId).id
+              ? `Игрок создан, его id: ${(res as INewObjectId).id}`
               : (res as IErrorRequest).error.msg,
             closeButtonLabel: 'Ок',
           },
@@ -212,4 +227,32 @@ export class EditFormComponent implements OnInit, OnDestroy {
   deleteStats(index) {
     this.oldPlayerData.playerStats.splice(index, 1);
   }
+
+  createNewNews() {
+    const controls = this.createNewsForm.controls;
+    if (!this.isControlsHaveError(controls)) {
+      const data = {
+        newsTitle: controls.newsTitle.value,
+        newsSubTitle: controls.newsSubTitle.value,
+        newsText: controls.newsText.value,
+        newsSportTypeCode: controls.newsSportTypeCode.value.toString() ? controls.newsSportTypeCode.value : null,
+        newsPhoto: controls.newsPhoto.value ? controls.newsPhoto.value : null,
+      }
+      this._subscriptions.add(this._apiService.createNewNews(data).subscribe(res => {
+        if ((res as INewObjectId).id) {
+          this.clearForm(controls);
+        }
+        return this._matDialog.open(ErrorDialogComponent, {
+          data: {
+            error: !(res as INewObjectId).id,
+            errorMessage: (res as INewObjectId).id
+              ? `Новость создана, ее id: ${(res as INewObjectId).id}`
+              : (res as IErrorRequest).error.msg,
+            closeButtonLabel: 'Ок',
+          },
+        });
+      }))
+    }
+  }
+
 }

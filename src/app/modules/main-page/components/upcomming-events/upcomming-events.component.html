@@ -6,9 +6,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Вид спорта</mat-label>
       <mat-select class="upcomming-events__sport-select" name="Спорт">
-        <mat-option>Футбол</mat-option>
-        <mat-option>Баскетбол</mat-option>
-        <mat-option>Киберспорт</mat-option>
+        <mat-option *ngFor="let item of sportTypeList">{{ item.title }}</mat-option>
       </mat-select>
     </mat-form-field>
   </mat-card-header>

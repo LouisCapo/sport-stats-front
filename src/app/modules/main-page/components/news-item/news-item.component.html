@@ -6,19 +6,13 @@
   />
   <mat-card-content class="card-body__content">
     <div class="card-body__date">
-      <span>25.12.2020</span>
+      <span>{{date | date: 'dd/MM/yyyy'}}</span>
     </div>
     <div class="card-body__title">
-      <span>Следующий матч Месси станет его 500-м в Ла Лиге</span>
+      <span>{{title}}</span>
     </div>
     <div class="card-body__desc">
-      <span>
-        Если Лео Месси сыграет против Эйбара 29 декабря, он проведет в Ла Лиге
-        свой 500-й матч. Только 10 игроков сделали это раньше: Андони
-        Зубиццарета (617), Хоакин (565), Рауль (550), Эйсебио (543), Пако Буйо
-        (542), Маноло Санчис (523), Икер Касильяс (510), Хави (505), Серхио
-        Рамос (505) и Микель Солер (504).
-      </span>
+      <span>{{subTitle}}</span>
     </div>
     <mat-card-footer class="card-footer">
       <button mat-raised-button color="primary">Читать полностью</button>

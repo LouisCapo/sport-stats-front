@@ -3,24 +3,22 @@
     <div class="news__filters">
       <mat-form-field appearance="fill">
         <mat-label>Вид спорта</mat-label>
-        <mat-select class="news__sport-select" name="Спорт">
-          <mat-option>Футбол</mat-option>
-          <mat-option>Баскетбол</mat-option>
-          <mat-option>Киберспорт</mat-option>
+        <mat-select [formControl]="selectedSportTypeCode" [disabled]="!isSportTypeSelectActive" class="news__sport-select">
+          <mat-option *ngFor="let item of sportTypeList" [value]="item.code">{{ item.title }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
     <span class="news__last-news">Последние новости:</span>
   </div>
   <div class="news-list">
-    <div class="news-list__card-item">
-      <app-news-item></app-news-item>
-    </div>
-    <div class="news-list__card-item">
-      <app-news-item></app-news-item>
-    </div>
-    <div class="news-list__card-item">
-      <app-news-item></app-news-item>
+    <div *ngFor="let item of newsList" class="news-list__card-item">
+      <app-news-item 
+                    [title]="item.newsTitle" 
+                    [subTitle]="item.newsSubtitle"
+                    [date]="item.newsDate"
+                    [photo]="item.newsPhoto"
+                    [newsId]="item.newsId">
+      </app-news-item>
     </div>
   </div>
 </div>

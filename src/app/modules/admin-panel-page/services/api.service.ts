@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { IErrorRequest } from 'src/app/shared/model/api-inteface';
 import { ENV_TOKEN } from 'src/environments/environment';
 import { IPlayer } from '../../player-page/model/player-interfaces';
-import { INewPlayer, INewPlayerId, ISportTypes } from '../model/edit-panel-interface'
+import { INewNews, INewPlayer, INewObjectId, ISportTypes } from '../model/edit-panel-interface'
 
 @Injectable()
 export class ApiService {
@@ -18,8 +18,8 @@ export class ApiService {
     return this._http.get<ISportTypes[] | IErrorRequest>(`${this._environments.apiUrl}/api/sport/sport-list`);
   }
 
-  createNewPlayer(player: INewPlayer): Observable<INewPlayerId | IErrorRequest> {
-    return this._http.post<INewPlayerId | IErrorRequest>(`${this._environments.apiUrl}/api/players/create-player`, player);
+  createNewPlayer(player: INewPlayer): Observable<INewObjectId | IErrorRequest> {
+    return this._http.post<INewObjectId | IErrorRequest>(`${this._environments.apiUrl}/api/players/create-player`, player);
   }
 
   getPlayerById(id: string): Observable<IPlayer | IErrorRequest> {
@@ -28,6 +28,10 @@ export class ApiService {
       `${this._environments.apiUrl}/api/players/get-player`,
       { params }
     );
+  }
+
+  createNewNews(news: INewNews) {
+    return this._http.post<INewObjectId | IErrorRequest>(`${this._environments.apiUrl}/api/news/create-news`, news);
   }
 
 }

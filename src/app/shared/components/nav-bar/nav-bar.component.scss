@@ -53,3 +53,7 @@
 		font-size: 30px;
 	}
 }
+
+::ng-deep .mat-toolbar.mat-primary {
+	z-index: 5 !important;
+}

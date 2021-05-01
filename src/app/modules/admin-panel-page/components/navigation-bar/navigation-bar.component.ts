@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { from } from 'rxjs';
 import { AdminPanelSections } from '../../admin-panel-enum.enum'
+import { NavMenuService } from '../../services/nav-menu.service'
 
 @Component({
   selector: 'app-navigation-bar',
@@ -12,9 +14,7 @@ export class NavigationBarComponent implements OnInit {
   panelSections = AdminPanelSections;
   selectedSection = this.panelSections.PLAYER;
 
-  @Output() onSectionSelected: EventEmitter<number> = new EventEmitter();
-
-  constructor() { }
+  constructor(private _navMenuService: NavMenuService) { }
 
   ngOnInit() {
   }
@@ -25,7 +25,7 @@ export class NavigationBarComponent implements OnInit {
 
   openSelectedSection(item: number) {
     this.selectedSection = item;
-    this.onSectionSelected.emit(item);
+    this._navMenuService.onMenuItemSelected.next(item);
   }
 
 }

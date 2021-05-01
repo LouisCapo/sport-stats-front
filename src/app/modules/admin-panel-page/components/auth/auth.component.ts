@@ -45,7 +45,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     return null;
   }
 
-  private _subscriptions: Subscription = new Subscription();
+  private _subscriptions = new Subscription();
 
   constructor(
     private _snackBar: MatSnackBar,

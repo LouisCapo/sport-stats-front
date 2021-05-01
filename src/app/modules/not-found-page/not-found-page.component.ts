@@ -12,7 +12,7 @@ import { ErrorDialogComponent } from '../../shared/components/error-dialog/error
 
 export class NotFoundPageComponent implements OnInit, OnDestroy {
 
-  private _subscription: Subscription[] = [];
+  private _subscription = new Subscription();
 
   constructor(private _matDialog: MatDialog, 
               private _router: Router,) {}
@@ -25,15 +25,13 @@ export class NotFoundPageComponent implements OnInit, OnDestroy {
         closeButtonLabel: 'На главную'
       }
     });
-    this._subscription.push(dialogRef.afterClosed().subscribe((res) => {
+    this._subscription.add(dialogRef.afterClosed().subscribe((res) => {
       this._router.navigate(['/main']);
     }));
   }
 
   ngOnDestroy() {
-    this._subscription.forEach(res => {
-      res.unsubscribe();
-    })
+    this._subscription.unsubscribe();
   }
 
 }

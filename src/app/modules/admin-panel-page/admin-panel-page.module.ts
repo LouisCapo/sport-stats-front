@@ -22,6 +22,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreatingStatsComponent } from './components/creating-stats/creating-stats.component'
 import { MatIconModule } from '@angular/material/icon';
+import { NavMenuService } from './services/nav-menu.service';
 
 @NgModule({
   imports: [
@@ -49,6 +50,6 @@ import { MatIconModule } from '@angular/material/icon';
     AuthComponent,
     CreatingStatsComponent
   ],
-  providers: [AuthService, ApiService]
+  providers: [AuthService, ApiService, NavMenuService]
 })
 export class AdminPanelPageModule { }

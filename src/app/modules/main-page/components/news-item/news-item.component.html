@@ -1,7 +1,7 @@
 <mat-card class="card-body">
   <img
     mat-card-image
-    src="https://imgresizer.eurosport.com/unsafe/1200x0/filters:format(jpeg):focal(1633x511:1635x509)/origin-imgresizer.eurosport.com/2020/08/26/2872402-59156048-2560-1440.jpg"
+    [src]="photo ? photo : '../../../../../assets/photos/news-photo.png'"
     alt=""
   />
   <mat-card-content class="card-body__content">
@@ -15,7 +15,7 @@
       <span>{{subTitle}}</span>
     </div>
     <mat-card-footer class="card-footer">
-      <button mat-raised-button color="primary">Читать полностью</button>
+      <button mat-raised-button color="primary" (click)="openNews()">Читать полностью</button>
     </mat-card-footer>
   </mat-card-content>
 </mat-card>

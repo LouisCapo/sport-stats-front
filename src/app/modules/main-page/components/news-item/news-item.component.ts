@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-news-item',
@@ -13,9 +14,13 @@ export class NewsItemComponent implements OnInit {
   @Input() date: Date;
   @Input() photo: string;
 
-  constructor() { }
+  constructor(private _router: Router) { }
 
   ngOnInit() {
+  }
+
+  openNews() {
+    this._router.navigate([`/news/${this.newsId}`]);
   }
 
 }

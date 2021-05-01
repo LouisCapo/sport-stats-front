@@ -26,22 +26,29 @@ export class NewsComponent implements OnInit {
   constructor(private _apiService: ApiService, private _matDialog: MatDialog) { }
 
   ngOnInit() {
+    console.log(123);
+    this.updateNewsList(-1);
     this._subscription.add(this.selectedSportTypeCode.valueChanges.subscribe(res => {
-      this.isSportTypeSelectActive = false;
-      this._subscription.add(this._apiService.getNewsList(this.selectedSportTypeCode.value).subscribe(newsList => {
-        if ((newsList as IErrorRequest).error) {
-          return this._matDialog.open(ErrorDialogComponent, {
-            data: {
-              error: true,
-              errorMessage: (res as IErrorRequest).error.msg,
-              closeButtonLabel: 'Ок',
-            },
-          });
-        }
-        this.newsList = newsList as INews[];
-        this.isSportTypeSelectActive = true;
-      }))
+      this.updateNewsList(this.selectedSportTypeCode.value);
     }));
+  }
+
+  updateNewsList(sportTypeCode: number) {
+    console.log(312)
+    this.isSportTypeSelectActive = false;
+    this._subscription.add(this._apiService.getNewsList(sportTypeCode).subscribe(newsList => {
+      if ((newsList as IErrorRequest).error) {
+        return this._matDialog.open(ErrorDialogComponent, {
+          data: {
+            error: true,
+            errorMessage: (newsList as IErrorRequest).error.msg,
+            closeButtonLabel: 'Ок',
+          },
+        });
+      }
+      this.newsList = newsList as INews[];
+      this.isSportTypeSelectActive = true;
+    }))
   }
 
 }

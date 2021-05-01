@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ErrorsService } from 'src/app/shared/services/errors.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { formatDate } from "@angular/common";
 import { IPlayer } from 'src/app/modules/player-page/model/player-interfaces';
 import { AdminPanelSections } from '../../admin-panel-enum.enum';
+import { NavMenuService } from '../../services/nav-menu.service';
 
 @Component({
   selector: 'app-edit-form',
@@ -18,8 +18,8 @@ import { AdminPanelSections } from '../../admin-panel-enum.enum';
   styleUrls: ['./edit-form.component.scss'],
 })
 export class EditFormComponent implements OnInit, OnDestroy {
-  @Input() selectedSection;
 
+  selectedSection = 1;
   panelSections = AdminPanelSections;
   loading = true;
   error = false;
@@ -89,7 +89,8 @@ export class EditFormComponent implements OnInit, OnDestroy {
     private _apiService: ApiService,
     private _matDialog: MatDialog,
     private _router: Router,
-    private _errorService: ErrorsService
+    private _errorService: ErrorsService,
+    private _navMenuService: NavMenuService,
   ) {}
 
   ngOnInit() {
@@ -122,6 +123,9 @@ export class EditFormComponent implements OnInit, OnDestroy {
         this.loading = false;
       })
     );
+    this._subscriptions.add(this._navMenuService.onMenuItemSelected.subscribe(res => {
+      this.selectedSection = res;
+    }));
   }
 
   ngOnDestroy() {

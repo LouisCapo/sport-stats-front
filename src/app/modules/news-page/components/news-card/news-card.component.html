@@ -1,4 +1,5 @@
 <ng-container *ngTemplateOutlet="loading ? spiner : newsCard"> </ng-container>
+
 <ng-template #newsCard>
   <mat-card class="news-card">
     <div *ngIf="errorInfo">
@@ -8,7 +9,7 @@
       <img
         mat-card-image
         class="news-card__photo"
-        [src]="newsInfo.newsPhoto"
+        [src]="newsInfo.newsPhoto ? newsInfo.newsPhoto : '../../../../../assets/photos/news-photo.png'"
         alt=""
       />
       <mat-card-content class="news-card__card-filling">
@@ -17,12 +18,13 @@
           <span>{{ newsInfo.newsText }}</span>
         </div>
         <mat-card-footer class="news-card__card-footer">
-          <span class="news-card__news-date">{{ newsInfo.newsDate }}</span>
+          <span class="news-card__news-date">{{ newsInfo.newsDate | date: 'dd/MM/yyyy'}}</span>
         </mat-card-footer>
       </mat-card-content>
     </div>
   </mat-card>
 </ng-template>
+
 <ng-template #spiner>
   <div class="loading-spiner">
     <mat-spinner></mat-spinner>

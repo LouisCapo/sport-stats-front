@@ -1,6 +1,8 @@
 .side-bar {
+  position:absolute;
+  z-index: 100;
   width: auto;
-  height: 93.5vh;
+  height: 93vh;
   background-color: #c2185b;
   display: flex;
   flex-direction: column;

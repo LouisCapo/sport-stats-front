@@ -10,14 +10,12 @@
           <div class="team-card__about-team">
             <span class="team-card__team-name">{{ teamInfo.teamName }}</span>
             <div class="team-card__team-line-up">
-              <div *ngFor="let teamMember of teamInfo.teamMembers">
-                <div (click)="openPlayerPage(teamMember.memberId)" class="team-card__player-card">
-                  <div class="team-card__player-photo">
-                    <img [src]="teamMember.memberPhoto" alt="">
-                  </div>
-                  <div class="team-card__player-nickname">
-                    <span>{{ teamMember.memberNick }}</span>
-                  </div>
+              <div *ngFor="let teamMember of teamInfo.teamMembers" (click)="openPlayerPage(teamMember.memberId)" class="team-card__player-card">
+                <div class="team-card__player-photo">
+                  <img [src]="teamMember.memberPhoto" alt="">
+                </div>
+                <div class="team-card__player-nickname">
+                  <span>{{ teamMember.memberNick }}</span>
                 </div>
               </div>
             </div>

@@ -6,7 +6,7 @@
     justify-content: space-around;
     flex-wrap: wrap;
     &-item {
-      width: 33%;
+      width: 30%;
     }
   }
   &__logo {
@@ -16,12 +16,13 @@
     }
   }
   &__team {
-    width: 33%;
     border-radius: 20px;
+    padding: 5px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px dashed #555555;
     &-name {
       margin-left: 20px;
     }

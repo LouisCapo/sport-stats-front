@@ -85,13 +85,13 @@
 		align-items: center;
 		justify-content: space-between;
 		flex-direction: row;
-		border: #b0b0b0 2px solid;
+		border: #b0b0b0 2px dashed;
 		border-bottom: none;
 		padding: 5px;
 	}
 
 	&__stats-row:last-child {
-		border-bottom: #b0b0b0 2px solid;
+		border-bottom: #b0b0b0 2px dashed;
 	}
 
 	&__stats {

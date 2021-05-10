@@ -56,13 +56,11 @@
                               >
             </app-info-message>
             <div class="player-card__player-stats">
-              <div *ngFor="let stats of playerInfo.playerStats">
-                <div class="player-card__stats-row">
-                  <span>{{ stats.title }}</span>
-                  <span class="player-card__stats-value">{{
-                    stats.value
-                  }}</span>
-                </div>
+              <div *ngFor="let stats of playerInfo.playerStats" class="player-card__stats-row">
+                <span>{{ stats.title }}</span>
+                <span class="player-card__stats-value">{{
+                  stats.value
+                }}</span>
               </div>
             </div>
           </div>

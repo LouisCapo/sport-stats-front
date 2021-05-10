@@ -12,7 +12,7 @@ export class NavigationBarComponent implements OnInit {
 
   navBarOpen = false;
   panelSections = AdminPanelSections;
-  selectedSection = this.panelSections.PLAYER;
+  selectedSection = AdminPanelSections.PLAYER;
 
   constructor(private _navMenuService: NavMenuService) { }
 

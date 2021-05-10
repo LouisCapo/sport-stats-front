@@ -1,0 +1,39 @@
+.event-card {
+  margin-top: 20px;
+  background-color: #3c3b3b;
+  &__content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    &-item {
+      width: 33%;
+    }
+  }
+  &__logo {
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  &__team {
+    width: 33%;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &-name {
+      margin-left: 20px;
+    }
+  }
+  &__team:hover {
+    background-color: #292828;
+  }
+  &__result {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+  }
+}

@@ -9,7 +9,6 @@ import { AuthService } from './services/auth.service';
 })
 export class AdminPanelPageComponent implements OnInit, OnDestroy {
 
-  selectedSection = 1;
   private _subscription = new Subscription();
 
   constructor(private _authService: AuthService) { }
@@ -20,10 +19,6 @@ export class AdminPanelPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._subscription.unsubscribe();
-  }
-
-  onSectionSelected(section) {
-    this.selectedSection = section
   }
 
 }

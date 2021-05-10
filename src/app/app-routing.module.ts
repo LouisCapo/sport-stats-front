@@ -40,6 +40,12 @@ const routes: Routes = [
         (module) => module.AdminPanelPageModule
       )
   }, {
+    path: 'games',
+    loadChildren: () => 
+      import(`./modules/games-page/games-page.module`).then(
+        (module) => module.GamesPageModule
+      )
+  }, {
     path: '**',
     loadChildren: () => 
       import(`./modules/not-found-page/not-found-page.module`).then(

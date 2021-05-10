@@ -9,6 +9,7 @@
   >
     <mat-nav-list>
       <a mat-list-item [routerLink]="['/main']" (click)="drawer.toggle()">Главная</a>
+      <a mat-list-item [routerLink]="['/games']" (click)="drawer.toggle()">Матчи</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -25,8 +26,7 @@
         </button>
         <span class="header-content__title" [routerLink]="['/main']">Sport Stats</span>
         <ul *ngIf="!(isHandset$ | async)" class="header-content__nav-bar">
-          <li class="header-content__nav-item"><a href="#">Матчи</a></li>
-          <li class="header-content__nav-item"><a href="#">Статистика</a></li>
+          <li class="header-content__nav-item"><a [routerLink]="['/games']">Матчи</a></li>
           <li class="header-content__nav-item" style="font-size: 5px;">
             <mat-form-field>
               <input class="header-content__search-input" matInput />

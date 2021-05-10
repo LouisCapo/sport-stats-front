@@ -1,0 +1,19 @@
+<mat-card class="games-card">
+  <mat-card-header class="games-card__header">
+    <mat-form-field appearance="fill">
+      <mat-label>Вид спорта</mat-label>
+      <mat-select>
+        <mat-option>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-header>
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Скоро">
+      <mat-card-content>
+        <ng-content></ng-content>
+      </mat-card-content>
+    </mat-tab>
+    <mat-tab label="Завершенные"> Content 2 </mat-tab>
+  </mat-tab-group>
+</mat-card>

@@ -1,0 +1,23 @@
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+::ng-deep {
+  .mat-tab-body-content {
+    overflow: hidden !important;
+  }
+}
+
+.games-card {
+  margin-top: 30px;
+  width: 70%;
+  height: 86vh;
+  overflow: auto;
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

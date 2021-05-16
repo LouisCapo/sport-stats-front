@@ -1,0 +1,15 @@
+<mat-card class="card-item" [ngClass]="{'extended': extended}">
+  <mat-card-content class="card-item__content">
+    <div class="card-item__photo">
+      <img [src]="photo" alt="">
+    </div>
+    <div class="card-item__info">
+      <span class="card-item__name">
+        {{title}}
+      </span>
+    </div>
+  </mat-card-content>
+  <mat-card-footer class="card-item__footer" *ngIf="expandable">
+    <mat-icon class="card-item__expand-button" aria-hidden="false" (click)="extended = !extended">{{icon}}</mat-icon>
+  </mat-card-footer>
+</mat-card>

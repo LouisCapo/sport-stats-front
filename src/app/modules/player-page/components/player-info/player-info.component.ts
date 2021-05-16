@@ -4,7 +4,6 @@ import { IPlayer } from '../../model/player-interfaces';
 import { PlayerService } from '../../services/player.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IErrorRequest } from '../../../../shared/model/api-inteface';
-import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
 import { ErrorsService } from 'src/app/shared/services/errors.service';

@@ -12,6 +12,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
+import {MatCardModule} from '@angular/material/card';
+import {CardItemComponent} from './components/card-item/card-item.component'
 
 @NgModule({
   imports: [
@@ -25,8 +27,9 @@ import { RouterModule } from '@angular/router';
     LayoutModule,
     MatListModule,
     RouterModule,
+    MatCardModule,
   ],
-  declarations: [InfoMessageComponent, ErrorDialogComponent, NavBarComponent],
-  exports: [InfoMessageComponent, ErrorDialogComponent, NavBarComponent]
+  declarations: [InfoMessageComponent, ErrorDialogComponent, NavBarComponent, CardItemComponent],
+  exports: [InfoMessageComponent, ErrorDialogComponent, NavBarComponent, CardItemComponent]
 })
 export class SharedModule { }

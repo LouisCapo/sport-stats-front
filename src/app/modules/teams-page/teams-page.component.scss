@@ -4,13 +4,7 @@
   justify-content: center;
 }
 
-::ng-deep {
-  .mat-tab-body-content {
-    overflow: hidden !important;
-  }
-}
-
-.games-card {
+.teams-card {
   margin-top: 20px;
   width: 70%;
   max-height: 86vh;

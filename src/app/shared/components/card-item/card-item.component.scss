@@ -1,0 +1,40 @@
+.card-item {
+  margin-top: 20px;
+  background-color: #3c3b3b;
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+  &__photo {
+    img {
+      border-radius: 50%;
+      height: 50px;
+      width: 50px;
+    }
+  }
+  &__name {
+    margin-left: 30px;
+    font-size: 25px;
+		color: #87a3bf;
+    cursor: pointer;
+  }
+  &__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__expand-button {
+    width: 70px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+  }
+  &__expand-button:hover {
+    background-color: #292828;
+  }
+}
+
+.extended {
+  height: 200px;
+}

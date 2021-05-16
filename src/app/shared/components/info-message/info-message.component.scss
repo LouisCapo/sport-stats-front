@@ -1,3 +1,8 @@
+$ssDangerColor: #d64646;
+$ssDangerBackground: #f99e9e;
+$ssInfoColor: #31708f;
+$ssInfoBackground: #83c9ec;
+
 .message-card {
   width: 100%;
 	padding: 10px;
@@ -8,19 +13,19 @@
 	box-sizing: border-box;
 
 	&__error-icon {
-		color: #d64646;
+		color: $ssDangerColor;
 	}
 
 	&__info-icon {
-		color: #31708f;
+		color: $ssInfoColor;
 	}
 
 	&__info-message {
-		color: #31708f;
+		color: $ssInfoColor;
 	}
 
 	&__error-message {
-		color: #d64646;
+		color: $ssDangerColor;
 	}
 
 	&__message-text {
@@ -30,11 +35,11 @@
 }
 
 .error {
-	background-color: #f99e9e;
-	border: 2px solid #d64646;
+	background-color: $ssDangerBackground;
+	border: 2px solid $ssDangerColor;
 }
 
 .info {
-	background-color: #83c9ec;
-	border: 2px solid #31708f;
+	background-color: $ssInfoBackground;
+	border: 2px solid $ssInfoColor;
 }

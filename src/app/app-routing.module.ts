@@ -46,6 +46,18 @@ const routes: Routes = [
         (module) => module.GamesPageModule
       )
   }, {
+    path: 'players',
+    loadChildren: () => 
+      import(`./modules/players-page/players-page.module`).then(
+        (module) => module.PlayersPageModule
+      )
+  }, {
+    path: 'teams',
+    loadChildren: () => 
+      import(`./modules/teams-page/teams-page.module`).then(
+        (module) => module.TeamsPageModule
+      )
+  },{
     path: '**',
     loadChildren: () => 
       import(`./modules/not-found-page/not-found-page.module`).then(

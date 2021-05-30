@@ -26,7 +26,6 @@ export class NewsComponent implements OnInit {
   constructor(private _apiService: ApiService, private _matDialog: MatDialog) { }
 
   ngOnInit() {
-    console.log(123);
     this.updateNewsList(-1);
     this._subscription.add(this.selectedSportTypeCode.valueChanges.subscribe(res => {
       this.updateNewsList(this.selectedSportTypeCode.value);
@@ -34,7 +33,6 @@ export class NewsComponent implements OnInit {
   }
 
   updateNewsList(sportTypeCode: number) {
-    console.log(312)
     this.isSportTypeSelectActive = false;
     this._subscription.add(this._apiService.getNewsList(sportTypeCode).subscribe(newsList => {
       if ((newsList as IErrorRequest).error) {

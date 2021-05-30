@@ -12,3 +12,8 @@ interface IErrorAnswer {
 	code: number;
 	msg: string;
 }
+
+export interface ISportTypes {
+  title: string,
+  code: string,
+}

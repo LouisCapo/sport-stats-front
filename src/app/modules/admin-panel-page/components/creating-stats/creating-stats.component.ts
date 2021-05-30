@@ -24,7 +24,7 @@ export class CreatingStatsComponent implements OnInit, OnDestroy {
     value: new FormControl(''),
   })
 
-  _subscriptions = new Subscription();
+  private _subscriptions = new Subscription();
 
   constructor() { }
 

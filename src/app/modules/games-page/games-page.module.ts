@@ -7,6 +7,10 @@ import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
 import {EventItemComponent} from './components/event-item/event-item.component'
 import {MatTabsModule} from '@angular/material/tabs';
+import { ApiService } from './services/api.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -15,11 +19,15 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatCardModule,
     MatSelectModule,
     MatTabsModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    SharedModule,
   ],
   declarations: [
     GamesPageComponent,
     EventsCardComponent,
     EventItemComponent,
-  ]
+  ],
+  providers: [ApiService]
 })
 export class GamesPageModule { }

@@ -6,6 +6,7 @@
       <ng-container *ngSwitchCase="panelSections.PLAYER" [ngTemplateOutlet]="playerCreate"></ng-container>
       <ng-container *ngSwitchCase="panelSections.NEWS" [ngTemplateOutlet]="newsCreate"></ng-container>
       <ng-container *ngSwitchCase="panelSections.MATCHES" [ngTemplateOutlet]="matchCreate"></ng-container>
+      <ng-container *ngSwitchCase="panelSections.TEAM" [ngTemplateOutlet]="teamCreate"></ng-container>
     </mat-tab>
     <mat-tab [ngSwitch]="selectedSection" label="Редактировать">
       <ng-container *ngSwitchCase="panelSections.PLAYER" [ngTemplateOutlet]="playerEdit"></ng-container>
@@ -381,6 +382,55 @@
           Сохранить
         </button>
       </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #teamCreate>
+  <div class="page-section">
+    <div class="page-section__edit-form" [formGroup]="createNewTeamForm">
+
+      <mat-form-field class="page-section__item">
+        <mat-label>Название команды</mat-label>
+        <input
+          type="text"
+          matInput
+          maxlength="50"
+          formControlName="teamName"
+          placeholder="Название команды"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="page-section__item">
+        <mat-label>Вид спорта</mat-label>
+        <mat-select formControlName="sportTypeCode">
+          <mat-option *ngFor="let item of sportTypesList" [value]="item.code">
+            {{ item.title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="page-section__item">
+        <mat-label>Логотип команды</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="teamLogo"
+          placeholder="URL"
+        />
+      </mat-form-field>
+
+      <div class="page-section__item">
+        <button style="width: 100%"
+                mat-raised-button
+                color="primary"
+                [disabled]="isControlsHaveError(createNewTeamForm.controls)"
+                (click)="createNewTeam()"
+        >
+          Сохранить
+        </button>
+      </div>
+
     </div>
   </div>
 </ng-template>

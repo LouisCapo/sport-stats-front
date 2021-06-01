@@ -36,3 +36,9 @@ interface IScore {
   firstTeam: number,
   secondTeam: number,
 }
+
+export interface INewTeam {
+  teamName: string,
+  sportTypeCode: number,
+  teamLogo: string,
+}

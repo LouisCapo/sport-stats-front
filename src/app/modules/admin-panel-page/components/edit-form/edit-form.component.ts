@@ -93,6 +93,16 @@ export class EditFormComponent implements OnInit, OnDestroy {
     firstTeamScore: new FormControl(''),
     secondTeamScore: new FormControl(''),
     isComplited: new FormControl(''),
+  });
+
+  createNewTeamForm = new FormGroup({
+    teamName: new FormControl('', [
+      Validators.required,
+    ]),
+    sportTypeCode: new FormControl('', [
+      Validators.required,
+    ]),
+    teamLogo: new FormControl(''),
   })
 
   get errorMessage(): string {
@@ -292,7 +302,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
         },
         isCompleted: controls.isComplited.value ? controls.isComplited.value : null,
       }
-      this._apiService.createMatch(data).subscribe(res => {
+      this._subscriptions.add(this._apiService.createMatch(data).subscribe(res => {
         if ((res as INewObjectId).id) {
           this.clearForm(controls);
         }
@@ -305,7 +315,34 @@ export class EditFormComponent implements OnInit, OnDestroy {
             closeButtonLabel: 'Ок',
           },
         });
-      })
+      }));
+    }
+  }
+
+  createNewTeam() {
+    console.log(321)
+    const controls = this.createNewTeamForm.controls;
+    if (!this.isControlsHaveError(controls)) {
+      console.log(123)
+      const data = {
+        teamName: controls.teamName.value,
+        sportTypeCode: controls.sportTypeCode.value.toString(),
+        teamLogo: controls.teamLogo.value,
+      }
+      this._subscriptions.add(this._apiService.createTeam(data).subscribe(res => {
+        if ((res as INewObjectId).id) {
+          this.clearForm(controls);
+        }
+        return this._matDialog.open(ErrorDialogComponent, {
+          data: {
+            error: !(res as INewObjectId).id,
+            errorMessage: (res as INewObjectId).id
+              ? `Команда создана, ее id: ${(res as INewObjectId).id}`
+              : (res as IErrorRequest).error.msg,
+            closeButtonLabel: 'Ок',
+          },
+        });
+      }));
     }
   }
 

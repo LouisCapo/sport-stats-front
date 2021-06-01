@@ -46,6 +46,18 @@
   &__stats-item:not(:first-child) {
     margin-top: 10px;
   }
+  &__checkbox-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .match-score {
+    display: flex;
+    justify-content: space-between;
+    &__item {
+      width: 40%;
+    }
+  }
 }
 
 .loading-spiner {

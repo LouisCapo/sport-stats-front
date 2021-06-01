@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IErrorRequest } from 'src/app/shared/model/api-inteface';
-import { INewObjectId, ISportTypes } from '../../model/edit-panel-interface';
+import { INewMatch, INewObjectId, ISportTypes } from '../../model/edit-panel-interface';
 import { ApiService } from '../../services/api.service'
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
 import { Router } from '@angular/router';
@@ -19,7 +19,7 @@ import { NavMenuService } from '../../services/nav-menu.service';
 })
 export class EditFormComponent implements OnInit, OnDestroy {
 
-  selectedSection = 1;
+  selectedSection = AdminPanelSections.PLAYER;
   panelSections = AdminPanelSections;
   loading = true;
   error = false;
@@ -73,6 +73,26 @@ export class EditFormComponent implements OnInit, OnDestroy {
       Validators.required,
     ]),
     newsPhoto: new FormControl(''),
+  });
+
+  createNewMatchForm = new FormGroup({
+    firstTeamId: new FormControl('', [
+      Validators.required,
+      Validators.minLength(24),
+      Validators.maxLength(24),
+    ]),
+    secondTeamId: new FormControl('', [
+      Validators.required,
+      Validators.minLength(24),
+      Validators.maxLength(24),
+    ]),
+    sportTypeCode: new FormControl('', [
+      Validators.required
+    ]),
+    matchDate: new FormControl(''),
+    firstTeamScore: new FormControl(''),
+    secondTeamScore: new FormControl(''),
+    isComplited: new FormControl(''),
   })
 
   get errorMessage(): string {
@@ -205,7 +225,6 @@ export class EditFormComponent implements OnInit, OnDestroy {
             }
             this.clearForm(controls);
             this.oldPlayerData = res as IPlayer;
-            console.log(Date.parse((res as IPlayer).playerBirthday));
             controls.playerId.setValue(this.oldPlayerData.playerId);
             controls.playerName.setValue(this.oldPlayerData.playerName);
             controls.playerNick.setValue(this.oldPlayerData.playerNick);
@@ -256,6 +275,37 @@ export class EditFormComponent implements OnInit, OnDestroy {
           },
         });
       }))
+    }
+  }
+
+  createNewMatch() {
+    const controls = this.createNewMatchForm.controls;
+    if (!this.isControlsHaveError(controls)) {
+      const data: INewMatch = {
+        firstTeamId: controls.firstTeamId.value,
+        secondTeamId: controls.secondTeamId.value,
+        sportTypeCode: controls.sportTypeCode.value.toString(),
+        date: controls.matchDate.value ? controls.matchDate.value: null,
+        score: {
+          firstTeam: controls.firstTeamScore.value ? controls.firstTeamScore.value : null,
+          secondTeam: controls.secondTeamScore.value ? controls.secondTeamScore.value : null,
+        },
+        isCompleted: controls.isComplited.value ? controls.isComplited.value : null,
+      }
+      this._apiService.createMatch(data).subscribe(res => {
+        if ((res as INewObjectId).id) {
+          this.clearForm(controls);
+        }
+        return this._matDialog.open(ErrorDialogComponent, {
+          data: {
+            error: !(res as INewObjectId).id,
+            errorMessage: (res as INewObjectId).id
+              ? `Матч создан, его id: ${(res as INewObjectId).id}`
+              : (res as IErrorRequest).error.msg,
+            closeButtonLabel: 'Ок',
+          },
+        });
+      })
     }
   }
 

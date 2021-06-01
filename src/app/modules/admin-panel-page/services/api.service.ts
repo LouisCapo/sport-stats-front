@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { IErrorRequest } from 'src/app/shared/model/api-inteface';
 import { ENV_TOKEN } from 'src/environments/environment';
 import { IPlayer } from '../../player-page/model/player-interfaces';
-import { INewNews, INewPlayer, INewObjectId, ISportTypes } from '../model/edit-panel-interface'
+import { INewNews, INewPlayer, INewObjectId, ISportTypes, INewMatch } from '../model/edit-panel-interface'
 
 @Injectable()
 export class ApiService {
@@ -32,6 +32,10 @@ export class ApiService {
 
   createNewNews(news: INewNews) {
     return this._http.post<INewObjectId | IErrorRequest>(`${this._environments.apiUrl}/api/news/create-news`, news);
+  }
+
+  createMatch(matchInfo: INewMatch) {
+    return this._http.post<INewObjectId | IErrorRequest>(`${this._environments.apiUrl}/api/games/create-match`, matchInfo)
   }
 
 }

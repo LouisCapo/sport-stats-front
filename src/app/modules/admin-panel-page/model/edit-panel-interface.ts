@@ -22,3 +22,17 @@ export interface INewNews {
   newsText: string,
   newsPhoto: string,
 }
+
+export interface INewMatch {
+  firstTeamId: string,
+  secondTeamId: string,
+  date: Date,
+  score: IScore,
+  isCompleted: boolean,
+  sportTypeCode: number,
+}
+
+interface IScore {
+  firstTeam: number,
+  secondTeam: number,
+}

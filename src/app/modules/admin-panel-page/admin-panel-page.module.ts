@@ -23,6 +23,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreatingStatsComponent } from './components/creating-stats/creating-stats.component'
 import { MatIconModule } from '@angular/material/icon';
 import { NavMenuService } from './services/nav-menu.service';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { NavMenuService } from './services/nav-menu.service';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
-    MatIconModule
+    MatIconModule,
+    MatCheckboxModule,
   ],
   declarations: [
     AdminPanelPageComponent,

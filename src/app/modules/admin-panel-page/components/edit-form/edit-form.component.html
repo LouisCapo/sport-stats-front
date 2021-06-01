@@ -5,6 +5,7 @@
     <mat-tab [ngSwitch]="selectedSection" label="Создать">
       <ng-container *ngSwitchCase="panelSections.PLAYER" [ngTemplateOutlet]="playerCreate"></ng-container>
       <ng-container *ngSwitchCase="panelSections.NEWS" [ngTemplateOutlet]="newsCreate"></ng-container>
+      <ng-container *ngSwitchCase="panelSections.MATCHES" [ngTemplateOutlet]="matchCreate"></ng-container>
     </mat-tab>
     <mat-tab [ngSwitch]="selectedSection" label="Редактировать">
       <ng-container *ngSwitchCase="panelSections.PLAYER" [ngTemplateOutlet]="playerEdit"></ng-container>
@@ -105,16 +106,16 @@
     <div class="page-section__row-bar page-section__item">
       <mat-form-field class="page-section__item">
         <mat-label>ID игрока</mat-label>
-        <input formControlName="playerId" 
-                type="email" 
-                matInput 
-                placeholder="XXXXXXXXXXXXXXXXXXXXXXXX" 
+        <input formControlName="playerId"
+                type="email"
+                matInput
+                placeholder="XXXXXXXXXXXXXXXXXXXXXXXX"
                 maxlength="24"
         />
       </mat-form-field>
       <div class="page-section__item">
-        <button style="width: 100%" 
-                mat-raised-button 
+        <button style="width: 100%"
+                mat-raised-button
                 color="primary"
                 [disabled]="!editPlayerForm.controls.playerId.value || !!editPlayerForm.controls.playerId.errors"
                 (click)="searchPlayer()"
@@ -151,7 +152,7 @@
           placeholder="nickname"
         />
       </mat-form-field>
-  
+
       <mat-form-field appearance="fill" class="page-section__item">
         <mat-label>Вид спорта</mat-label>
         <mat-select formControlName="sportTypeCode">
@@ -160,7 +161,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-  
+
       <mat-form-field appearance="fill" class="page-section__item">
         <mat-label>Дата рождения</mat-label>
         <input
@@ -171,7 +172,7 @@
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-  
+
       <mat-form-field class="page-section__item">
         <mat-label>ID команды</mat-label>
         <input
@@ -185,7 +186,7 @@
           <span>ID команды должен быть длинной 24 символа</span>
         </mat-error>
       </mat-form-field>
-  
+
       <mat-form-field class="page-section__item">
         <mat-label>Фотография</mat-label>
         <input
@@ -198,7 +199,7 @@
 
       <div class="page-section__item">
         <div class="page-section__stats-item" *ngFor="let statsItem of oldPlayerData.playerStats; let i = index">
-          <app-creating-stats [title]="statsItem.title" 
+          <app-creating-stats [title]="statsItem.title"
                               [value]="statsItem.value"
                               (onStatsChanged)="changeStats($event, i)"
                               (onStatsDeleted)="deleteStats(i)"
@@ -214,10 +215,10 @@
       </div>
 
       <div class="page-section__item">
-        <button style="width: 100%" 
-                mat-raised-button 
-                color="primary" 
-                [disabled]="isControlsHaveError(editPlayerForm.controls)" 
+        <button style="width: 100%"
+                mat-raised-button
+                color="primary"
+                [disabled]="isControlsHaveError(editPlayerForm.controls)"
                 (click)="savePlayerChanges()"
         >
           Сохранить
@@ -283,16 +284,103 @@
       </mat-form-field>
 
       <div class="page-section__item">
-        <button style="width: 100%" 
-                mat-raised-button 
-                color="primary" 
-                [disabled]="isControlsHaveError(createNewsForm.controls)" 
+        <button style="width: 100%"
+                mat-raised-button
+                color="primary"
+                [disabled]="isControlsHaveError(createNewsForm.controls)"
                 (click)="createNewNews()"
         >
           Сохранить
         </button>
       </div>
 
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #matchCreate>
+  <div class="page-section">
+    <div class="page-section__edit-form" [formGroup]="createNewMatchForm">
+
+      <mat-form-field class="page-section__item">
+        <mat-label>ID первой команды</mat-label>
+        <input
+          type="text"
+          matInput
+          maxlength="24"
+          formControlName="firstTeamId"
+          placeholder="ID первой команды"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="page-section__item">
+        <mat-label>ID второй команды</mat-label>
+        <input
+          type="text"
+          matInput
+          maxlength="24"
+          formControlName="secondTeamId"
+          placeholder="ID второрй команды"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="page-section__item">
+        <mat-label>Вид спорта</mat-label>
+        <mat-select formControlName="sportTypeCode">
+          <mat-option *ngFor="let item of sportTypesList" [value]="item.code">
+            {{ item.title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="page-section__item">
+        <mat-label>Дата проведения</mat-label>
+        <input
+          matInput
+          formControlName="matchDate"
+          [matDatepicker]="picker"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div class="page-section__item match-score">
+        <mat-form-field class="match-score__item">
+          <mat-label>Счет для первой команды</mat-label>
+          <input
+            type="number"
+            matInput
+            maxlength="10"
+            formControlName="firstTeamScore"
+            placeholder="Счет для первой команды"
+          />
+        </mat-form-field>
+        <mat-form-field class="match-score__item">
+          <mat-label>Счет второй команды</mat-label>
+          <input
+            type="number"
+            matInput
+            maxlength="10"
+            formControlName="secondTeamScore"
+            placeholder="Счет второй команды"
+          />
+        </mat-form-field>
+      </div>
+
+      <section class="page-section__item page-section__checkbox-container">
+        <mat-checkbox formControlName="isComplited" class="example-margin">Матч завершен</mat-checkbox>
+      </section>
+
+      <div class="page-section__item">
+        <button style="width: 100%"
+                mat-raised-button
+                color="primary"
+                [disabled]="isControlsHaveError(createNewMatchForm.controls)"
+                (click)="createNewMatch()"
+        >
+          Сохранить
+        </button>
+      </div>
     </div>
   </div>
 </ng-template>

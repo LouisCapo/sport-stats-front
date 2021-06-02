@@ -12,8 +12,16 @@ constructor(private _router: Router) { }
     return localStorage.getItem('token');
   }
 
+  get theme() {
+    return localStorage.getItem('theme');
+  }
+
   set userToken(token) {
     localStorage.setItem('token', token);
+  }
+
+  set theme(theme: string) {
+    localStorage.setItem('theme', theme);
   }
 
   logout() {

@@ -5,7 +5,7 @@
     <mat-card-content>
         <div class="team-card__team-info">
           <div class="team-card__team-logo">
-            <img [src]="teamInfo.teamLogo" alt="">
+            <img [src]="teamInfo.teamLogo ? teamInfo.teamLogo : '../../../../../assets/photos/team-photo.png'" alt="">
           </div>
           <div class="team-card__about-team">
             <span class="team-card__team-name">{{ teamInfo.teamName }}</span>
@@ -45,14 +45,14 @@
               <div class="team-card__last-match-row">
                 <div class="team-card__last-match-team">
                   <div class="team-card__last-match-team-logo">
-                    <img src="{{ match.firstTeam.teamLogo }}" alt="">
+                    <img src="{{ match.firstTeam.teamLogo ? match.firstTeam.teamLogo : '../../../../../assets/photos/team-photo.png' }}" alt="">
                   </div>
                   <span class="team-card__last-match-team-name">{{ match.firstTeam.teamName }}</span>
                 </div>
                 <span class="team-card__last-match-score">{{ match.matchScore }}</span>
                 <div class="team-card__last-match-team">
                   <div class="team-card__last-match-team-logo">
-                    <img src="{{ match.secondTeam.teamLogo }}" alt="">
+                    <img src="{{ match.secondTeam.teamLogo ? match.secondTeam.teamLogo : '../../../../../assets/photos/team-photo.png' }}" alt="">
                   </div>
                   <span class="team-card__last-match-team-name">{{ match.secondTeam.teamName }}</span>
                 </div>

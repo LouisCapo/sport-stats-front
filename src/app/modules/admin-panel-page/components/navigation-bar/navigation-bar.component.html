@@ -1,8 +1,9 @@
-<div class="side-bar">
+<div class="side-bar" [ngClass]="{'side-bar-light': isLightThemeSelected}">
   <div class="side-bar__groupe">
     <div
       [ngClass]="{
-        'side-bar__selected-item': selectedSection === panelSections.PLAYER
+        'side-bar__selected-item': selectedSection === panelSections.PLAYER,
+        'side-bar__item-light': isLightThemeSelected
       }"
       (click)="openSelectedSection(panelSections.PLAYER)"
       class="side-bar__item"
@@ -12,7 +13,8 @@
     </div>
     <div
       [ngClass]="{
-        'side-bar__selected-item': selectedSection === panelSections.TEAM
+        'side-bar__selected-item': selectedSection === panelSections.TEAM,
+        'side-bar__item-light': isLightThemeSelected
       }"
       (click)="openSelectedSection(panelSections.TEAM)"
       class="side-bar__item"
@@ -22,7 +24,8 @@
     </div>
     <div
       [ngClass]="{
-        'side-bar__selected-item': selectedSection === panelSections.NEWS
+        'side-bar__selected-item': selectedSection === panelSections.NEWS,
+        'side-bar__item-light': isLightThemeSelected
       }"
       (click)="openSelectedSection(panelSections.NEWS)"
       class="side-bar__item"
@@ -32,7 +35,8 @@
     </div>
     <div
       [ngClass]="{
-        'side-bar__selected-item': selectedSection === panelSections.MATCHES
+        'side-bar__selected-item': selectedSection === panelSections.MATCHES,
+        'side-bar__item-light': isLightThemeSelected
       }"
       (click)="openSelectedSection(panelSections.MATCHES)"
       class="side-bar__item"
@@ -42,7 +46,7 @@
     </div>
   </div>
   <div class="side-bar__groupe">
-    <div class="side-bar__item side-bar__open-button" (click)="togleNavBar()">
+    <div class="side-bar__item side-bar__open-button" (click)="togleNavBar()" [ngClass]="{'side-bar__item-light': isLightThemeSelected}">
       <span *ngIf="!navBarOpen" class="material-icons">
         arrow_forward_ios
       </span>

@@ -7,11 +7,20 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-nav-list>
-      <a mat-list-item [routerLink]="['/main']" (click)="drawer.toggle()">Главная</a>
-      <a mat-list-item [routerLink]="['/games']" (click)="drawer.toggle()">Матчи</a>
-      <a mat-list-item [routerLink]="['/players']" (click)="drawer.toggle()">Игроки</a>
-      <a mat-list-item [routerLink]="['/teams']" (click)="drawer.toggle()">Команды</a>
+    <mat-nav-list class="nav-list">
+      <div>
+        <a mat-list-item [routerLink]="['/main']" (click)="drawer.toggle()">Главная</a>
+        <a mat-list-item [routerLink]="['/games']" (click)="drawer.toggle()">Матчи</a>
+        <a mat-list-item [routerLink]="['/players']" (click)="drawer.toggle()">Игроки</a>
+        <a mat-list-item [routerLink]="['/teams']" (click)="drawer.toggle()">Команды</a>
+      </div>
+      <section class="nav-list__toggle">
+        <mat-slide-toggle
+            [formControl]="themeControl"
+            [color]="'accent'">
+          Светлая тема
+        </mat-slide-toggle>
+      </section>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -36,6 +45,15 @@
               <input class="header-content__search-input" [formControl]="searchControl" matInput />
               <mat-icon (click)="searchCoincidence()" class="header-content__search-icon" matSuffix>search</mat-icon>
             </mat-form-field>
+          </li>
+          <li class="header-content__nav-item">
+            <section>
+              <mat-slide-toggle
+                  [formControl]="themeControl"
+                  [color]="'accent'">
+                Светлая тема
+              </mat-slide-toggle>
+            </section>
           </li>
         </ul>
       </div>

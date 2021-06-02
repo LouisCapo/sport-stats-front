@@ -8,6 +8,9 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 0 0 20px 0;
+  &-light {
+    background-color: #283593;
+  }
   &__item {
     display: flex;
     align-items: center;
@@ -25,6 +28,9 @@
       padding-right: 15px;
       font-size: 15px;
 		  color: #fff;
+    }
+    &-light:hover {
+      background-color: #0d1971 !important;
     }
   }
   &__item:hover {

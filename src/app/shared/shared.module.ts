@@ -17,6 +17,8 @@ import {CardItemComponent} from './components/card-item/card-item.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from './services/api.service';
 import { SearchDialogComponent } from './components/search-dialog/search-dialog.component'
+import { ThemeService } from './services/theme.service'
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   imports: [
@@ -31,9 +33,10 @@ import { SearchDialogComponent } from './components/search-dialog/search-dialog.
     MatListModule,
     RouterModule,
     MatCardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSlideToggleModule,
   ],
-  providers: [ApiService],
+  providers: [ApiService, ThemeService],
   declarations: [InfoMessageComponent, ErrorDialogComponent, NavBarComponent, CardItemComponent, SearchDialogComponent],
   exports: [InfoMessageComponent, ErrorDialogComponent, NavBarComponent, CardItemComponent]
 })

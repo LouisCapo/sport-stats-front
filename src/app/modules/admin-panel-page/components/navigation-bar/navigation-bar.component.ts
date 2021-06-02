@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { from } from 'rxjs';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { from, Subscription } from 'rxjs';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 import { AdminPanelSections } from '../../admin-panel-enum.enum'
 import { NavMenuService } from '../../services/nav-menu.service'
 
@@ -8,15 +9,26 @@ import { NavMenuService } from '../../services/nav-menu.service'
   templateUrl: './navigation-bar.component.html',
   styleUrls: ['./navigation-bar.component.scss']
 })
-export class NavigationBarComponent implements OnInit {
+export class NavigationBarComponent implements OnInit, OnDestroy {
 
-  navBarOpen = false;
-  panelSections = AdminPanelSections;
-  selectedSection = AdminPanelSections.PLAYER;
+  public isLightThemeSelected: boolean;
+  public navBarOpen = false;
+  public panelSections = AdminPanelSections;
+  public selectedSection = AdminPanelSections.PLAYER;
 
-  constructor(private _navMenuService: NavMenuService) { }
+  private _subscription = new Subscription();
+
+  constructor(private _navMenuService: NavMenuService, 
+              private _themeService: ThemeService) { }
 
   ngOnInit() {
+    this._subscription.add(this._themeService.onThemeChange.subscribe(res => {
+      this.isLightThemeSelected = !!res;
+    }))
+  }
+
+  ngOnDestroy() {
+    this._subscription.unsubscribe();
   }
 
   togleNavBar(): void {

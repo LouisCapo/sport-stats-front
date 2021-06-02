@@ -7,6 +7,9 @@ import { ApiService } from 'src/app/shared/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SearchDialogComponent } from '../search-dialog/search-dialog.component';
 import { ISearchResult } from '../../model/api-inteface';
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
+import { ThemeService } from '../../services/theme.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -16,6 +19,7 @@ import { ISearchResult } from '../../model/api-inteface';
 export class NavBarComponent implements OnInit, OnDestroy {
 
   public searchControl = new FormControl('');
+  public themeControl = new FormControl(this._storageService.theme === 'light' ? true : false);
 
   isHandset$: Observable<boolean> = this._breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -27,9 +31,14 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   constructor(private _breakpointObserver: BreakpointObserver,
               private _apiService: ApiService,
-              private _matDialog: MatDialog) {}
+              private _matDialog: MatDialog,
+              private _themeService: ThemeService,
+              private _storageService: StorageService) {}
 
   ngOnInit() {
+    this._subscription.add(this.themeControl.valueChanges.subscribe(res => {
+      this._themeService.onThemeChange.next(res);
+    }))
   }
 
   ngOnDestroy() {
@@ -46,7 +55,15 @@ export class NavBarComponent implements OnInit, OnDestroy {
               data: res.data
             },
           });
+          return
         }
+        const dialogRef = this._matDialog.open(ErrorDialogComponent, {
+          data: {
+            errorMessage: 'К сожалению, по вашему запросу не удалось найти игроков или команды :(',
+            error: false,
+            closeButtonLabel: 'Ок',
+          },
+        });
       }));
     }
   }

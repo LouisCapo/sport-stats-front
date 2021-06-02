@@ -1,32 +1,27 @@
 .card-body {
 	width: 100%;
-	color: #b0b0b0;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	flex-direction: column;
-
 	&__content {
 		width: 100%;
-	}
-
-	&__date {
-		width: 100%;
-	}
-
-	&__title {
-		color: #fff;
-		font-size: 25px;
-		line-height: 1;
-	}
-
-	&__content {
 		padding: 10px;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 	}
-
+	&__date {
+		width: 100%;
+		color: #678ee6;
+	}
+	&__title {
+		font-size: 25px;
+		line-height: 1;
+	}
+	&__desc {
+		color: #c1c1c1;
+	}
 }
 
 .card-footer {

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IMatchesListInterface } from '../../model/matches-list-interface';
+import { IMatchesListInterface, ITeamInfo } from '../../model/matches-list-interface';
 
 @Component({
   selector: 'app-event-item',
@@ -20,6 +20,10 @@ export class EventItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  getTeamPage(team: ITeamInfo): string {
+    return `/team/${team.teamId}`
   }
 
 }

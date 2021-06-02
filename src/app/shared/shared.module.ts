@@ -14,6 +14,9 @@ import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
 import {CardItemComponent} from './components/card-item/card-item.component'
+import { ReactiveFormsModule } from '@angular/forms';
+import { ApiService } from './services/api.service';
+import { SearchDialogComponent } from './components/search-dialog/search-dialog.component'
 
 @NgModule({
   imports: [
@@ -28,8 +31,10 @@ import {CardItemComponent} from './components/card-item/card-item.component'
     MatListModule,
     RouterModule,
     MatCardModule,
+    ReactiveFormsModule
   ],
-  declarations: [InfoMessageComponent, ErrorDialogComponent, NavBarComponent, CardItemComponent],
+  providers: [ApiService],
+  declarations: [InfoMessageComponent, ErrorDialogComponent, NavBarComponent, CardItemComponent, SearchDialogComponent],
   exports: [InfoMessageComponent, ErrorDialogComponent, NavBarComponent, CardItemComponent]
 })
 export class SharedModule { }

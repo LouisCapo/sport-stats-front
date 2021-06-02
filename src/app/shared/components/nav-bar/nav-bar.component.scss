@@ -48,9 +48,15 @@
 		}
 
 	}
-
-	&__search-icon {
-		font-size: 30px;
+	&__search {
+		&-input {
+			font-size: 20px;
+			color: #b0b0b0;
+		}
+		&-icon {
+			font-size: 30px;
+			cursor: pointer;
+		}
 	}
 }
 

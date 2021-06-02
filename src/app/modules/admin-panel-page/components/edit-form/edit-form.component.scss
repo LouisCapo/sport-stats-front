@@ -1,16 +1,12 @@
 :host {
   width: 100%;
 }
-::ng-deep {
-  .mat-tab-body-content {
-    overflow: hidden !important;
-  }
-}
 
 .page-section {
   margin-top: 50px;
   width: 100%;
   display: flex;
+  min-height: 75vh;
   justify-content: center;
   align-items: center;
   flex-direction: column;

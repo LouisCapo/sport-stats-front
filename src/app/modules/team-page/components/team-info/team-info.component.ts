@@ -41,29 +41,29 @@ export class TeamInfoComponent implements OnInit, OnDestroy {
     this._subscription.add(
       this._route.params.subscribe((res) => {
         this.teamId = res.id;
+        this._subscription.add(
+          this._teamService.getTeam(this.teamId).subscribe(
+            (res) => {
+              if ((res as IErrorRequest).error) {
+                this.error = true;
+                const dialogRef = this._matDialog.open(ErrorDialogComponent, {
+                  data: {
+                    error: true,
+                    errorMessage: (res as IErrorRequest).error.msg,
+                    closeButtonLabel: 'На главную',
+                  },
+                });
+                this._subscription.add(
+                  dialogRef.afterClosed().subscribe((ev) => {
+                    this._router.navigate(['/main']);
+                  })
+                );
+              }
+              this.teamInfo = res as ITeam;
+              this.loading = false;
+            })
+        );
       })
-    );
-    this._subscription.add(
-      this._teamService.getTeam(this.teamId).subscribe(
-        (res) => {
-          if ((res as IErrorRequest).error) {
-            this.error = true;
-            const dialogRef = this._matDialog.open(ErrorDialogComponent, {
-              data: {
-                error: true,
-                errorMessage: (res as IErrorRequest).error.msg,
-                closeButtonLabel: 'На главную',
-              },
-            });
-            this._subscription.add(
-              dialogRef.afterClosed().subscribe((ev) => {
-                this._router.navigate(['/main']);
-              })
-            );
-          }
-          this.teamInfo = res as ITeam;
-          this.loading = false;
-        })
     );
   }
 

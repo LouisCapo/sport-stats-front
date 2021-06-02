@@ -10,6 +10,7 @@
     </mat-tab>
     <mat-tab [ngSwitch]="selectedSection" label="Редактировать">
       <ng-container *ngSwitchCase="panelSections.PLAYER" [ngTemplateOutlet]="playerEdit"></ng-container>
+      <ng-container *ngSwitchCase="panelSections.TEAM" [ngTemplateOutlet]="teamEdit"></ng-container>
     </mat-tab>
   </mat-tab-group>
 </ng-template>
@@ -431,6 +432,32 @@
         </button>
       </div>
 
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #teamEdit>
+  <div class="page-section" [formGroup]='editPlayerForm'>
+    <div class="page-section__row-bar page-section__item">
+      <mat-form-field class="page-section__item">
+        <mat-label>ID команды</mat-label>
+        <input formControlName="playerId"
+                type="email"
+                matInput
+                placeholder="XXXXXXXXXXXXXXXXXXXXXXXX"
+                maxlength="24"
+        />
+      </mat-form-field>
+      <div class="page-section__item">
+        <button style="width: 100%"
+                mat-raised-button
+                color="primary"
+                [disabled]="!editPlayerForm.controls.playerId.value || !!editPlayerForm.controls.playerId.errors"
+                (click)="searchPlayer()"
+                >
+          Найти
+        </button>
+      </div>
     </div>
   </div>
 </ng-template>

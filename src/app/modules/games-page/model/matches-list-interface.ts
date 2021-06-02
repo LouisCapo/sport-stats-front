@@ -8,7 +8,7 @@ export interface IMatchesListInterface {
   isCompleted: Boolean,
 }
 
-interface ITeamInfo {
+export interface ITeamInfo {
   teamId: string,
   teamName: string,
   teamLogo: string,

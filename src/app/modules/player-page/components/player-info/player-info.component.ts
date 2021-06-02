@@ -36,33 +36,31 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
         this.loading = false;
       }
     }))
-    this._subscriptions.add(
-      this._route.params.subscribe((res) => {
-        this.playerId = res.id;
-      })
-    );
-    this._subscriptions.add(
-      this._playerService.getPlayer(this.playerId).subscribe(
-        (res) => {
-          if ((res as IErrorRequest).error) {
-            this.error = true;
-            const dialogRef = this._matDialog.open(ErrorDialogComponent, {
-              data: {
-                errorMessage: (res as IErrorRequest).error.msg,
-                error: true,
-                closeButtonLabel: 'На главную',
-              },
-            });
-            this._subscriptions.add(
-              dialogRef.afterClosed().subscribe((ev) => {
-                this._router.navigate(['/main']);
-              })
-            );
-          }
-          this.playerInfo = res as IPlayer;
-          this.loading = false;
-        })
-    );
+    this._subscriptions.add(this._route.params.subscribe((res) => {
+      this.playerId = res.id;
+      this._subscriptions.add(
+        this._playerService.getPlayer(this.playerId).subscribe(
+          (res) => {
+            if ((res as IErrorRequest).error) {
+              this.error = true;
+              const dialogRef = this._matDialog.open(ErrorDialogComponent, {
+                data: {
+                  errorMessage: (res as IErrorRequest).error.msg,
+                  error: true,
+                  closeButtonLabel: 'На главную',
+                },
+              });
+              this._subscriptions.add(
+                dialogRef.afterClosed().subscribe((ev) => {
+                  this._router.navigate(['/main']);
+                })
+              );
+            }
+            this.playerInfo = res as IPlayer;
+            this.loading = false;
+          })
+      );
+    }));
   }
 
   ngOnDestroy() {

@@ -1,0 +1,10 @@
+<mat-dialog-content class="dialog-content">
+  <div *ngFor="let item of data.data" (click)="redirectToItemPage(item)" class="search-card">
+    <div class="search-card__photo">
+      <img [src]="item.photo ? item.photo : '../../../../../assets/photos/player-photo.png'">
+    </div>
+    <div class="search-card__title">
+      <span>{{item.title}}</span>
+    </div>
+  </div>
+</mat-dialog-content>

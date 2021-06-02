@@ -5,6 +5,17 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    @media (max-width: 800px ){
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      &-item {
+        width: 90% !important;
+      }
+      &-item:not(:last-child):not(:first-child) {
+        margin: 15px 0 15px 0 ;
+      }
+    }
     &-item {
       width: 30%;
     }
@@ -37,6 +48,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3em;
+    font-size: 2em;
   }
 }

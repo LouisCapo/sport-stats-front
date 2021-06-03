@@ -49,12 +49,12 @@
                   </div>
                   <span class="team-card__last-match-team-name">{{ match.firstTeam.teamName }}</span>
                 </div>
-                <span class="team-card__last-match-score">{{ match.matchScore }}</span>
+                <span class="team-card__last-match-score">{{ match.score.firstTeam ? match.score.firstTeam : '0' }}:{{match.score.secondTeam}}</span>
                 <div class="team-card__last-match-team">
                   <div class="team-card__last-match-team-logo">
                     <img src="{{ match.secondTeam.teamLogo ? match.secondTeam.teamLogo : '../../../../../assets/photos/team-photo.png' }}" alt="">
                   </div>
-                  <span class="team-card__last-match-team-name">{{ match.secondTeam.teamName }}</span>
+                  <span class="team-card__last-match-team-name">{{ match.secondTeam.teamName ? match.secondTeam.teamName : '0' }}</span>
                 </div>
               </div>
             </div>

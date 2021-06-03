@@ -4,7 +4,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Вид спорта</mat-label>
         <mat-select [formControl]="selectedSportTypeCode" [disabled]="!isSportTypeSelectActive" class="news__sport-select">
-          <mat-option *ngFor="let item of sportTypeList" [value]="item.code">{{ item.title }}</mat-option>
+          <mat-option *ngFor="let item of sportTypes" [value]="item.code">{{ item.title }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>

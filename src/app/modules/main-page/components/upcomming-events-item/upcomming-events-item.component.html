@@ -2,18 +2,19 @@
   <mat-card-content class="event-card__content">
     <div class="event-card__team event-card__item" [ngClass]="{'event-card__team-light': isLightThemeSelected}">
       <div class="event-card__logo event-card__team-item">
-        <img src="https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937">
+        <img [src]="data.firstTeam.teamLogo ? data.firstTeam.teamLogo : '../../../../../assets/photos/team-photo.png'">
       </div>
-      <span class="event-card__team-item">Natus Vincere</span>
+      <span class="event-card__team-item">{{data.firstTeam.teamName}}</span>
     </div>
     <div class="event-card__time event-card__item">
-      <span>21:00</span>
+      <span *ngIf="data.date">{{data.date | date : 'dd.MM.yyyy'}}</span>
+      <span *ngIf="!data.date">VS</span>
     </div>
     <div class="event-card__team event-card__item" [ngClass]="{'event-card__team-light': isLightThemeSelected}">
       <div class="event-card__logo event-card__team-item">
-        <img src="https://img-cdn.hltv.org/teamlogo/pNV-lVdpvYZIkDwHdEXXg-.svg?ixlib=java-2.1.0&s=8b557b5b4d283208976340ef1bc44c76">
+        <img [src]="data.secondTeam.teamLogo ? data.secondTeam.teamLogo : '../../../../../assets/photos/team-photo.png'">
       </div>
-      <span class="event-card__team-item">Gambit</span>
+      <span class="event-card__team-item">{{data.secondTeam.teamName}}</span>
     </div>
   </mat-card-content>
 </mat-card>

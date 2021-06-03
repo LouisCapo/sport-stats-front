@@ -1,4 +1,9 @@
 <app-events-card (onSportTypeChange)="onSportTypeChange($event)">
-  <app-info-message *ngIf="errorMessage" [messageText]="errorMessage"></app-info-message>
-  <app-event-item *ngFor="let item of mathesList" [matchData]="item"></app-event-item>
+  <app-info-message class="error-message" 
+                    *ngIf="errorMessage" 
+                    [messageText]="errorMessage">
+  </app-info-message>
+  <app-event-item *ngFor="let item of mathesList"
+                  [matchData]="item">
+  </app-event-item>
 </app-events-card>

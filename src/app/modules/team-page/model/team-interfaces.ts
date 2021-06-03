@@ -27,10 +27,13 @@ interface ITeamStats {
 }
 
 interface ILastMatch {
-	firstTeam: ITeamInfo;
-	secondTeam: ITeamInfo;
-	winningTeam: string;
-	matchScore: string;
+	matchId: string,
+	firstTeam: ITeamInfo,
+	secondTeam: ITeamInfo,
+	score: {
+		firstTeam: number,
+		secondTeam: number,
+	}
 }
 
 interface ITeamInfo {

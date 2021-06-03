@@ -15,11 +15,17 @@ import { ApiService } from '../../services/api.service';
 })
 export class NewsComponent implements OnInit {
 
-  @Input() sportTypeList: ISportTypes[];
+  @Input() set sportTypeList(value: ISportTypes[]){
+    this.sportTypes = value;
+    if (value?.length) {
+      this.selectedSportTypeCode.setValue(value[0].code)
+    }
+  };
 
-  selectedSportTypeCode = new FormControl('');
-  isSportTypeSelectActive = true;
-  newsList: INews[] = [];
+  public selectedSportTypeCode = new FormControl('');
+  public isSportTypeSelectActive = true;
+  public newsList: INews[] = [];
+  public sportTypes: ISportTypes[];
 
   private _subscription = new Subscription()
 

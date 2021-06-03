@@ -294,11 +294,11 @@ export class EditFormComponent implements OnInit, OnDestroy {
       const data: INewMatch = {
         firstTeamId: controls.firstTeamId.value,
         secondTeamId: controls.secondTeamId.value,
-        sportTypeCode: controls.sportTypeCode.value.toString(),
+        sportTypeCode: controls.sportTypeCode.value,
         date: controls.matchDate.value ? controls.matchDate.value: null,
         score: {
-          firstTeam: controls.firstTeamScore.value ? controls.firstTeamScore.value : null,
-          secondTeam: controls.secondTeamScore.value ? controls.secondTeamScore.value : null,
+          firstTeam: controls.firstTeamScore.value.toString() ? controls.firstTeamScore.value : null,
+          secondTeam: controls.secondTeamScore.value.toString() ? controls.secondTeamScore.value : null,
         },
         isCompleted: controls.isComplited.value ? controls.isComplited.value : null,
       }
@@ -320,10 +320,8 @@ export class EditFormComponent implements OnInit, OnDestroy {
   }
 
   createNewTeam() {
-    console.log(321)
     const controls = this.createNewTeamForm.controls;
     if (!this.isControlsHaveError(controls)) {
-      console.log(123)
       const data = {
         teamName: controls.teamName.value,
         sportTypeCode: controls.sportTypeCode.value.toString(),

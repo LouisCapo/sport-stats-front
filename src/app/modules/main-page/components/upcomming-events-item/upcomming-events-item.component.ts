@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { IMatchesList } from 'src/app/modules/games-page/model/matches-list-interface';
 import { ThemeService } from 'src/app/shared/services/theme.service';
 
 @Component({
@@ -9,9 +10,7 @@ import { ThemeService } from 'src/app/shared/services/theme.service';
 })
 export class UpcommingEventsItemComponent implements OnInit, OnDestroy {
 
-  @Input() date: string;
-  @Input() firstMember;
-  @Input() secondMember;
+  @Input() data: IMatchesList;
 
   public isLightThemeSelected: boolean;
 

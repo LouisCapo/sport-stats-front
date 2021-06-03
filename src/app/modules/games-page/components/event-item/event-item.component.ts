@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ThemeService } from 'src/app/shared/services/theme.service';
-import { IMatchesListInterface, ITeamInfo } from '../../model/matches-list-interface';
+import { IMatchesList, ITeamInfo } from '../../model/matches-list-interface';
 
 @Component({
   selector: 'app-event-item',
@@ -10,7 +10,7 @@ import { IMatchesListInterface, ITeamInfo } from '../../model/matches-list-inter
 })
 export class EventItemComponent implements OnInit, OnDestroy {
 
-  @Input() matchData: IMatchesListInterface;
+  @Input() matchData: IMatchesList;
 
   public isLightThemeSelected: boolean;
 

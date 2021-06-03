@@ -1,4 +1,4 @@
-export interface IMatchesListInterface {
+export interface IMatchesList {
   matchId: String,
   firstTeam: ITeamInfo,
   secondTeam: ITeamInfo,
@@ -6,6 +6,10 @@ export interface IMatchesListInterface {
   score: IScoreInfo,
   sportType: ISportType,
   isCompleted: Boolean,
+}
+
+export interface IMatchListResponse {
+  data: IMatchesList[]
 }
 
 export interface ITeamInfo {

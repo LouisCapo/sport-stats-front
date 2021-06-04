@@ -1,19 +1,16 @@
 .player-card {
 	margin-top: 50px;
-
 	&__header {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	}
-
 	&__player-info {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: center;
 	}
-
 	&__player-photo {
 		max-width: 300px;
 		img {
@@ -21,7 +18,6 @@
 			height: 100%;
 		}
 	}
-
 	&__about-player-row {
 		display: flex;
 		width: 100%;
@@ -29,33 +25,27 @@
 		font-size: 17px;
 		height: 10px;
 	}
-
 	&__about-player-row:not(:last-child) {
 		margin-bottom: 15px;
 	}
-
 	&__about-player-title {
 		font-weight: lighter;
 	}
-
 	&__about-player-value {
 		margin-left: 30px;
 		color: #87a3bf;
 	}
-
 	&__player-name {
 		font-size: 20px;
 		color: #87a3bf;
 		margin-bottom: 30px;
 	}
-
 	&__about-player {
 		display: flex;
 		align-items: center;
 		flex-direction: column;
 		margin-bottom: 20px;
 	}
-
 	&__player-team {
 		display: flex;
 		justify-content: center;
@@ -66,20 +56,16 @@
 			margin-right: 10px;
 		}
 	}
-
 	&__player-stats {
 		padding: 10px;
 		width: 300px;
 		font-weight: lighter;
 		font-size: 17px;
 	}
-
 	&__stats-value {
 		font-weight: normal;
 		color: #87a3bf;
 	}
-
-
 	&__stats-row {
 		display: flex;
 		align-items: center;
@@ -89,17 +75,14 @@
 		border-bottom: none;
 		padding: 5px;
 	}
-
 	&__stats-row:last-child {
 		border-bottom: #b0b0b0 2px dashed;
 	}
-
 	&__stats {
 		color: #b0b0b0;
 		font-size: 20px;
 		margin-top: 10px;
 	}
-
 	&__stats-bar {
 		width: 100%;
 		border-top: #b0b0b0 2px solid;
@@ -108,19 +91,15 @@
 		justify-content: center;
 		align-items: center;
 	}
-
 	&__error-bar {
 		width: 100%;
 	}
-
 	&__link {
 		cursor: pointer;
 	}
-
 	&__link:hover {
 		color: #b0b0b0;
 	}
-
 }
 
 .loading-spiner {

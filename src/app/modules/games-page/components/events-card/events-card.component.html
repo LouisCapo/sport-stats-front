@@ -11,10 +11,10 @@
   </mat-card-header>
   <mat-tab-group (selectedTabChange)="onTabChange($event)" mat-align-tabs="center">
     <mat-tab label="Скоро">
-      <ng-content></ng-content>
+      <ng-container *ngTemplateOutlet="mathesListTemplate"></ng-container>
     </mat-tab>
     <mat-tab label="Завершенные"> 
-      FLEX
+      <ng-container *ngTemplateOutlet="mathesListTemplate"></ng-container>
     </mat-tab>
   </mat-tab-group>
 </mat-card>

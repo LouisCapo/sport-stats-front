@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -17,6 +17,8 @@ export class EventsCardComponent implements OnInit, OnDestroy {
   public selectedSportType = new FormControl('')
   public sportTypeList: ISportTypes[];
   public selectedTab = EnumTabs.UPCOMING;
+
+  @Input() mathesListTemplate: TemplateRef<any>;
 
   @Output() onSportTypeChange = new EventEmitter<{sportTypeCode: Number, isCompleted: boolean}>();
 

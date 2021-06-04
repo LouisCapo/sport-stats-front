@@ -14,7 +14,7 @@ interface ITeamSportType {
 	sportTypeTitle: string
 }
 
-interface ITeamMember {
+export interface ITeamMember {
 	memberName: string;
 	memberNick: string;
 	memberPhoto: string;
@@ -36,7 +36,7 @@ interface ILastMatch {
 	}
 }
 
-interface ITeamInfo {
+export interface ITeamInfo {
 	teamName: string;
 	teamLogo: string;
 	teamId: string;

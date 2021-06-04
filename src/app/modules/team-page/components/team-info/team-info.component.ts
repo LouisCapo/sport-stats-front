@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ITeam } from '../../model/team-interfaces';
+import { ITeam, ITeamMember, ITeamInfo } from '../../model/team-interfaces';
 import { TeamService } from '../../services/team.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -71,7 +71,11 @@ export class TeamInfoComponent implements OnInit, OnDestroy {
     this._subscription.unsubscribe();
   }
 
-  openPlayerPage(playerId) {
-    this._router.navigate([`/player/${playerId}`]);
+  getPlayerPageLink(playerInfo: ITeamMember): string {
+    return `/player/${playerInfo.memberId}`;
+  }
+
+  getTeamPageLink(teamInfo: ITeamInfo): string {
+    return `/team/${teamInfo.teamId}`;
   }
 }

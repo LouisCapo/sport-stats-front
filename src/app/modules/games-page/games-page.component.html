@@ -1,9 +1,16 @@
-<app-events-card (onSportTypeChange)="onSportTypeChange($event)">
-  <app-info-message class="error-message" 
-                    *ngIf="errorMessage" 
+<ng-template #mathesListTemplate>
+  <div *ngIf="isDataLoading" class="loading-spiner">
+    <mat-spinner></mat-spinner>
+  </div>
+  <app-info-message *ngIf="errorMessage"
+                    class="error-message"
                     [messageText]="errorMessage">
   </app-info-message>
   <app-event-item *ngFor="let item of mathesList"
                   [matchData]="item">
-  </app-event-item>
+</app-event-item>
+</ng-template>
+
+<app-events-card (onSportTypeChange)="onSportTypeChange($event)" 
+                [mathesListTemplate]="mathesListTemplate">
 </app-events-card>

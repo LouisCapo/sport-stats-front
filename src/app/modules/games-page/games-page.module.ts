@@ -11,6 +11,7 @@ import { ApiService } from './services/api.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatDialogModule,
     ReactiveFormsModule,
     SharedModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     GamesPageComponent,

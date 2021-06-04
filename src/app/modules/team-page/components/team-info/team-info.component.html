@@ -10,7 +10,9 @@
           <div class="team-card__about-team">
             <span class="team-card__team-name">{{ teamInfo.teamName }}</span>
             <div class="team-card__team-line-up">
-              <div *ngFor="let teamMember of teamInfo.teamMembers" (click)="openPlayerPage(teamMember.memberId)" class="team-card__player-card">
+              <div *ngFor="let teamMember of teamInfo.teamMembers" 
+                  [routerLink]="getPlayerPageLink(teamMember)" 
+                  class="team-card__player-card">
                 <div class="team-card__player-photo">
                   <img [src]="teamMember.memberPhoto" alt="">
                 </div>
@@ -41,21 +43,19 @@
           <div class="team-card__last-matches">
             <span class="team-card__last-match-title">Последние матчи:</span>
             <app-info-message *ngIf="!teamInfo.lastMatches" [messageText]="'Нет актуальной инфорамации по последним матчам ' + teamInfo.teamName"></app-info-message>
-            <div *ngFor="let match of teamInfo.lastMatches">
-              <div class="team-card__last-match-row">
-                <div class="team-card__last-match-team">
-                  <div class="team-card__last-match-team-logo">
-                    <img src="{{ match.firstTeam.teamLogo ? match.firstTeam.teamLogo : '../../../../../assets/photos/team-photo.png' }}" alt="">
-                  </div>
-                  <span class="team-card__last-match-team-name">{{ match.firstTeam.teamName }}</span>
+            <div *ngFor="let match of teamInfo.lastMatches" class="team-card__last-match-row">
+              <div [routerLink]="getTeamPageLink(match.firstTeam)" class="team-card__last-match-team team-card__last-match-item">
+                <div class="team-card__last-match-team-logo">
+                  <img src="{{ match.firstTeam.teamLogo ? match.firstTeam.teamLogo : '../../../../../assets/photos/team-photo.png' }}" alt="">
                 </div>
-                <span class="team-card__last-match-score">{{ match.score.firstTeam ? match.score.firstTeam : '0' }}:{{match.score.secondTeam}}</span>
-                <div class="team-card__last-match-team">
-                  <div class="team-card__last-match-team-logo">
-                    <img src="{{ match.secondTeam.teamLogo ? match.secondTeam.teamLogo : '../../../../../assets/photos/team-photo.png' }}" alt="">
-                  </div>
-                  <span class="team-card__last-match-team-name">{{ match.secondTeam.teamName ? match.secondTeam.teamName : '0' }}</span>
+                <span class="team-card__last-match-team-name">{{ match.firstTeam.teamName }}</span>
+              </div>
+              <span class="team-card__last-match-score team-card__last-match-item">{{ match.score.firstTeam ? match.score.firstTeam : '0' }}:{{match.score.secondTeam}}</span>
+              <div [routerLink]="getTeamPageLink(match.secondTeam)" class="team-card__last-match-team team-card__last-match-item">
+                <div class="team-card__last-match-team-logo">
+                  <img src="{{ match.secondTeam.teamLogo ? match.secondTeam.teamLogo : '../../../../../assets/photos/team-photo.png' }}" alt="">
                 </div>
+                <span class="team-card__last-match-team-name">{{ match.secondTeam.teamName ? match.secondTeam.teamName : '0' }}</span>
               </div>
             </div>
           </div>

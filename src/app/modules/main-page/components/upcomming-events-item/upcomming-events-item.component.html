@@ -1,6 +1,6 @@
 <mat-card class="event-card" [ngClass]="{'event-card-light': isLightThemeSelected}">
   <mat-card-content class="event-card__content">
-    <div class="event-card__team event-card__item" [ngClass]="{'event-card__team-light': isLightThemeSelected}">
+    <div [routerLink]="getTeamPageLink(data.firstTeam)" class="event-card__team event-card__item" [ngClass]="{'event-card__team-light': isLightThemeSelected}">
       <div class="event-card__logo event-card__team-item">
         <img [src]="data.firstTeam.teamLogo ? data.firstTeam.teamLogo : '../../../../../assets/photos/team-photo.png'">
       </div>
@@ -10,7 +10,7 @@
       <span *ngIf="data.date">{{data.date | date : 'dd.MM.yyyy'}}</span>
       <span *ngIf="!data.date">VS</span>
     </div>
-    <div class="event-card__team event-card__item" [ngClass]="{'event-card__team-light': isLightThemeSelected}">
+    <div [routerLink]="getTeamPageLink(data.secondTeam)" class="event-card__team event-card__item" [ngClass]="{'event-card__team-light': isLightThemeSelected}">
       <div class="event-card__logo event-card__team-item">
         <img [src]="data.secondTeam.teamLogo ? data.secondTeam.teamLogo : '../../../../../assets/photos/team-photo.png'">
       </div>

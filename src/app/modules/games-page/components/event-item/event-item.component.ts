@@ -27,7 +27,6 @@ export class EventItemComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._subscriptions.add(this._themeService.onThemeChange.subscribe(res => {
-      console.log(res)
       this.isLightThemeSelected = !!res;
     }));
   }

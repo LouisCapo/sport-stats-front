@@ -32,7 +32,6 @@ export class NewsComponent implements OnInit {
   constructor(private _apiService: ApiService, private _matDialog: MatDialog) { }
 
   ngOnInit() {
-    this.updateNewsList(-1);
     this._subscription.add(this.selectedSportTypeCode.valueChanges.subscribe(res => {
       this.updateNewsList(this.selectedSportTypeCode.value);
     }));

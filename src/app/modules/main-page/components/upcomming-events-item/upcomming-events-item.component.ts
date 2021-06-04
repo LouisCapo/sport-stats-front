@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { IMatchesList } from 'src/app/modules/games-page/model/matches-list-interface';
+import { IMatchesList, ITeamInfo } from 'src/app/modules/games-page/model/matches-list-interface';
 import { ThemeService } from 'src/app/shared/services/theme.service';
 
 @Component({
@@ -26,6 +26,10 @@ export class UpcommingEventsItemComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._subscription.unsubscribe();
+  }
+
+  getTeamPageLink(team: ITeamInfo): string {
+    return `/team/${team.teamId}`
   }
 
 }

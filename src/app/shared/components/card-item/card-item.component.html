@@ -1,15 +1,24 @@
-<mat-card class="card-item" [ngClass]="{'extended': extended, 'card-item-light': isLightThemeActive}">
+<mat-card class="card-item" [ngClass]="{'card-item-light': isLightThemeActive}">
   <mat-card-content class="card-item__content">
     <div class="card-item__photo">
-      <img [src]="photo" alt="">
+      <img [src]="photo ? photo : '../../../../../assets/photos/team-photo.png'" alt="">
     </div>
     <div class="card-item__info">
-      <span class="card-item__name">
+      <span [routerLink]="'/team/' + id" class="card-item__name">
         {{title}}
       </span>
     </div>
   </mat-card-content>
-  <mat-card-footer class="card-item__footer" *ngIf="expandable">
+  <mat-card-footer class="card-item__footer" *ngIf="expandable && memberList.length">
     <mat-icon [ngClass]="{'card-item__expand-button-light': isLightThemeActive}" class="card-item__expand-button" aria-hidden="false" (click)="extended = !extended">{{icon}}</mat-icon>
+    <div *ngIf="extended" class="member-list">
+      <div *ngFor="let item of memberList" 
+            class="member-list__item" 
+            [ngClass]="{'member-list__item-light': isLightThemeActive}"
+            [routerLink]="'/player/' + item.playerId">
+        <img [src]="item.playerPhoto">
+        <span>{{item.playerName}}</span>
+      </div>
+    </div>
   </mat-card-footer>
 </mat-card>

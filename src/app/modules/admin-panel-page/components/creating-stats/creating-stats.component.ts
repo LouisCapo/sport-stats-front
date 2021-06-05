@@ -9,31 +9,30 @@ import { Subscription } from 'rxjs';
 })
 export class CreatingStatsComponent implements OnInit, OnDestroy {
 
-  @Output() onStatsChanged = new EventEmitter();
-  @Output() onStatsDeleted = new EventEmitter();
-
-  @Input() set title(val: string) {
-    this.playerStats.controls.title.setValue(val);
-  }
-  @Input() set value(val: string) {
-    this.playerStats.controls.value.setValue(val);
-  }
-
-  playerStats = new FormGroup({
+  public playerStats = new FormGroup({
     title: new FormControl(''),
     value: new FormControl(''),
   })
+  public hasChanges = false;
+
+  @Input() title: string;
+  @Input() value: string
+
+  @Output() onStatsChanged = new EventEmitter();
+  @Output() onStatsDeleted = new EventEmitter();
 
   private _subscriptions = new Subscription();
 
   constructor() { }
 
   ngOnInit() {
+    this.playerStats.controls.title.setValue(this.title);
+    this.playerStats.controls.value.setValue(this.value);
     this._subscriptions.add(this.playerStats.valueChanges.subscribe(res => {
-      this.onStatsChanged.emit({
-        title: res.title,
-        value: res.value, 
-      });
+      if (res.title !== this.title || res.value !== this.value) {
+        return this.hasChanges = true;
+      }
+      this.hasChanges = false;
     }));
   }
 
@@ -43,6 +42,13 @@ export class CreatingStatsComponent implements OnInit, OnDestroy {
 
   deleteStats() {
     this.onStatsDeleted.emit();
+  }
+
+  saveStats() {
+    this.onStatsChanged.emit({
+      title: this.playerStats.controls.title.value,
+      value: this.playerStats.controls.value.value,
+    })
   }
 
 }

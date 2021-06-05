@@ -2,57 +2,35 @@
   <mat-card-header class="teams-card__header">
     <mat-form-field appearance="fill">
       <mat-label>Вид спорта</mat-label>
-      <mat-select>
-        <mat-option>
+      <mat-select [formControl]="sportTypeControl">
+        <mat-option *ngFor="let item of sportTypes" [value]="item.code">
+          {{item.title}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </mat-card-header>
-  <mat-card-content>
-    <app-card-item class="teams-card__item" 
-                    [title]="'Natus Vincere'"
-                    [photo]="'https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937'"
+  <mat-card-content class="teams-card__content">
+    <div *ngIf="isDataLoading" class="loading-spiner">
+      <mat-spinner></mat-spinner>
+    </div>
+    <app-info-message *ngIf="!teamList?.length && !isDataLoading" [messageText]="'Команды не найдены'"></app-info-message>
+    <app-card-item *ngFor="let item of teamList" class="teams-card__item" 
+                    [title]="item.teamName"
+                    [photo]="item.teamLogo"
                     [expandable]="true"
+                    [id]="item.teamId"
+                    [memberList]="item.teamMembers"
     ></app-card-item>
-    <app-card-item class="teams-card__item" 
-                    [title]="'Natus Vincere'"
-                    [photo]="'https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937'"
-                    [expandable]="true"
-    ></app-card-item>
-    <app-card-item class="teams-card__item" 
-                    [title]="'Natus Vincere'"
-                    [photo]="'https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937'"
-                    [expandable]="true"
-    ></app-card-item>
-    <app-card-item class="teams-card__item" 
-                    [title]="'Natus Vincere'"
-                    [photo]="'https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937'"
-                    [expandable]="true"
-    ></app-card-item>
-    <app-card-item class="teams-card__item" 
-                    [title]="'Natus Vincere'"
-                    [photo]="'https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937'"
-                    [expandable]="true"
-    ></app-card-item>
-    <app-card-item class="teams-card__item" 
-                    [title]="'Natus Vincere'"
-                    [photo]="'https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937'"
-                    [expandable]="true"
-    ></app-card-item>
-    <app-card-item class="teams-card__item" 
-                    [title]="'Natus Vincere'"
-                    [photo]="'https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937'"
-                    [expandable]="true"
-    ></app-card-item>
-    <app-card-item class="teams-card__item" 
-                    [title]="'Natus Vincere'"
-                    [photo]="'https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937'"
-                    [expandable]="true"
-    ></app-card-item>
-    <app-card-item class="teams-card__item" 
-                    [title]="'Natus Vincere'"
-                    [photo]="'https://img-cdn.hltv.org/teamlogo/kixzGZIb9IYAAv-1vGrGev.svg?ixlib=java-2.1.0&s=8f9986a391fcb1adfbfff021b824a937'"
-                    [expandable]="true"
-    ></app-card-item>
+    <button *ngIf="!noMoreData" 
+            class="teams-card__button" 
+            mat-button color="primary" 
+            [disabled]="isDataLoading" 
+            (click)="loadMore()">
+            Загрузить еще
+    </button>
+    <app-info-message *ngIf="teamList?.length && !isDataLoading && noMoreData" 
+                      [messageText]="'Команд больше не найдено'"
+                      class="info-message">
+    </app-info-message>
   </mat-card-content>
 </mat-card>

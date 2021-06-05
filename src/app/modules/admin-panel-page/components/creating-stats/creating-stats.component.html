@@ -1,9 +1,4 @@
-<mat-card class="statistic-card" [formGroup]="playerStats">
-  <mat-card-header class="statistic-card__header">
-    <button mat-icon-button (click)="deleteStats()">
-      <mat-icon>clear</mat-icon>
-    </button>
-  </mat-card-header>
+<mat-card class="statistic-card" [formGroup]="playerStats" [ngClass]="{'has-changes': hasChanges}">
   <mat-card-content class="statistic-card__body">
     <mat-form-field>
       <mat-label>Пункт статистики</mat-label>
@@ -14,4 +9,12 @@
       <input matInput type="text" formControlName="value">
     </mat-form-field>
   </mat-card-content>
+  <mat-card-footer class="statistic-card__footer">
+    <button mat-icon-button (click)="deleteStats()">
+      <mat-icon>clear</mat-icon>
+    </button>
+    <button mat-icon-button (click)="saveStats()">
+      <mat-icon>done</mat-icon>
+    </button>
+  </mat-card-footer>
 </mat-card>

@@ -6,6 +6,8 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 import { IErrorRequest } from 'src/app/shared/model/api-inteface';
 import { ISportTypes } from '../admin-panel-page/model/edit-panel-interface';
 import { ApiService } from './services/api.service';
+import { WindowService } from '../../shared/services/window.service'
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-page',
@@ -14,13 +16,14 @@ import { ApiService } from './services/api.service';
 })
 export class MainPageComponent implements OnInit, OnDestroy {
 
-  sportTypeList: ISportTypes[];
+  public sportTypeList: ISportTypes[];
 
   private _subscriptions = new Subscription();
 
   constructor(private _router: Router, 
               private _apiService: ApiService, 
-              private _matDialog: MatDialog) { }
+              private _matDialog: MatDialog, 
+              private _windowService: WindowService) { }
 
   ngOnInit() {
     this._router.navigate(['/main']);

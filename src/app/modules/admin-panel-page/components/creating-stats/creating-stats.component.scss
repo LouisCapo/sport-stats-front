@@ -1,11 +1,22 @@
 .statistic-card {
+  background-color: #62ad62;
   &__header {
     display: flex;
     justify-content: flex-end;
+    width: 100%;
   }
   &__body {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    color: black;
   }
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.has-changes {
+  background-color: #fd4c4c !important;
 }

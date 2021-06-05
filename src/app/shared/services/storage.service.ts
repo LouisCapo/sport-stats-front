@@ -30,7 +30,7 @@ constructor(private _router: Router) { }
   }
 
   clearToken() {
-    localStorage.clear();
+    localStorage.removeItem('token');
   }
 
 }

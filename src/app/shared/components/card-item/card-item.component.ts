@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ITeamMember } from 'src/app/modules/teams-page/model/api-interface';
 import { ThemeService } from '../../services/theme.service';
 
 @Component({
@@ -13,7 +14,9 @@ export class CardItemComponent implements OnInit {
 
   @Input() title: string;
   @Input() photo: string;
+  @Input() id: string
   @Input() expandable: boolean = false;
+  @Input() memberList: ITeamMember[];
 
   get icon() {
     return this.extended ? 'expand_less' : 'expand_more'

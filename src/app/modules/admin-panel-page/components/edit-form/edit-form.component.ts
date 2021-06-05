@@ -247,7 +247,20 @@ export class EditFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  savePlayerChanges() {}
+  savePlayerChanges() {
+    const controls = this.editPlayerForm.controls;
+    if (controls.playerId.value && controls.playerId.value.length === 24) {
+      const data = {
+        playerId: controls.playerId.value,
+        playerNick: controls.playerNick.value ? controls.playerNick.value : null,
+        playerTeam: controls.playerTeamId.value ? controls.playerTeamId.value : null,
+        playerPhoto: controls.playerPhoto.value ? controls.playerPhoto.value : null,
+        sportTypeCode: controls.sportTypeCode.value,
+        playerBirthday: controls.playerBirthday.value ? controls.playerBirthday.value : null,
+        playerStats: this.oldPlayerData.playerStats ? this.oldPlayerData.playerStats : null,  
+      }
+    }
+  }
 
   changeStats(event, index) {
     this.oldPlayerData.playerStats[index] = event;

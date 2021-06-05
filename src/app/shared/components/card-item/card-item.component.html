@@ -1,4 +1,4 @@
-<mat-card class="card-item" [ngClass]="{'extended': extended}">
+<mat-card class="card-item" [ngClass]="{'extended': extended, 'card-item-light': isLightThemeActive}">
   <mat-card-content class="card-item__content">
     <div class="card-item__photo">
       <img [src]="photo" alt="">
@@ -10,6 +10,6 @@
     </div>
   </mat-card-content>
   <mat-card-footer class="card-item__footer" *ngIf="expandable">
-    <mat-icon class="card-item__expand-button" aria-hidden="false" (click)="extended = !extended">{{icon}}</mat-icon>
+    <mat-icon [ngClass]="{'card-item__expand-button-light': isLightThemeActive}" class="card-item__expand-button" aria-hidden="false" (click)="extended = !extended">{{icon}}</mat-icon>
   </mat-card-footer>
 </mat-card>

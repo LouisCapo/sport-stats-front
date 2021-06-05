@@ -36,8 +36,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ReactiveFormsModule,
     MatSlideToggleModule,
   ],
-  providers: [ApiService, ThemeService],
+  providers: [ApiService],
   declarations: [InfoMessageComponent, ErrorDialogComponent, NavBarComponent, CardItemComponent, SearchDialogComponent],
-  exports: [InfoMessageComponent, ErrorDialogComponent, NavBarComponent, CardItemComponent]
+  exports: [InfoMessageComponent, ErrorDialogComponent, NavBarComponent, CardItemComponent,]
 })
 export class SharedModule { }

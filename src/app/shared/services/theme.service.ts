@@ -3,7 +3,9 @@ import { BehaviorSubject} from 'rxjs';
 import { ThemeEnum } from '../model/theme.enum'
 import { StorageService } from './storage.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ThemeService {
 
 public onThemeChange = new BehaviorSubject(this._storageService.theme === 'light' ? ThemeEnum.lightTheme : ThemeEnum.darkTheme);

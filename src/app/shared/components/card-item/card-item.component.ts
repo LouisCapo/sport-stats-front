@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-card-item',
@@ -7,7 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CardItemComponent implements OnInit {
 
-  extended = false;
+  public extended = false;
+  public isLightThemeActive;
 
   @Input() title: string;
   @Input() photo: string;
@@ -17,9 +19,12 @@ export class CardItemComponent implements OnInit {
     return this.extended ? 'expand_less' : 'expand_more'
   }
 
-  constructor() { }
+  constructor(private _themeService: ThemeService) { }
 
   ngOnInit() {
+    this._themeService.onThemeChange.subscribe(res => {
+      this.isLightThemeActive = !!res;
+    })
   }
 
 }

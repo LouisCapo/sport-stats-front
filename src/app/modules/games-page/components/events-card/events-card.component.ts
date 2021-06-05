@@ -18,9 +18,9 @@ export class EventsCardComponent implements OnInit, OnDestroy {
   public sportTypeList: ISportTypes[];
   public selectedTab = EnumTabs.UPCOMING;
 
-
   @Input() mathesListTemplate: TemplateRef<any>;
   @Input() noMoreData: boolean;
+  @Input() isDataLoading: boolean;
 
   @Output() onSportTypeChange = new EventEmitter<{sportTypeCode: Number, isCompleted: boolean}>();
   @Output() onLoadMoreButtonPressed = new EventEmitter<{sportTypeCode: Number, isCompleted: boolean, offset: number}>();

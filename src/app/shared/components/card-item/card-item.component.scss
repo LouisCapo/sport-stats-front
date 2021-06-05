@@ -1,6 +1,11 @@
+@import '../../styles/color-schematic.scss';
+
 .card-item {
   margin-top: 20px;
-  background-color: #3c3b3b;
+  background-color: $darkBackground;
+  &-light {
+    background-color: $lightBackground;
+  }
   &__content {
     display: flex;
     align-items: center;
@@ -29,9 +34,12 @@
     display: flex;
     justify-content: center;
     cursor: pointer;
+    &-light:hover {
+      background-color: $lightHoverBackground !important;
+    }
   }
   &__expand-button:hover {
-    background-color: #292828;
+    background-color: $darkHoverBackground;
   }
 }
 

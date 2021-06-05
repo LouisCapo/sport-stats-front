@@ -13,13 +13,15 @@ export class GamesPageComponent implements OnInit {
   public mathesList: IMatchesList[] = [];
   public errorMessage = '';
   public isDataLoading = false;
+  public noDataMore = false;
 
   constructor(private _apiService: ApiService) { }
 
   ngOnInit() {
   }
 
-  onSportTypeChange(data: {sportTypeCode: Number, isCompleted}) {
+  onSportTypeChange(data: {sportTypeCode: Number, isCompleted: boolean}) {
+    this.noDataMore = false;
     this.mathesList = [];
     this.isDataLoading = true;
     this._apiService.getMatchesList(data.sportTypeCode, data.isCompleted).subscribe(res => {
@@ -31,6 +33,16 @@ export class GamesPageComponent implements OnInit {
       this.errorMessage = (res as IErrorRequest).error.msg;
       this.mathesList = [];
       this.isDataLoading = false;
+    })
+  }
+
+  loadMore(data: {sportTypeCode: Number, isCompleted: boolean, offset: number}) {
+    this.noDataMore = false;
+    this._apiService.getMatchesList(data.sportTypeCode, data.isCompleted, data.offset.toString()).subscribe(res => {
+      if ((res as IMatchListResponse).data) {
+        return this.mathesList = this.mathesList.concat((res as IMatchListResponse).data);
+      }
+      this.noDataMore = true;
     })
   }
 

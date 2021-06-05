@@ -16,8 +16,8 @@ constructor(@Inject(ENV_TOKEN) private _environments,
     return this._http.get<ISportTypes[] | IErrorRequest>(`${this._environments.apiUrl}/api/sport/sport-list`);
   }
 
-  getMatchesList(sportTypeCode: Number, isComplited: Boolean): Observable<IMatchListResponse | IErrorRequest> {
-    const params = new HttpParams().set('sportTypeCode', sportTypeCode.toString()).set('isCompleted', isComplited.toString());
+  getMatchesList(sportTypeCode: Number, isComplited: Boolean, offset?: string): Observable<IMatchListResponse | IErrorRequest> {
+    const params = new HttpParams().set('sportTypeCode', sportTypeCode.toString()).set('isCompleted', isComplited.toString()).set('offset', offset);
     return this._http.get<IMatchListResponse | IErrorRequest>(`${this._environments.apiUrl}/api/games/games-list`, { params });
   }
 

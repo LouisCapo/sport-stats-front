@@ -2,15 +2,21 @@
   <div *ngIf="isDataLoading" class="loading-spiner">
     <mat-spinner></mat-spinner>
   </div>
-  <app-info-message *ngIf="errorMessage"
-                    class="error-message"
-                    [messageText]="errorMessage">
-  </app-info-message>
+  <div *ngIf="errorMessage && !isDataLoading" class="error-message">
+    <app-info-message [messageText]="errorMessage">
+    </app-info-message>
+  </div>
   <app-event-item *ngFor="let item of mathesList"
                   [matchData]="item">
-</app-event-item>
+  </app-event-item>
+  <div *ngIf="noDataMore" class="error-message">
+    <app-info-message [messageText]="'Больше матчей не найдено!'">
+    </app-info-message>
+  </div>
 </ng-template>
 
-<app-events-card (onSportTypeChange)="onSportTypeChange($event)" 
-                [mathesListTemplate]="mathesListTemplate">
+<app-events-card (onSportTypeChange)="onSportTypeChange($event)"
+                (onLoadMoreButtonPressed)="loadMore($event)"
+                [mathesListTemplate]="mathesListTemplate"
+                [noMoreData]="noDataMore">
 </app-events-card>

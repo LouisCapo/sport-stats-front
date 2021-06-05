@@ -18,11 +18,15 @@ export class EventsCardComponent implements OnInit, OnDestroy {
   public sportTypeList: ISportTypes[];
   public selectedTab = EnumTabs.UPCOMING;
 
+
   @Input() mathesListTemplate: TemplateRef<any>;
+  @Input() noMoreData: boolean;
 
   @Output() onSportTypeChange = new EventEmitter<{sportTypeCode: Number, isCompleted: boolean}>();
+  @Output() onLoadMoreButtonPressed = new EventEmitter<{sportTypeCode: Number, isCompleted: boolean, offset: number}>();
 
   private _subscription = new Subscription();
+  private _offset = 1;
 
   constructor(private _apiService: ApiService, 
               private _matDialog: MatDialog) { }
@@ -51,8 +55,14 @@ export class EventsCardComponent implements OnInit, OnDestroy {
   }
 
   onTabChange(event) {
+    this._offset = 1;
     this.selectedTab = event.index;
     this.onSportTypeChange.emit({sportTypeCode: (this.selectedSportType.value as Number), isCompleted: !!this.selectedTab});
+  }
+
+  loadMore() {
+    this._offset++;
+    this.onLoadMoreButtonPressed.emit({sportTypeCode: (this.selectedSportType.value as Number), isCompleted: !!this.selectedTab, offset: this._offset});
   }
 
 }

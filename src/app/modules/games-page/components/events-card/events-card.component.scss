@@ -14,10 +14,16 @@
   margin-top: 20px;
   width: 70%;
   max-height: 86vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   overflow: auto;
   &__header {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  &__item {
+    width: 100%;
   }
 }

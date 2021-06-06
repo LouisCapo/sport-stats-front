@@ -1,7 +1,8 @@
 <mat-card class="card-item" [ngClass]="{'card-item-light': isLightThemeActive}">
   <mat-card-content class="card-item__content">
     <div class="card-item__photo">
-      <img [src]="photo ? photo : '../../../../../assets/photos/team-photo.png'" alt="">
+      <img *ngIf="photo" [src]="photo" alt="">
+      <mat-icon class="icon" *ngIf="!photo" aria-hidden="false">groups</mat-icon>
     </div>
     <div class="card-item__info">
       <span [routerLink]="'/team/' + id" class="card-item__name">

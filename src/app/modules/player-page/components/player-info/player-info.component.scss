@@ -1,5 +1,8 @@
 .player-card {
 	margin-top: 50px;
+	@media (max-width: 650px){
+		margin-top: 0;
+	}
 	&__header {
 		display: flex;
 		justify-content: center;

@@ -12,6 +12,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { ApiService } from './services/api.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     MatButtonModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
 
   ],
   providers:[ApiService],

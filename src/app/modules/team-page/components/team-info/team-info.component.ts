@@ -9,6 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
 import { ErrorsService } from 'src/app/shared/services/errors.service';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 
 @Component({
   selector: 'app-team-info',
@@ -16,10 +17,12 @@ import { ErrorsService } from 'src/app/shared/services/errors.service';
   styleUrls: ['./team-info.component.scss'],
 })
 export class TeamInfoComponent implements OnInit, OnDestroy {
-  teamId: string;
-  teamInfo: ITeam;
-  error: boolean;
-  loading = true;
+
+  public teamId: string;
+  public teamInfo: ITeam;
+  public error: boolean;
+  public loading = true;
+  public isLightThemeActive: boolean;
 
   private _subscription = new Subscription();
 
@@ -29,6 +32,7 @@ export class TeamInfoComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _matDialog: MatDialog,
     private _errorService: ErrorsService,
+    private _themeService: ThemeService
   ) {}
 
   ngOnInit() {
@@ -65,6 +69,9 @@ export class TeamInfoComponent implements OnInit, OnDestroy {
         );
       })
     );
+    this._subscription.add(this._themeService.onThemeChange.subscribe(res => {
+      this.isLightThemeActive = !!res;
+    }))
   }
 
   ngOnDestroy() {

@@ -5,11 +5,21 @@
     <mat-card-content>
         <div class="team-card__team-info">
           <div class="team-card__team-logo">
-            <img [src]="teamInfo.teamLogo ? teamInfo.teamLogo : '../../../../../assets/photos/team-photo.png'" alt="">
+            <img *ngIf="teamInfo.teamLogo" [src]="teamInfo.teamLogo" alt="">
+            <mat-icon class="icon" *ngIf="!teamInfo.teamLogo" aria-hidden="false">groups</mat-icon>
           </div>
           <div class="team-card__about-team">
             <span class="team-card__team-name">{{ teamInfo.teamName }}</span>
-            <div class="team-card__team-line-up">
+            <div class="team-card__member-list">
+              <div class="team-card__team-member" 
+                  *ngFor="let teamMember of teamInfo.teamMembers" 
+                  [routerLink]="getPlayerPageLink(teamMember)"
+                  [ngClass]="{'team-card__team-member-light': isLightThemeActive}">
+                <img [src]="teamMember.memberPhoto">
+                <div class="team-card__member-title">{{ teamMember.memberNick ? teamMember.memberNick : teamMember.memberName }}</div>
+              </div>
+            </div>
+            <!-- <div class="team-card__team-line-up">
               <div *ngFor="let teamMember of teamInfo.teamMembers" 
                   [routerLink]="getPlayerPageLink(teamMember)" 
                   class="team-card__player-card">
@@ -20,7 +30,7 @@
                   <span>{{ teamMember.memberNick }}</span>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="team-card__stats-info">
               <div class="team-card__stats-row">
                 <span class="team-card__stats-title">Вид спорта:</span>
@@ -46,14 +56,16 @@
             <div *ngFor="let match of teamInfo.lastMatches" class="team-card__last-match-row">
               <div [routerLink]="getTeamPageLink(match.firstTeam)" class="team-card__last-match-team team-card__last-match-item">
                 <div class="team-card__last-match-team-logo">
-                  <img src="{{ match.firstTeam.teamLogo ? match.firstTeam.teamLogo : '../../../../../assets/photos/team-photo.png' }}" alt="">
+                  <img *ngIf="match.firstTeam.teamLogo" [src]="match.firstTeam.teamLogo" alt="">
+                  <mat-icon class="icon" *ngIf="!match.firstTeam.teamLogo" aria-hidden="false">groups</mat-icon>
                 </div>
                 <span class="team-card__last-match-team-name">{{ match.firstTeam.teamName }}</span>
               </div>
               <span class="team-card__last-match-score team-card__last-match-item">{{ match.score.firstTeam ? match.score.firstTeam : '0' }}:{{match.score.secondTeam}}</span>
               <div [routerLink]="getTeamPageLink(match.secondTeam)" class="team-card__last-match-team team-card__last-match-item">
                 <div class="team-card__last-match-team-logo">
-                  <img src="{{ match.secondTeam.teamLogo ? match.secondTeam.teamLogo : '../../../../../assets/photos/team-photo.png' }}" alt="">
+                  <img *ngIf="match.secondTeam.teamLogo" [src]="match.secondTeam.teamLogo" alt="">
+                  <mat-icon class="icon" *ngIf="!match.secondTeam.teamLogo" aria-hidden="false">groups</mat-icon>
                 </div>
                 <span class="team-card__last-match-team-name">{{ match.secondTeam.teamName ? match.secondTeam.teamName : '0' }}</span>
               </div>

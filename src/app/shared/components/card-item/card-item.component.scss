@@ -16,6 +16,9 @@
       height: 50px;
       width: 50px;
     }
+    .icon {
+      font-size: 3em;
+    }
   }
   &__name {
     width: 100%;
@@ -50,7 +53,6 @@
     justify-content: space-around;
     flex-wrap: wrap;
     &__item {
-      border: 1px dashed #555555;
       width: 150px;
       padding: 5px;
       border-radius: 5px;
@@ -59,16 +61,17 @@
       align-items: center;
       flex-direction: column;
       margin-bottom: 5px;
+      background: linear-gradient(320deg, #0b1d3a, #4a5d84);
       img {
         width: 50px;
         height: 50px;
       }
     }
     &__item:hover {
-      background-color: $darkHoverBackground;
+      transform: scale(1.2);
     }
-    &__item-light:hover {
-      background-color: $lightHoverBackground;
+    &__item-light {
+      background: linear-gradient(320deg, #a2c6ef, #e9ecf5);
     }
   }
 }

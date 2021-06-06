@@ -21,7 +21,7 @@
                     [id]="item.teamId"
                     [memberList]="item.teamMembers"
     ></app-card-item>
-    <button *ngIf="!noMoreData" 
+    <button *ngIf="!noMoreData && teamList?.length" 
             class="teams-card__button" 
             mat-button color="primary" 
             [disabled]="isDataLoading" 

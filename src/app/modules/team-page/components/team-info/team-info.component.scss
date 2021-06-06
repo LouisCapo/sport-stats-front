@@ -1,5 +1,11 @@
+@import '../../../../shared/styles/color-schematic.scss';
+
 .team-card {
 	margin-top: 50px;
+	max-width: 800px;
+	@media (max-width: 820px){
+		margin-top: 0;
+	}
 	&__error-message{
 		width: 100%;
 	}
@@ -7,13 +13,18 @@
 		&-info {
 			width: auto;
 			display: flex;
-			justify-content: center;
+			justify-content: space-around;
 			flex-wrap: wrap;
 		}
 		&-logo {
 			img {
 				width: 200px;
 				height: 200px;
+			}
+			.icon {
+				width: 200px;
+				height: 200px;
+				font-size: 14em;
 			}
 		}
 		&-name {
@@ -32,50 +43,88 @@
 		align-items: center;
 		flex-direction: column;
 	}
-	&__player {
-		&-card {
-			width: 100px;
-			height: 130px;
-			border: 1px dashed #555555;
-			border-right: none;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			flex-direction: column;
-		}
-		&-card:first-child {
-			border-radius: 10px 0 0 10px;
-		}
-		&-card:last-child {
-			border-right: 1px dashed #555555;
-			border-radius: 0 10px 10px 0;
-		}
-		&-card:hover {
-			box-shadow: 0 0 10px #b0b0b0;
-		}
-	}
-	&__player {
-		&-photo {
-			img {
-				width: 100%;
-				height: 100%;
-			}
-		}
-		&-nickname {
-			width: 100%;
-			height: 30px;
-			border-top: 1px dashed #555555;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-	}
-	&__team-line-up {
+	&__member-list {
+		width: 100%;
 		display: flex;
-		justify-content: center;
+		justify-content: space-around;
 		align-items: center;
 		flex-wrap: wrap;
 	}
+	&__team-member {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		border-radius: 10px;
+		width: 100px;
+		height: 120px;
+		padding: 5px;
+		margin-bottom: 10px;
+		background: linear-gradient(320deg, #0b1d3a, #4a5d84);
+		img {
+			width: 100%;
+			height: 100%;
+		}
+		&-light {
+			background: linear-gradient(320deg, #a2c6ef, #e9ecf5);
+		}
+	}
+	&__team-member:not(:last-child) {
+		margin-right: 5px;
+	}
+	&__team-member:hover {
+    transform: scale(1.2);
+	}
+	&__member-title {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	// &__team-line-up {
+	// 	width: 100%;
+	// 	display: flex;
+	// 	justify-content: space-around;
+	// 	align-items: center;
+	// 	flex-wrap: wrap;
+	// 	flex-direction: row;
+	// }
+	// &__player {
+	// 	&-card {
+	// 		width: 100px;
+	// 		height: 130px;
+	// 		border: 1px dashed #555555;
+	// 		border-right: none;
+	// 		display: flex;
+	// 		justify-content: center;
+	// 		align-items: center;
+	// 		flex-direction: column;
+	// 	}
+	// 	&-card:first-child {
+	// 		border-radius: 10px 0 0 10px;
+	// 	}
+	// 	&-card:last-child {
+	// 		border-right: 1px dashed #555555;
+	// 		border-radius: 0 10px 10px 0;
+	// 	}
+	// 	&-card:hover {
+	// 		box-shadow: 0 0 10px #b0b0b0;
+	// 	}
+	// 	&-photo {
+	// 		img {
+	// 			width: 100%;
+	// 			height: 100%;
+	// 		}
+	// 	}
+	// 	&-nickname {
+	// 		width: 100%;
+	// 		height: 30px;
+	// 		border-top: 1px dashed #555555;
+	// 		display: flex;
+	// 		justify-content: center;
+	// 		align-items: center;
+	// 	}
+	// }
 	&__stats {
 		&-row {
 			font-size: 17px;
@@ -108,6 +157,7 @@
 	}
 	&__last-match {
 		&-row {
+			width: 80% !important;
 			padding: 5px;
 			border-radius: 10px;
 			display: flex;
@@ -129,6 +179,9 @@
 				img {
 					width: 20px;
 					height: 20px;
+				}
+				.icon {
+					font-size: 2em;
 				}
 				margin-right: 10px;
 			}

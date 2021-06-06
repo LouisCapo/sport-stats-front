@@ -2,7 +2,8 @@
   <mat-card-content class="event-card__content">
     <div [routerLink]="getTeamPageLink(data.firstTeam)" class="event-card__team event-card__item" [ngClass]="{'event-card__team-light': isLightThemeSelected}">
       <div class="event-card__logo event-card__team-item">
-        <img [src]="data.firstTeam.teamLogo ? data.firstTeam.teamLogo : '../../../../../assets/photos/team-photo.png'">
+        <img *ngIf="data.firstTeam.teamLogo" [src]="data.firstTeam.teamLogo">
+        <mat-icon class="icon" *ngIf="!data.firstTeam.teamLogo" aria-hidden="false">groups</mat-icon>
       </div>
       <span class="event-card__team-item">{{data.firstTeam.teamName}}</span>
     </div>
@@ -12,7 +13,8 @@
     </div>
     <div [routerLink]="getTeamPageLink(data.secondTeam)" class="event-card__team event-card__item" [ngClass]="{'event-card__team-light': isLightThemeSelected}">
       <div class="event-card__logo event-card__team-item">
-        <img [src]="data.secondTeam.teamLogo ? data.secondTeam.teamLogo : '../../../../../assets/photos/team-photo.png'">
+        <img *ngIf="data.secondTeam.teamLogo" [src]="data.secondTeam.teamLogo">
+        <mat-icon class="icon" *ngIf="!data.secondTeam.teamLogo" aria-hidden="false">groups</mat-icon>
       </div>
       <span class="event-card__team-item">{{data.secondTeam.teamName}}</span>
     </div>

@@ -3,7 +3,7 @@
   z-index: 100;
   width: auto;
   height: 93vh;
-  background-color: #c2185b;
+  background-color: #7b1fa2;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -34,7 +34,7 @@
     }
   }
   &__item:hover {
-    background-color: #9e0441;
+    background-color: #5b107b;
     cursor: pointer;
   }
   &__open-button {
@@ -47,10 +47,10 @@
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     .material-icons {
-      color: #c2185b;
+      color: #7b1fa2;
     }
     .side-bar__item-desc {
-      color: #c2185b;
+      color: #7b1fa2;
     }
   }
   &__selected-item:hover {

@@ -17,7 +17,7 @@
             class="member-list__item" 
             [ngClass]="{'member-list__item-light': isLightThemeActive}"
             [routerLink]="'/player/' + item.playerId">
-        <img [src]="item.playerPhoto">
+        <img *ngIf="item.playerPhoto" [src]="item.playerPhoto">
         <span>{{item.playerName}}</span>
       </div>
     </div>

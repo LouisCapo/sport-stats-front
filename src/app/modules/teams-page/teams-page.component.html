@@ -23,7 +23,7 @@
     ></app-card-item>
     <button *ngIf="!noMoreData && teamList?.length" 
             class="teams-card__button" 
-            mat-button color="primary" 
+            mat-raised-button color="primary" 
             [disabled]="isDataLoading" 
             (click)="loadMore()">
             Загрузить еще

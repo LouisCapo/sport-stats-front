@@ -17,7 +17,7 @@
       <ng-container *ngTemplateOutlet="mathesListTemplate"></ng-container>
     </mat-tab>
   </mat-tab-group>
-  <mat-card-footer *ngIf="!noMoreData">
-    <button mat-button color="primary" [disabled]="isDataLoading" (click)="loadMore()">Загрузить еще</button>
+  <mat-card-footer class="games-card__footer" *ngIf="!noMoreData">
+    <button mat-raised-button color="primary" [disabled]="isDataLoading" (click)="loadMore()">Загрузить еще</button>
   </mat-card-footer>
 </mat-card>

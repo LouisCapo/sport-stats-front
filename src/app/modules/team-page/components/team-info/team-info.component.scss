@@ -51,6 +51,7 @@
 		flex-wrap: wrap;
 	}
 	&__team-member {
+		cursor: pointer;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -60,20 +61,25 @@
 		height: 120px;
 		padding: 5px;
 		margin-bottom: 10px;
-		background: linear-gradient(320deg, #0b1d3a, #4a5d84);
+		transition: transform 0.2s;
+		background: linear-gradient(320deg, #8b2bb3, #50076f);
+		box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+		color: #fff;
 		img {
 			width: 100%;
 			height: 100%;
 		}
 		&-light {
-			background: linear-gradient(320deg, #a2c6ef, #e9ecf5);
+			background: linear-gradient(320deg, #4858c7, #152177);
 		}
 	}
 	&__team-member:not(:last-child) {
 		margin-right: 5px;
 	}
 	&__team-member:hover {
-    transform: scale(1.2);
+		z-index: 5;
+    transform: scale(1.3);
+		box-shadow: 0 15px 30px rgba(0,0,0,0.7)
 	}
 	&__member-title {
 		width: 100%;

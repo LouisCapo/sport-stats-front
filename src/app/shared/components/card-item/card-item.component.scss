@@ -53,6 +53,7 @@
     justify-content: space-around;
     flex-wrap: wrap;
     &__item {
+      cursor: pointer;
       width: 150px;
       padding: 5px;
       border-radius: 5px;
@@ -61,17 +62,22 @@
       align-items: center;
       flex-direction: column;
       margin-bottom: 5px;
-      background: linear-gradient(320deg, #0b1d3a, #4a5d84);
+      transition: transform 0.2s;
+      color: #fff;
+      background: linear-gradient(320deg, #8b2bb3, #50076f);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.5);
       img {
         width: 50px;
         height: 50px;
       }
     }
     &__item:hover {
+      z-index: 5;
       transform: scale(1.2);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.5)
     }
     &__item-light {
-      background: linear-gradient(320deg, #a2c6ef, #e9ecf5);
+      background: linear-gradient(320deg, #4858c7, #152177);
     }
   }
 }

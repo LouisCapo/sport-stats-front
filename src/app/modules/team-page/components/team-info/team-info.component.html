@@ -15,7 +15,7 @@
                   *ngFor="let teamMember of teamInfo.teamMembers" 
                   [routerLink]="getPlayerPageLink(teamMember)"
                   [ngClass]="{'team-card__team-member-light': isLightThemeActive}">
-                <img [src]="teamMember.memberPhoto">
+                <img *ngIf="teamMember.memberPhoto" [src]="teamMember.memberPhoto">
                 <div class="team-card__member-title">{{ teamMember.memberNick ? teamMember.memberNick : teamMember.memberName }}</div>
               </div>
             </div>

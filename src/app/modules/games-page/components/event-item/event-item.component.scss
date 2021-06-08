@@ -23,26 +23,33 @@
       width: 30%;
     }
   }
-  &__logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    img {
-      width: 50px;
-      height: 50px;
-    }
-  }
   &__team {
     border-radius: 20px;
     padding: 5px;
     cursor: pointer;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     border: 1px dashed #555555;
     &-light:hover {
       background-color: #c7c6c6 !important;
+    }
+    &-logo {
+      width: 35%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+    &-name {
+      width: 65%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
   &__team:hover {

@@ -3,7 +3,7 @@
     <div [routerLink]="[getTeamPage(matchData.firstTeam)]" 
           class="event-card__team event-card__content-item"
           [ngClass]="{'event-card__team-light': isLightThemeSelected}">
-      <div class="event-card__logo">
+      <div class="event-card__team-logo">
         <img [src]="matchData.firstTeam.teamLogo ? matchData.firstTeam.teamLogo : '../../../../../assets/photos/team-photo.png'">
       </div>
       <span class="event-card__team-name">
@@ -18,7 +18,7 @@
     <div [routerLink]="[getTeamPage(matchData.secondTeam)]" 
           class="event-card__team event-card__content-item"
           [ngClass]="{'event-card__team-light': isLightThemeSelected}">
-      <div class="event-card__logo">
+      <div class="event-card__team-logo">
         <img [src]="matchData.secondTeam.teamLogo ? matchData.secondTeam.teamLogo : '../../../../../assets/photos/team-photo.png'">
       </div>
       <span class="event-card__team-name">

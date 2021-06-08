@@ -11,7 +11,6 @@
       <div>
         <a mat-list-item [routerLink]="['/main']" (click)="drawer.toggle()">Главная</a>
         <a mat-list-item [routerLink]="['/games']" (click)="drawer.toggle()">Матчи</a>
-        <a mat-list-item [routerLink]="['/players']" (click)="drawer.toggle()">Игроки</a>
         <a mat-list-item [routerLink]="['/teams']" (click)="drawer.toggle()">Команды</a>
       </div>
       <section class="nav-list__toggle">
@@ -38,7 +37,6 @@
         <span class="header-content__title" [routerLink]="['/main']">Sport Stats</span>
         <ul *ngIf="!(isHandset$ | async)" class="header-content__nav-bar">
           <li class="header-content__nav-item"><a [routerLink]="['/games']">Матчи</a></li>
-          <li class="header-content__nav-item"><a [routerLink]="['/players']">Игроки</a></li>
           <li class="header-content__nav-item"><a [routerLink]="['/teams']">Команды</a></li>
           <li class="header-content__nav-item" style="font-size: 5px;">
             <mat-form-field>

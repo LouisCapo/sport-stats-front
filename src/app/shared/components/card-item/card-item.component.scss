@@ -12,6 +12,8 @@
   }
   &__photo {
     img {
+      border: 1px dashed #555555;
+      padding: 3px;
       border-radius: 50%;
       height: 50px;
       width: 50px;
@@ -55,6 +57,7 @@
     &__item {
       cursor: pointer;
       width: 150px;
+      height: 80px;
       padding: 5px;
       border-radius: 5px;
       display: flex;
@@ -67,6 +70,8 @@
       background: linear-gradient(320deg, #8b2bb3, #50076f);
       box-shadow: 0 5px 10px rgba(0,0,0,0.5);
       img {
+        object-fit: cover;
+        border-radius: 10px;
         width: 50px;
         height: 50px;
       }

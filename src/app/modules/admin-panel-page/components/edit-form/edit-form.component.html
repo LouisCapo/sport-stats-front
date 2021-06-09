@@ -126,7 +126,7 @@
         </button>
       </div>
     </div>
-    <div *ngIf="oldPlayerData && editPlayerForm.controls.playerId" class="page-section__edit-form">
+    <div *ngIf="oldPlayerData && !editPlayerForm.controls.playerId.errors" class="page-section__edit-form">
       <div class="page-section__item page-section__photo">
         <img [src]="oldPlayerData.playerPhoto ? oldPlayerData.playerPhoto : '../../../../../assets/photos/player-photo.png'" alt="">
       </div>
@@ -437,12 +437,11 @@
 </ng-template>
 
 <ng-template #teamEdit>
-  <div class="page-section" [formGroup]='editPlayerForm'>
+  <div class="page-section" [formGroup]='editTeamForm'>
     <div class="page-section__row-bar page-section__item">
       <mat-form-field class="page-section__item">
         <mat-label>ID команды</mat-label>
-        <input formControlName="playerId"
-                type="email"
+        <input formControlName="teamId"
                 matInput
                 placeholder="XXXXXXXXXXXXXXXXXXXXXXXX"
                 maxlength="24"
@@ -452,12 +451,26 @@
         <button style="width: 100%"
                 mat-raised-button
                 color="primary"
-                [disabled]="!editPlayerForm.controls.playerId.value || !!editPlayerForm.controls.playerId.errors"
-                (click)="searchPlayer()"
+                [disabled]="!editTeamForm.controls.teamId.value || !!editTeamForm.controls.teamId.errors"
+                (click)="searchTeam()"
                 >
           Найти
         </button>
       </div>
+    </div>
+    <div *ngIf="oldTeamData && !editTeamForm.controls.teamId.errors" class="page-section__edit-form">
+      <div class="page-section__item page-section__photo">
+        <img [src]="oldTeamData.teamLogo ? oldTeamData.teamLogo : '../../../../../assets/photos/player-photo.png'" alt="">
+      </div>
+      <mat-form-field class="page-section__item">
+        <mat-label>Название команды</mat-label>
+        <input
+          type="text"
+          matInput
+          maxlength="50"
+          placeholder="Название команды"
+        />
+      </mat-form-field>
     </div>
   </div>
 </ng-template>

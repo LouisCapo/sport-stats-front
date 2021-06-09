@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { IErrorRequest } from 'src/app/shared/model/api-inteface';
 import { ENV_TOKEN } from 'src/environments/environment';
 import { IPlayer } from '../../player-page/model/player-interfaces';
+import { ITeam, ITeamInfo } from '../../team-page/model/team-interfaces';
 import { INewNews, INewPlayer, INewObjectId, ISportTypes, INewMatch, INewTeam } from '../model/edit-panel-interface'
 
 @Injectable()
@@ -40,6 +41,15 @@ export class ApiService {
 
   createTeam(teamInfo: INewTeam): Observable<INewObjectId | IErrorRequest> {
     return this._http.post<INewObjectId | IErrorRequest>(`${this._environments.apiUrl}/api/teams/create-team`, teamInfo);
+  }
+
+  editPlayer(playerInfo): Observable<INewObjectId | IErrorRequest>{
+    return this._http.put<INewObjectId | IErrorRequest>(`${this._environments.apiUrl}/api/players/edit-player`, playerInfo);
+  }
+
+  getTeamById(id: string): Observable<ITeam | IErrorRequest> {
+    const params = new HttpParams().set('id', id);
+    return this._http.get<ITeam | IErrorRequest>(`${this._environments.apiUrl}/api/teams/get-team`, { params });
   }
 
 }

@@ -15,30 +15,18 @@
                   *ngFor="let teamMember of teamInfo.teamMembers" 
                   [routerLink]="getPlayerPageLink(teamMember)"
                   [ngClass]="{'team-card__team-member-light': isLightThemeActive}">
-                <img *ngIf="teamMember.memberPhoto" [src]="teamMember.memberPhoto">
+                <img class="team-card__member-photo" *ngIf="teamMember.memberPhoto" [src]="teamMember.memberPhoto">
                 <div class="team-card__member-title">{{ teamMember.memberNick ? teamMember.memberNick : teamMember.memberName }}</div>
               </div>
             </div>
-            <!-- <div class="team-card__team-line-up">
-              <div *ngFor="let teamMember of teamInfo.teamMembers" 
-                  [routerLink]="getPlayerPageLink(teamMember)" 
-                  class="team-card__player-card">
-                <div class="team-card__player-photo">
-                  <img [src]="teamMember.memberPhoto" alt="">
-                </div>
-                <div class="team-card__player-nickname">
-                  <span>{{ teamMember.memberNick }}</span>
-                </div>
-              </div>
-            </div> -->
             <div class="team-card__stats-info">
               <div class="team-card__stats-row">
                 <span class="team-card__stats-title">Вид спорта:</span>
                   <span class="team-card__stats-value">{{ teamInfo.sportType.sportTypeTitle }}</span>
               </div>
-              <div *ngIf="teamInfo.memberAverageAge " class="team-card__stats-row">
+              <div *ngIf="teamInfo.memberAverageAge" class="team-card__stats-row">
                 <span class="team-card__stats-title">Средний возраст игроков:</span>
-                  <span class="team-card__stats-value">{{ teamInfo.memberAverageAge }}</span>
+                  <span class="team-card__stats-value">{{ teamInfo.memberAverageAge | number : '1.2-2'}}</span>
               </div>
               <div *ngFor="let teamStats of teamInfo.teamStats">
                 <div class="team-card__stats-row">
@@ -52,7 +40,7 @@
         <mat-card-footer>
           <div class="team-card__last-matches">
             <span class="team-card__last-match-title">Последние матчи:</span>
-            <app-info-message *ngIf="!teamInfo.lastMatches" [messageText]="'Нет актуальной инфорамации по последним матчам ' + teamInfo.teamName"></app-info-message>
+            <app-info-message *ngIf="!teamInfo.lastMatches.length" [messageText]="'Нет актуальной инфорамации по последним матчам ' + teamInfo.teamName"></app-info-message>
             <div *ngFor="let match of teamInfo.lastMatches" class="team-card__last-match-row">
               <div [routerLink]="getTeamPageLink(match.firstTeam)" class="team-card__last-match-team team-card__last-match-item">
                 <div class="team-card__last-match-team-logo">

@@ -11,6 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IPlayer } from 'src/app/modules/player-page/model/player-interfaces';
 import { AdminPanelSections } from '../../admin-panel-enum.enum';
 import { NavMenuService } from '../../services/nav-menu.service';
+import { ITeam } from 'src/app/modules/team-page/model/team-interfaces';
 
 @Component({
   selector: 'app-edit-form',
@@ -19,12 +20,13 @@ import { NavMenuService } from '../../services/nav-menu.service';
 })
 export class EditFormComponent implements OnInit, OnDestroy {
 
-  selectedSection = AdminPanelSections.PLAYER;
-  panelSections = AdminPanelSections;
-  loading = true;
-  error = false;
-  sportTypesList: ISportTypes[];
-  oldPlayerData: IPlayer;
+  public selectedSection = AdminPanelSections.PLAYER;
+  public panelSections = AdminPanelSections;
+  public loading = true;
+  public error = false;
+  public sportTypesList: ISportTypes[];
+  public oldPlayerData: IPlayer;
+  public oldTeamData: ITeam;
 
   newPlayerForm = new FormGroup({
     playerName: new FormControl('', [
@@ -103,6 +105,14 @@ export class EditFormComponent implements OnInit, OnDestroy {
       Validators.required,
     ]),
     teamLogo: new FormControl(''),
+  })
+
+  editTeamForm = new FormGroup({
+    teamId: new FormControl('', [
+      Validators.required,
+      Validators.minLength(24),
+      Validators.maxLength(24),
+    ])
   })
 
   get errorMessage(): string {
@@ -252,13 +262,28 @@ export class EditFormComponent implements OnInit, OnDestroy {
     if (controls.playerId.value && controls.playerId.value.length === 24) {
       const data = {
         playerId: controls.playerId.value,
+        playerName: controls.playerName.value,
         playerNick: controls.playerNick.value ? controls.playerNick.value : null,
-        playerTeam: controls.playerTeamId.value ? controls.playerTeamId.value : null,
+        playerTeamId: controls.playerTeamId.value ? controls.playerTeamId.value : null,
         playerPhoto: controls.playerPhoto.value ? controls.playerPhoto.value : null,
         sportTypeCode: controls.sportTypeCode.value,
         playerBirthday: controls.playerBirthday.value ? controls.playerBirthday.value : null,
         playerStats: this.oldPlayerData.playerStats ? this.oldPlayerData.playerStats : null,  
       }
+      this._apiService.editPlayer(data).subscribe(res => {
+        console.log(res);
+      })
+    }
+  }
+
+  searchTeam() {
+    const controls = this.editTeamForm.controls;
+    if (!controls.teamId.errors) {
+      this._apiService.getTeamById(controls.teamId.value).subscribe(res => {
+        if ((res as ITeam).teamId) {
+          this.oldTeamData = res as ITeam;
+        }
+      })
     }
   }
 

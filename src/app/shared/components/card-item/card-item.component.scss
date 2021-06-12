@@ -12,6 +12,7 @@
   }
   &__photo {
     img {
+      object-fit: cover;
       border: 1px dashed #555555;
       padding: 3px;
       border-radius: 50%;

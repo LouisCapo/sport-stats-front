@@ -65,7 +65,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
   createNewsForm = new FormGroup({
     newsTitle: new FormControl('', [
       Validators.required,
-      Validators.maxLength(50),
+      Validators.maxLength(100),
     ]),
     newsSportTypeCode: new FormControl(''),
     newsSubTitle: new FormControl('', [

@@ -7,7 +7,7 @@ interface Environment {
 
 export const environment: Environment = {
   production: true,
-  apiUrl: 'http://localhost:3000'
+  apiUrl: 'http://45.138.24.144:3000'
 };
 
 export const ENV_TOKEN = new InjectionToken<Environment>('app.environment.token');

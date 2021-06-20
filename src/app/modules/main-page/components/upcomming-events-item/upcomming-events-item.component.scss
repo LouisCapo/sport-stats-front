@@ -13,6 +13,8 @@
 		flex-direction: column;
 	}
 	&__team {
+		transition: transform 0.08s;
+		border-radius: 10px;
 		&-light:hover {
 			background-color: $lightHoverBackground!important;
 		}
@@ -35,6 +37,7 @@
 	}
 	&__team:hover {
 		background-color: $darkHoverBackground;
+		transform: scale(1.02);
 	}
 	&__time {
 		display: flex;

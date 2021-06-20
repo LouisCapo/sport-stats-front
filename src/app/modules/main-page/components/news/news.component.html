@@ -12,8 +12,7 @@
   </div>
   <div class="news-list">
     <div *ngFor="let item of newsList" class="news-list__card-item">
-      <app-news-item 
-                    [title]="item.newsTitle" 
+      <app-news-item [title]="item.newsTitle" 
                     [subTitle]="item.newsSubtitle"
                     [date]="item.newsDate"
                     [photo]="item.newsPhoto"

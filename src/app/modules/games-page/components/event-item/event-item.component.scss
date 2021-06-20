@@ -32,6 +32,7 @@
     align-items: center;
     flex-wrap: wrap;
     border: 1px dashed #555555;
+    transition: transform 0.08s;
     &-light:hover {
       background-color: #c7c6c6 !important;
     }
@@ -54,6 +55,7 @@
   }
   &__team:hover {
     background-color: #292828;
+    transform: scale(1.02);
   }
   &__result {
     cursor: pointer;

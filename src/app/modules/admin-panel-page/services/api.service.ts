@@ -5,7 +5,7 @@ import { IErrorRequest } from 'src/app/shared/model/api-inteface';
 import { ENV_TOKEN } from 'src/environments/environment';
 import { IPlayer } from '../../player-page/model/player-interfaces';
 import { ITeam, ITeamInfo } from '../../team-page/model/team-interfaces';
-import { INewNews, INewPlayer, INewObjectId, ISportTypes, INewMatch, INewTeam } from '../model/edit-panel-interface'
+import { INewNews, INewPlayer, INewObjectId, ISportTypes, INewMatch, INewTeam, INews } from '../model/edit-panel-interface'
 
 @Injectable()
 export class ApiService {
@@ -50,6 +50,15 @@ export class ApiService {
   getTeamById(id: string): Observable<ITeam | IErrorRequest> {
     const params = new HttpParams().set('id', id);
     return this._http.get<ITeam | IErrorRequest>(`${this._environments.apiUrl}/api/teams/get-team`, { params });
+  }
+
+  getNewsById(id: string): Observable<INews | IErrorRequest> {
+    const params = new HttpParams().set('id', id);
+    return this._http.get<INews | IErrorRequest>(`${this._environments.apiUrl}/api/news/get-news`, { params });
+  }
+
+  editNews(news): Observable<INewObjectId | IErrorRequest> {
+    return this._http.put<INewObjectId | IErrorRequest>(`${this._environments.apiUrl}/api/news/edit-news`, news);
   }
 
 }

@@ -11,6 +11,8 @@
     <mat-tab [ngSwitch]="selectedSection" label="Редактировать">
       <ng-container *ngSwitchCase="panelSections.PLAYER" [ngTemplateOutlet]="playerEdit"></ng-container>
       <ng-container *ngSwitchCase="panelSections.TEAM" [ngTemplateOutlet]="teamEdit"></ng-container>
+      <ng-container *ngSwitchCase="panelSections.NEWS" [ngTemplateOutlet]="newsEdit"></ng-container>
+      <ng-container *ngSwitchCase="panelSections.MATCHES" [ngTemplateOutlet]="matchEdit"></ng-container>
     </mat-tab>
   </mat-tab-group>
 </ng-template>
@@ -471,6 +473,195 @@
           placeholder="Название команды"
         />
       </mat-form-field>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #newsEdit>
+  <div class="page-section" [formGroup]="editNewsForm">
+    <div class="page-section__row-bar page-section__item">
+      <mat-form-field class="page-section__item">
+        <mat-label>ID новости</mat-label>
+        <input formControlName="newsId"
+                matInput
+                placeholder="XXXXXXXXXXXXXXXXXXXXXXXX"
+                maxlength="24"
+        />
+      </mat-form-field>
+      <div class="page-section__item">
+        <button style="width: 100%"
+                mat-raised-button
+                color="primary"
+                [disabled]="!editNewsForm.controls.newsId.value || !!editNewsForm.controls.newsId.errors"
+                (click)="searchNews()"
+                >
+          Найти
+        </button>
+      </div>
+    </div>
+    <div *ngIf="oldNewsData && !editNewsForm.controls.newsId.errors" class="page-section__edit-form">
+      <mat-form-field class="page-section__item">
+        <mat-label>Заголовок новости</mat-label>
+        <input
+          formControlName="newsTitle"
+          type="text"
+          matInput
+          maxlength="50"
+          placeholder="Заголовок"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="page-section__item">
+        <mat-label>Вид спорта</mat-label>
+        <mat-select formControlName="sportTypeCode">
+          <mat-option *ngFor="let item of sportTypesList" [value]="item.code">
+            {{ item.title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="page-section__item">
+        <mat-label>Описание новости</mat-label>
+        <textarea
+          formControlName="newsSubtitle"
+          type="text"
+          matInput
+          placeholder="Описание"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field class="page-section__item">
+        <mat-label>Текст новости</mat-label>
+        <textarea
+          formControlName="newsText"
+          type="text"
+          matInput
+          placeholder="Текст"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field class="page-section__item">
+        <mat-label>Фото</mat-label>
+        <input
+          formControlName="newsPhoto"
+          type="url"
+          matInput
+          placeholder="Фото"
+        />
+      </mat-form-field>
+      <div class="page-section__item">
+        <button style="width: 100%"
+                mat-raised-button
+                color="primary"
+                [disabled]="isControlsHaveError(editNewsForm.controls)"
+                (click)="editNews()"
+        >
+          Сохранить
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #matchEdit>
+  <div class="page-section" [formGroup]="editMatchForm">
+    <div class="page-section__row-bar page-section__item">
+      <mat-form-field class="page-section__item">
+        <mat-label>ID матча</mat-label>
+        <input formControlName="matchId"
+                matInput
+                placeholder="XXXXXXXXXXXXXXXXXXXXXXXX"
+                maxlength="24"
+        />
+      </mat-form-field>
+      <div class="page-section__item">
+        <button style="width: 100%"
+                mat-raised-button
+                color="primary"
+                [disabled]="!editNewsForm.controls.newsId.value || !!editNewsForm.controls.newsId.errors"
+                (click)="searchNews()"
+                >
+          Найти
+        </button>
+      </div>
+    </div>
+    <div *ngIf="oldMatchData && !editMatchForm.controls.matchId.errors" class="page-section__edit-form">
+
+      <mat-form-field class="page-section__item">
+        <mat-label>ID первой команды</mat-label>
+        <input
+          type="text"
+          matInput
+          maxlength="24"
+          formControlName="firstTeamId"
+          placeholder="ID первой команды"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="page-section__item">
+        <mat-label>ID второй команды</mat-label>
+        <input
+          type="text"
+          matInput
+          maxlength="24"
+          formControlName="secondTeamId"
+          placeholder="ID второрй команды"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="page-section__item">
+        <mat-label>Вид спорта</mat-label>
+        <mat-select formControlName="sportTypeCode">
+          <mat-option *ngFor="let item of sportTypesList" [value]="item.code">
+            {{ item.title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="page-section__item">
+        <mat-label>Дата проведения</mat-label>
+        <input
+          matInput
+          formControlName="date"
+          [matDatepicker]="picker"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div class="page-section__item match-score">
+        <mat-form-field class="match-score__item">
+          <mat-label>Счет для первой команды</mat-label>
+          <input
+            type="number"
+            matInput
+            maxlength="10"
+            formControlName="firstTeamScore"
+            placeholder="Счет для первой команды"
+          />
+        </mat-form-field>
+        <mat-form-field class="match-score__item">
+          <mat-label>Счет второй команды</mat-label>
+          <input
+            type="number"
+            matInput
+            maxlength="10"
+            formControlName="secondTeamScore"
+            placeholder="Счет второй команды"
+          />
+        </mat-form-field>
+      </div>
+
+      <section class="page-section__item page-section__checkbox-container">
+        <mat-checkbox formControlName="isComplited" class="example-margin">Матч завершен</mat-checkbox>
+      </section>
+
+      <div class="page-section__item">
+        <button style="width: 100%"
+                mat-raised-button
+                color="primary"
+                [disabled]="isControlsHaveError(createNewMatchForm.controls)"
+                (click)="createNewMatch()"
+        >
+          Сохранить
+        </button>
+      </div>
     </div>
   </div>
 </ng-template>

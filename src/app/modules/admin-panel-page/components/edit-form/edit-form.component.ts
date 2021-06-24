@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IErrorRequest } from 'src/app/shared/model/api-inteface';
-import { INewMatch, INewObjectId, ISportTypes } from '../../model/edit-panel-interface';
+import { INewMatch, INewObjectId, INews, ISportTypes } from '../../model/edit-panel-interface';
 import { ApiService } from '../../services/api.service'
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
 import { Router } from '@angular/router';
@@ -27,8 +27,10 @@ export class EditFormComponent implements OnInit, OnDestroy {
   public sportTypesList: ISportTypes[];
   public oldPlayerData: IPlayer;
   public oldTeamData: ITeam;
+  public oldNewsData: INews;
+  public oldMatchData;
 
-  newPlayerForm = new FormGroup({
+  public newPlayerForm = new FormGroup({
     playerName: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
@@ -43,7 +45,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
     playerPhoto: new FormControl(''),
   });
 
-  editPlayerForm = new FormGroup({
+  public editPlayerForm = new FormGroup({
     playerId: new FormControl('', [
       Validators.minLength(24),
       Validators.maxLength(24),
@@ -62,7 +64,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
     playerPhoto: new FormControl(''),
   });
 
-  createNewsForm = new FormGroup({
+  public createNewsForm = new FormGroup({
     newsTitle: new FormControl('', [
       Validators.required,
       Validators.maxLength(100),
@@ -77,7 +79,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
     newsPhoto: new FormControl(''),
   });
 
-  createNewMatchForm = new FormGroup({
+  public createNewMatchForm = new FormGroup({
     firstTeamId: new FormControl('', [
       Validators.required,
       Validators.minLength(24),
@@ -97,7 +99,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
     isComplited: new FormControl(''),
   });
 
-  createNewTeamForm = new FormGroup({
+  public createNewTeamForm = new FormGroup({
     teamName: new FormControl('', [
       Validators.required,
     ]),
@@ -107,12 +109,56 @@ export class EditFormComponent implements OnInit, OnDestroy {
     teamLogo: new FormControl(''),
   })
 
-  editTeamForm = new FormGroup({
+  public editTeamForm = new FormGroup({
     teamId: new FormControl('', [
       Validators.required,
       Validators.minLength(24),
       Validators.maxLength(24),
-    ])
+    ]),
+  })
+
+  public editNewsForm = new FormGroup({
+    newsId: new FormControl('', [
+      Validators.required,
+      Validators.minLength(24),
+      Validators.maxLength(24),
+    ]),
+    newsTitle: new FormControl('', [
+      Validators.required,
+    ]),
+    newsSubtitle: new FormControl('', [
+      Validators.required,
+    ]),
+    newsText: new FormControl('', [
+      Validators.required,
+    ]),
+    sportTypeCode: new FormControl('', [
+      Validators.required,
+    ]),
+    newsPhoto: new FormControl(''),
+  });
+
+  public editMatchForm = new FormGroup({
+    matchId: new FormControl('', [
+      Validators.required,
+      Validators.minLength(24),
+      Validators.maxLength(24),
+    ]),
+    firstTeamId: new FormControl('', [
+      Validators.required,
+    ]),
+    secondTeamId: new FormControl('', [
+      Validators.required,
+    ]),
+    sportTypeCode: new FormControl('', [
+      Validators.required,
+    ]),
+    date: new FormControl('', [
+      Validators.required,
+    ]),
+    firstTeamScore: new FormControl(''),
+    secondTeamScore: new FormControl(''),
+    isComplited: new FormControl(''),
   })
 
   get errorMessage(): string {
@@ -271,7 +317,22 @@ export class EditFormComponent implements OnInit, OnDestroy {
         playerStats: this.oldPlayerData.playerStats ? this.oldPlayerData.playerStats : null,  
       }
       this._apiService.editPlayer(data).subscribe(res => {
-        console.log(res);
+        if ((res as IErrorRequest).error) {
+          return this._matDialog.open(ErrorDialogComponent, {
+            data: {
+              error: true,
+              errorMessage: (res as IErrorRequest).error.msg,
+              closeButtonLabel: 'Ок',
+            },
+          });
+        }
+        return this._matDialog.open(ErrorDialogComponent, {
+          data: {
+            error: false,
+            errorMessage: 'Информация обновлена!',
+            closeButtonLabel: 'Ок',
+          }
+        });
       })
     }
   }
@@ -284,6 +345,61 @@ export class EditFormComponent implements OnInit, OnDestroy {
           this.oldTeamData = res as ITeam;
         }
       })
+    }
+  }
+
+  searchNews(): void {
+    const controls = this.editNewsForm.controls;
+    if (!controls.newsId.errors) {
+      this._subscriptions.add(this._apiService.getNewsById(controls.newsId.value).subscribe(res => {
+        if ((res as IErrorRequest).error) {
+          return this._matDialog.open(ErrorDialogComponent, {
+            data: {
+              error: true,
+              errorMessage: (res as IErrorRequest).error.msg,
+              closeButtonLabel: 'Ок',
+            },
+          });
+        }
+        this.oldNewsData = res as INews;
+        controls.newsTitle.setValue(this.oldNewsData.newsTitle);
+        controls.newsSubtitle.setValue(this.oldNewsData.newsSubtitle),
+        controls.newsText.setValue(this.oldNewsData.newsText),
+        controls.sportTypeCode.setValue(this.oldNewsData.sportType.code),
+        controls.newsPhoto.setValue(this.oldNewsData.newsPhoto)
+      }));
+    }
+  }
+
+  editNews() {
+    const controls = this.editNewsForm.controls;
+    if (!this.isControlsHaveError(controls)) {
+      const data = {
+        id: controls.newsId.value,
+        newsTitle: controls.newsTitle.value,
+        sportTypeCode: controls.sportTypeCode.value,
+        newsSubtitle: controls.newsSubtitle.value,
+        newsText: controls.newsText.value,
+        newsPhoto: controls.newsPhoto.value ? controls.newsPhoto.value : null,
+      }
+      this._subscriptions.add(this._apiService.editNews(data).subscribe(res => {
+        if ((res as IErrorRequest).error) {
+          return this._matDialog.open(ErrorDialogComponent, {
+            data: {
+              error: true,
+              errorMessage: (res as IErrorRequest).error.msg,
+              closeButtonLabel: 'Ок',
+            },
+          });
+        }
+        return this._matDialog.open(ErrorDialogComponent, {
+          data: {
+            error: false,
+            errorMessage: 'Информация обновлена!',
+            closeButtonLabel: 'Ок',
+          }
+        });
+      }))
     }
   }
 

@@ -42,3 +42,13 @@ export interface INewTeam {
   sportTypeCode: number,
   teamLogo: string,
 }
+
+export interface INews {
+  newsDate: Date,
+  newsId: string,
+  newsPhoto: string,
+  newsSubtitle: string,
+  newsText: string,
+  newsTitle: string,
+  sportType: ISportTypes,
+}

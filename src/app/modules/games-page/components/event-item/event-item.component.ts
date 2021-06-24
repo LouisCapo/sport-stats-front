@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ThemeService } from 'src/app/shared/services/theme.service';
 import { IMatchesList, ITeamInfo } from '../../model/matches-list-interface';
+import { HelperService } from '../../../../shared/services/helper.service'
 
 @Component({
   selector: 'app-event-item',
@@ -15,7 +16,7 @@ export class EventItemComponent implements OnInit, OnDestroy {
   public isLightThemeSelected: boolean;
 
   get gameScore() {
-    if (this.matchData.score.firstTeam && this.matchData.score.secondTeam) {
+    if (!this._helperService.isNullOrUndefined(this.matchData.score.firstTeam) && !this._helperService.isNullOrUndefined(this.matchData.score.secondTeam)) {
       return `${this.matchData.score.firstTeam} : ${this.matchData.score.secondTeam}`
     }
     return null;
@@ -23,7 +24,8 @@ export class EventItemComponent implements OnInit, OnDestroy {
 
   private _subscriptions = new Subscription();
 
-  constructor(private _themeService: ThemeService) { }
+  constructor(private _themeService: ThemeService, 
+              private _helperService: HelperService) { }
 
   ngOnInit() {
     this._subscriptions.add(this._themeService.onThemeChange.subscribe(res => {

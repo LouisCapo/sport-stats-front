@@ -16,8 +16,11 @@ export class EventItemComponent implements OnInit, OnDestroy {
   public isLightThemeSelected: boolean;
 
   get gameScore() {
-    if (!this._helperService.isNullOrUndefined(this.matchData.score.firstTeam) && !this._helperService.isNullOrUndefined(this.matchData.score.secondTeam)) {
-      return `${this.matchData.score.firstTeam} : ${this.matchData.score.secondTeam}`
+    if (
+      !this._helperService.isNullOrUndefined(this.matchData.score.firstTeam) &&
+      !this._helperService.isNullOrUndefined(this.matchData.score.secondTeam)
+    ) {
+      return `${this.matchData.score.firstTeam} : ${this.matchData.score.secondTeam}`;
     }
     return null;
   }

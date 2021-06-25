@@ -14,6 +14,7 @@
       <span *ngIf="gameScore">{{gameScore}}</span>
       <span *ngIf="!gameScore && matchData.date">{{matchData.date | date : 'dd.MM.yyyy'}}</span>
       <span *ngIf="!gameScore && !matchData.date">VS</span>
+      <span *ngIf="gameScore && matchData.date" class="event-card__result-date">{{matchData.date | date : 'dd.MM.yyyy'}}</span>
     </div>
     <div [routerLink]="[getTeamPage(matchData.secondTeam)]" 
           class="event-card__team event-card__content-item"
